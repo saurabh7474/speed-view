@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/SpeedView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/app_background" >
+
+    <RelativeLayout
+        android:id="@id/startup_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/app_background" >
+
+        <ImageView
+            android:id="@id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15.0dip"
+            android:layout_marginTop="15.0dip"
+            android:src="@drawable/app_logo_pro" />
+
+        <RelativeLayout
+            android:id="@id/status_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="68.0dip"
+            android:layout_centerVertical="true"
+            android:background="#25000000" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_centerHorizontal="true" >
+
+                <com.codesector.speedview.pro.SatelliteView
+                    android:id="@id/SatelliteView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@id/status_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_toRightOf="@id/SatelliteView"
+                    android:text="@string/starting_the_app"
+                    android:textColor="#ffffffff"
+                    android:textSize="17.0sp" />
+
+                <TextView
+                    android:id="@id/num_of_satellites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/status_message"
+                    android:layout_below="@id/status_message"
+                    android:layout_marginTop="4.0dip"
+                    android:text="@string/please_wait_a_moment"
+                    android:textColor="#ffcccccc"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@id/tips_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#25000000"
+            android:padding="15.0dip" >
+
+            <TextView
+                android:id="@id/tip_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/satellites_tip"
+                android:textColor="#ffffffff"
+                android:textSize="13.0sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@id/upgrade_banner"
+            android:layout_width="320.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/upgrade_banner"
+            android:visibility="gone" />
+
+        <com.google.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+            android:id="@id/adViewStartup"
+            android:layout_width="320.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="a14ca0e8b30bfea"
+            ads:keywords="android,car,gps,speedometer,speed,compass,hud,acceleration,track,location"
+            ads:loadAdOnCreate="false"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@id/main_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <ViewStub
+            android:id="@id/AddressStub"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:layout="@layout/address_stub" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@id/lookout_banner"
+                android:layout_width="320.0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/lookout_banner"
+                android:visibility="gone" />
+
+            <ViewStub
+                android:id="@id/AdMobStub"
+                android:layout_width="320.0dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout="@layout/admob_stub" />
+        </RelativeLayout>
+
+        <com.codesector.speedview.pro.CompassView
+            android:id="@id/CompassView"
+            android:layout_width="296.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12.0dip" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center" >
+
+            <com.codesector.speedview.pro.SpeedometerView
+                android:id="@id/SpeedometerView"
+                android:layout_width="320.0dip"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/indicators"
+            android:layout_width="296.0dip"
+            android:layout_height="23.0dip"
+            android:layout_gravity="center_horizontal"
+            android:background="#25000000"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@id/odometer_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/odometer_field" />
+
+            <TextView
+                android:id="@id/odometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8.0dip"
+                android:layout_marginRight="12.0dip"
+                android:minWidth="60.0dip"
+                android:text="@string/not_available"
+                android:textColor="#ffcccccc"
+                android:textSize="16.0sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@id/max_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/max_field" />
+
+            <TextView
+                android:id="@id/max_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8.0dip"
+                android:minWidth="27.0dip"
+                android:text="@string/not_available"
+                android:textColor="#ffcccccc"
+                android:textSize="16.0sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.codesector.speedview.pro.GraphView
+            android:id="@id/GraphView"
+            android:layout_width="296.0dip"
+            android:layout_height="103.0dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="6.0dip"
+            android:layout_marginTop="10.0dip" />
+
+        <RelativeLayout
+            android:id="@id/accuracy_notification"
+            android:layout_width="296.0dip"
+            android:layout_height="103.0dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="6.0dip"
+            android:layout_marginTop="10.0dip"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@id/low_accuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:text="@string/low_position_accuracy"
+                android:textColor="#ffcccccc"
+                android:textSize="17.0sp" />
+
+            <TextView
+                android:id="@id/accuracy_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/low_accuracy"
+                android:layout_marginTop="4.0dip"
+                android:text="@string/accuracy_tip"
+                android:textColor="#ffffffff"
+                android:textSize="13.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@id/compass_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible" >
+
+        <com.codesector.speedview.pro.CompassMode
+            android:id="@id/CompassMode"
+            android:layout_width="320.0dip"
+            android:layout_height="320.0dip"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@id/compass_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0dip"
+            android:layout_marginTop="15.0dip"
+            android:text="@string/speed"
+            android:textColor="#ffcccccc"
+            android:textSize="22.0sp" />
+
+        <TextView
+            android:id="@id/compass_odometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15.0dip"
+            android:layout_marginTop="15.0dip"
+            android:text="@string/odometer"
+            android:textColor="#ffcccccc"
+            android:textSize="22.0sp" />
+
+        <TextView
+            android:id="@id/compass_elevation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15.0dip"
+            android:layout_marginLeft="15.0dip"
+            android:text="@string/elevation"
+            android:textColor="#ffcccccc"
+            android:textSize="22.0sp" />
+
+        <TextView
+            android:id="@id/compass_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15.0dip"
+            android:layout_marginRight="15.0dip"
+            android:text="@string/time"
+            android:textColor="#ffcccccc"
+            android:textSize="22.0sp" />
+
+        <TextView
+            android:id="@id/compass_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/sensor"
+            android:textColor="#ffcccccc"
+            android:textSize="18.0sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/hud_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_filler"
+        android:visibility="invisible" >
+
+        <com.codesector.speedview.pro.HudMode
+            android:id="@id/HudMode"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@id/advanced_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <ScrollView
+            android:id="@id/advanced_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:id="@id/advanced_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:padding="15.0dip" >
+
+                <TableLayout
+                    android:id="@id/advanced_data"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TableRow
+                        android:id="@id/total_distance_row"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#25cccccc" >
+
+                        <TextView
+                            android:id="@id/total_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.0"
+                            android:text="@string/total_distance"
+                            android:textColor="#ffffffff"
+                            android:textSize="16.0sp" />
+
+                        <TextView
+                            android:id="@id/trip_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:text="@string/not_available"
+                            android:textColor="#ffcccccc"
+                            android:textSize="16.0sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@id/moving_time_row"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:background="#25555555" >
+
+                        <TextView
+                            android:id="@id/moving_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.0"
+                            android:text="@string/moving_time"
+                            android:textColor="#ffffffff"
+                            android:textSize="16.0sp" />
+
+                        <TextView
+                            android:id="@id/trip_time_moving"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:text="@string/not_available"
+                            android:textColor="#ffcccccc"
+                            android:textSize="16.0sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@id/stopped_time_row"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:background="#25cccccc" >
+
+                        <TextView
+                            android:id="@id/stopped_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.0"
+                            android:text="@string/stopped_time"
+                            android:textColor="#ffffffff"
+                            android:textSize="16.0sp" />
+
+                        <TextView
+                            android:id="@id/trip_time_stopped"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:text="@string/not_available"
+                            android:textColor="#ffcccccc"
+                            android:textSize="16.0sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@id/total_time_row"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:background="#25555555" >
+
+                        <TextView
+                            android:id="@id/total_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.0"
+                            android:text="@string/total_time"
+                            android:textColor="#ffffffff"
+                            android:textSize="16.0sp" />
+
+                        <TextView
+                            android:id="@id/trip_time_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:text="@string/not_available"
+                            android:textColor="#ffcccccc"
+                            android:textSize="16.0sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@id/moving_average_row"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:background="#25cccccc" >
+
+                        <TextView
+                            android:id="@id/moving_average"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.0"
+                            android:text="@string/moving_average"
+                            android:textColor="#ffffffff"
+                            android:textSize="16.0sp" />
+
+                        <TextView
+                            android:id="@id/speed_moving_avg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:text="@string/not_available"
+                            android:textColor="#ffcccccc"
+                            android:textSize="16.0sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@id/overall_average_row"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:background="#25555555" >
+
+                        <TextView
+                            android:id="@id/overall_average"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.0"
+                            android:text="@string/overall_average"
+                            android:textColor="#ffffffff"
+                            android:textSize="16.0sp" />
+
+                        <TextView
+                            android:id="@id/speed_overall_avg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:text="@string/not_available"
+                            android:textColor="#ffcccccc"
+                            android:textSize="16.0sp" />
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:id="@id/recording_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15.0dip"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@id/recording_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recording_info"
+                        android:textColor="#ffcccccc"
+                        android:textSize="12.0sp" />
+
+                    <Button
+                        android:id="@id/recording_button"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip"
+                        android:text="@string/stop_recording" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@id/acceleration_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15.0dip"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@id/car_acceleration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/car_acceleration"
+                        android:textColor="#ffffffff"
+                        android:textSize="18.0sp" />
+
+                    <View
+                        android:id="@id/acceleration_divider"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:background="#ffcccccc" />
+
+                    <TextView
+                        android:id="@id/acceleration_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:text="@string/acceleration_info"
+                        android:textColor="#ffcccccc"
+                        android:textSize="12.0sp" />
+
+                    <TableLayout
+                        android:id="@id/acceleration_times"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip" >
+
+                        <TableRow
+                            android:id="@id/from_0_to_60_row"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#25cccccc" >
+
+                            <TextView
+                                android:id="@id/from_0_to_60_mph"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.0"
+                                android:text="@string/from_0_to_60_mph"
+                                android:textColor="#ffffffff"
+                                android:textSize="16.0sp" />
+
+                            <TextView
+                                android:id="@id/from_0_to_60_result"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center"
+                                android:text="@string/not_available"
+                                android:textColor="#ffcccccc"
+                                android:textSize="16.0sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@id/from_0_to_100_row"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#25cccccc"
+                            android:visibility="gone" >
+
+                            <TextView
+                                android:id="@id/from_0_to_100_kmh"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.0"
+                                android:text="@string/from_0_to_100_kmh"
+                                android:textColor="#ffffffff"
+                                android:textSize="16.0sp" />
+
+                            <TextView
+                                android:id="@id/from_0_to_100_result"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center"
+                                android:text="@string/not_available"
+                                android:textColor="#ffcccccc"
+                                android:textSize="16.0sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@id/quarter_mile_row"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10.0dip"
+                            android:background="#25555555" >
+
+                            <TextView
+                                android:id="@id/qtr_mile_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1.0"
+                                android:text="@string/qtr_mile_time"
+                                android:textColor="#ffffffff"
+                                android:textSize="16.0sp" />
+
+                            <TextView
+                                android:id="@id/quarter_mile_result"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center"
+                                android:text="@string/not_available"
+                                android:textColor="#ffcccccc"
+                                android:textSize="16.0sp" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <LinearLayout
+                        android:id="@id/acceleration_buttons"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip"
+                        android:gravity="center_horizontal" >
+
+                        <Button
+                            android:id="@id/from_0_to_60_button"
+                            android:layout_width="140.0dip"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:text="@string/from_0_to_60_mph" />
+
+                        <Button
+                            android:id="@id/from_0_to_100_button"
+                            android:layout_width="140.0dip"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:text="@string/from_0_to_100_kmh"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@id/quarter_mile_button"
+                            android:layout_width="140.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8.0dip"
+                            android:enabled="false"
+                            android:text="@string/quarter_mile_time" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@id/gpx_export_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15.0dip"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@id/gpx_track_export"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gpx_track_export"
+                        android:textColor="#ffffffff"
+                        android:textSize="18.0sp" />
+
+                    <View
+                        android:id="@id/gpx_export_divider"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:background="#ffcccccc" />
+
+                    <TextView
+                        android:id="@id/gpx_export_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:text="@string/track_logging_disabled"
+                        android:textColor="#ffcccccc"
+                        android:textSize="12.0sp" />
+
+                    <LinearLayout
+                        android:id="@id/gpx_export_buttons"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip"
+                        android:gravity="center_horizontal" >
+
+                        <Button
+                            android:id="@id/export_gpx_button"
+                            android:layout_width="140.0dip"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:text="@string/export_to_sd_card" />
+
+                        <Button
+                            android:id="@id/send_gpx_button"
+                            android:layout_width="140.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8.0dip"
+                            android:enabled="false"
+                            android:text="@string/send_gpx_file" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@id/quick_launch_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15.0dip"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@id/quick_launch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_launch"
+                        android:textColor="#ffffffff"
+                        android:textSize="18.0sp" />
+
+                    <View
+                        android:id="@id/quick_launch_divider"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:background="#ffcccccc" />
+
+                    <TextView
+                        android:id="@id/quick_launch_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:text="@string/quick_launch_info"
+                        android:textColor="#ffcccccc"
+                        android:textSize="12.0sp" />
+
+                    <LinearLayout
+                        android:id="@id/quick_launch_buttons"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip" >
+
+                        <Button
+                            android:id="@id/google_maps_button"
+                            android:layout_width="104.0dip"
+                            android:layout_height="wrap_content"
+                            android:text="@string/google_maps"
+                            android:textSize="12.0sp" />
+
+                        <Button
+                            android:id="@id/open_spot_button"
+                            android:layout_width="88.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8.0dip"
+                            android:enabled="false"
+                            android:text="@string/open_spot"
+                            android:textSize="12.0sp" />
+
+                        <Button
+                            android:id="@id/maverick_button"
+                            android:layout_width="80.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8.0dip"
+                            android:enabled="false"
+                            android:text="@string/maverick"
+                            android:textSize="12.0sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/from_0_to_60_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_filler"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:id="@id/from_0_to_60_data"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@id/from_0_to_60_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:text="@string/default_seconds"
+                android:textColor="#ffffffff"
+                android:textSize="28.0sp" />
+
+            <TextView
+                android:id="@id/from_0_to_60_feet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:text="@string/default_feet"
+                android:textColor="#ffffffff"
+                android:textSize="28.0sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@id/from_0_to_60_speed_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@id/from_0_to_60_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#ffffffff"
+                android:textSize="128.0sp" />
+
+            <TextView
+                android:id="@id/from_0_to_60_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mph"
+                android:textColor="#ffcccccc"
+                android:textSize="36.0sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/from_0_to_60_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15.0dip"
+            android:minLines="3"
+            android:text="@string/from_0_to_60_info"
+            android:textColor="#ffcccccc"
+            android:textSize="16.0sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="#ff444444" />
+
+        <LinearLayout
+            android:id="@id/from_0_to_60_buttons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff333333"
+            android:gravity="center_horizontal"
+            android:paddingBottom="6.0dip"
+            android:paddingTop="10.0dip" >
+
+            <Button
+                android:id="@id/confirm_0_60_button"
+                android:layout_width="120.0dip"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:paddingLeft="10.0dip"
+                android:paddingRight="10.0dip"
+                android:text="Confirm" />
+
+            <Button
+                android:id="@id/discard_0_60_button"
+                android:layout_width="140.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:enabled="false"
+                android:text="Discard this result" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/from_0_to_100_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_filler"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:id="@id/from_0_to_100_data"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@id/from_0_to_100_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:text="@string/default_seconds"
+                android:textColor="#ffffffff"
+                android:textSize="28.0sp" />
+
+            <TextView
+                android:id="@id/from_0_to_100_meters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:text="@string/default_meters"
+                android:textColor="#ffffffff"
+                android:textSize="28.0sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@id/from_0_to_100_speed_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@id/from_0_to_100_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#ffffffff"
+                android:textSize="128.0sp" />
+
+            <TextView
+                android:id="@id/from_0_to_100_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kmh"
+                android:textColor="#ffcccccc"
+                android:textSize="36.0sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/from_0_to_100_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15.0dip"
+            android:minLines="3"
+            android:text="@string/from_0_to_100_info"
+            android:textColor="#ffcccccc"
+            android:textSize="16.0sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="#ff444444" />
+
+        <LinearLayout
+            android:id="@id/from_0_to_100_buttons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff333333"
+            android:gravity="center_horizontal"
+            android:paddingBottom="6.0dip"
+            android:paddingTop="10.0dip" >
+
+            <Button
+                android:id="@id/confirm_0_100_button"
+                android:layout_width="120.0dip"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:paddingLeft="10.0dip"
+                android:paddingRight="10.0dip"
+                android:text="Confirm" />
+
+            <Button
+                android:id="@id/discard_0_100_button"
+                android:layout_width="140.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:enabled="false"
+                android:text="Discard this result" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/quarter_mile_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_filler"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:id="@id/quarter_mile_data"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@id/quarter_mile_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:text="@string/default_seconds"
+                android:textColor="#ffffffff"
+                android:textSize="28.0sp" />
+
+            <TextView
+                android:id="@id/quarter_mile_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:text="@string/default_speed"
+                android:textColor="#ffffffff"
+                android:textSize="28.0sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@id/qtr_mile_meters_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@id/quarter_mile_dist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#ffffffff"
+                android:textSize="128.0sp" />
+
+            <TextView
+                android:id="@id/quarter_mile_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feet"
+                android:textColor="#ffcccccc"
+                android:textSize="36.0sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/quarter_mile_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15.0dip"
+            android:minLines="3"
+            android:text="@string/quarter_mile_info"
+            android:textColor="#ffcccccc"
+            android:textSize="16.0sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="#ff444444" />
+
+        <LinearLayout
+            android:id="@id/quarter_mile_buttons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff333333"
+            android:gravity="center_horizontal"
+            android:paddingBottom="6.0dip"
+            android:paddingTop="10.0dip" >
+
+            <Button
+                android:id="@id/confirm_qtr_button"
+                android:layout_width="120.0dip"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:paddingLeft="10.0dip"
+                android:paddingRight="10.0dip"
+                android:text="@string/confirm" />
+
+            <Button
+                android:id="@id/discard_qtr_button"
+                android:layout_width="140.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:enabled="false"
+                android:text="@string/discard_this_result" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@id/switchboard"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#cc000000"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <RelativeLayout
+                android:id="@id/town_limit_toggle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@id/town_limit_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/speed_limit_sign" />
+
+                <TextView
+                    android:id="@id/town_limit_numbers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ff000000"
+                    android:textSize="60.0sp" />
+
+                <ImageView
+                    android:id="@id/town_limit_dec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_toLeftOf="@id/town_limit_sign"
+                    android:src="@drawable/speed_limit_dec" />
+
+                <ImageView
+                    android:id="@id/town_limit_inc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_toRightOf="@id/town_limit_sign"
+                    android:src="@drawable/speed_limit_inc" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@id/highway_limit_toggle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/town_limit_toggle"
+                android:layout_marginTop="30.0dip" >
+
+                <ImageView
+                    android:id="@id/highway_limit_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/speed_limit_sign" />
+
+                <TextView
+                    android:id="@id/highway_limit_numbers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ff000000"
+                    android:textSize="60.0sp" />
+
+                <ImageView
+                    android:id="@id/highway_limit_dec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_toLeftOf="@id/highway_limit_sign"
+                    android:src="@drawable/speed_limit_dec" />
+
+                <ImageView
+                    android:id="@id/highway_limit_inc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_toRightOf="@id/highway_limit_sign"
+                    android:src="@drawable/speed_limit_inc" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@id/freeway_limit_toggle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/highway_limit_toggle"
+                android:layout_marginTop="30.0dip" >
+
+                <ImageView
+                    android:id="@id/freeway_limit_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/speed_limit_sign" />
+
+                <TextView
+                    android:id="@id/freeway_limit_numbers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ff000000"
+                    android:textSize="60.0sp" />
+
+                <ImageView
+                    android:id="@id/freeway_limit_dec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_toLeftOf="@id/freeway_limit_sign"
+                    android:src="@drawable/speed_limit_dec" />
+
+                <ImageView
+                    android:id="@id/freeway_limit_inc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_toRightOf="@id/freeway_limit_sign"
+                    android:src="@drawable/speed_limit_inc" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

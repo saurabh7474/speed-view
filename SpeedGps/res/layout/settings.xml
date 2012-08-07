@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/settings_screen" android:background="@drawable/app_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/logo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:layout_marginRight="15.0dip" android:src="@drawable/app_logo_pro" android:layout_alignParentRight="true" />
+    <ScrollView android:id="@id/settings_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/logo">
+        <RelativeLayout android:id="@id/settings_layout" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TableLayout android:id="@id/basics_table_layout" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <RelativeLayout android:id="@id/basics_group" android:background="#ff333333" android:layout_width="fill_parent" android:layout_height="24.0dip">
+                    <TextView android:id="@id/basics" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/basics" android:layout_centerVertical="true" style="@style/DividerFont" />
+                    <View android:id="@id/basics_divider" android:background="#ff444444" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+                <TableRow android:id="@id/units_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/display_units" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/display_units" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <Spinner android:entries="@array/display_units" android:layout_gravity="center_vertical" android:id="@id/units_spinner" android:layout_width="100.0dip" android:layout_height="wrap_content" android:prompt="@string/select_display_units" />
+                </TableRow>
+                <TextView android:id="@id/units_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/units_info" style="@style/HintFont" />
+                <TableRow android:id="@id/warning_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/speed_warning" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/speed_warning" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/warning_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/warning_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/warning_info" style="@style/HintFont" />
+                <TableLayout android:id="@id/warning_table_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <RelativeLayout android:id="@id/current_limit_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="15.0dip">
+                        <TextView android:id="@id/current_limit_caption" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/current_speed_limit" style="@style/CurrentCaptionFont" />
+                        <TextView android:id="@id/current_limit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_toRightOf="@id/current_limit_caption" style="@style/CurrentValueFont" />
+                    </RelativeLayout>
+                    <TextView android:id="@id/speed_limits_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text="@string/speed_limits_info" style="@style/HintFont" />
+                    <RelativeLayout android:id="@id/limit_selection_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="15.0dip">
+                        <Button android:textSize="14.0sp" android:id="@id/urban_area_button" android:layout_width="99.0dip" android:layout_height="wrap_content" android:text="@string/urban_area" />
+                        <Button android:textSize="14.0sp" android:id="@id/highway_button" android:layout_width="99.0dip" android:layout_height="wrap_content" android:text="@string/highway" android:layout_toRightOf="@id/urban_area_button" />
+                        <Button android:textSize="14.0sp" android:id="@id/freeway_button" android:layout_width="99.0dip" android:layout_height="wrap_content" android:text="@string/freeway" android:layout_toRightOf="@id/highway_button" />
+                    </RelativeLayout>
+                    <TableLayout android:id="@id/town_limit_layout" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                        <TableRow android:id="@id/town_limit_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                            <TextView android:layout_gravity="center_vertical" android:id="@id/within_towns" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/within_towns" android:layout_weight="1.0" style="@style/CaptionFont" />
+                            <Spinner android:entries="@array/speed_limits_mph" android:layout_gravity="center_vertical" android:id="@id/town_limit_spinner" android:layout_width="90.0dip" android:layout_height="wrap_content" />
+                        </TableRow>
+                        <TextView android:id="@id/town_limit_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/town_limit_info" style="@style/HintFont" />
+                        <TableRow android:id="@id/town_seekbar_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                            <SeekBar android:layout_gravity="center_vertical" android:id="@id/town_limit_seekbar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:max="160" android:layout_weight="1.0" />
+                            <TextView android:layout_gravity="right|center" android:id="@id/town_limit_value" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/CurrentValueFont" />
+                        </TableRow>
+                    </TableLayout>
+                    <TableLayout android:id="@id/highway_limit_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                        <TableRow android:id="@id/highway_limit_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                            <TextView android:layout_gravity="center_vertical" android:id="@id/highways" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/highways" android:layout_weight="1.0" style="@style/CaptionFont" />
+                            <Spinner android:entries="@array/speed_limits_mph" android:layout_gravity="center_vertical" android:id="@id/highway_limit_spinner" android:layout_width="90.0dip" android:layout_height="wrap_content" />
+                        </TableRow>
+                        <TextView android:id="@id/highway_limit_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/highway_limit_info" style="@style/HintFont" />
+                        <TableRow android:id="@id/highway_seekbar_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                            <SeekBar android:layout_gravity="center_vertical" android:id="@id/highway_limit_seekbar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:max="160" android:layout_weight="1.0" />
+                            <TextView android:layout_gravity="right|center" android:id="@id/highway_limit_value" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/CurrentValueFont" />
+                        </TableRow>
+                    </TableLayout>
+                    <TableLayout android:id="@id/freeway_limit_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                        <TableRow android:id="@id/freeway_limit_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                            <TextView android:textSize="16.0sp" android:layout_gravity="center_vertical" android:id="@id/freeways" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/freeways" android:layout_weight="1.0" style="@style/CaptionFont" />
+                            <Spinner android:entries="@array/speed_limits_mph" android:layout_gravity="center_vertical" android:id="@id/freeway_limit_spinner" android:layout_width="90.0dip" android:layout_height="wrap_content" />
+                        </TableRow>
+                        <TextView android:id="@id/freeway_limit_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/freeway_limit_info" style="@style/HintFont" />
+                        <TableRow android:id="@id/freeway_seekbar_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                            <SeekBar android:layout_gravity="center_vertical" android:id="@id/freeway_limit_seekbar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:max="160" android:layout_weight="1.0" />
+                            <TextView android:layout_gravity="right|center" android:id="@id/freeway_limit_value" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/CurrentValueFont" />
+                        </TableRow>
+                    </TableLayout>
+                    <TableRow android:id="@id/sound_alert_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/sound_notification" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sound_notification" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <ToggleButton android:textSize="12.0sp" android:layout_gravity="right|center" android:id="@id/sound_alert_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="@string/on" android:textOff="@string/off" />
+                    </TableRow>
+                    <TextView android:id="@id/sound_alert_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sound_alert_info" style="@style/HintFont" />
+                    <TableRow android:id="@id/vibration_alert_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/vibration_alert" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/vibration_alert" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <CheckBox android:layout_gravity="right|center" android:id="@id/vibration_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </TableRow>
+                    <TextView android:id="@id/vibration_alert_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/vibration_alert_info" style="@style/HintFont" />
+                </TableLayout>
+            </TableLayout>
+            <TableLayout android:id="@id/interface_table_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/basics_table_layout">
+                <RelativeLayout android:id="@id/interface_group" android:background="#ff333333" android:layout_width="fill_parent" android:layout_height="24.0dip" android:layout_marginTop="25.0dip">
+                    <TextView android:id="@id/user_interface" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/user_interface" android:layout_centerVertical="true" style="@style/DividerFont" />
+                    <View android:id="@id/interface_divider" android:background="#ff444444" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+                <TableRow android:id="@id/digital_speedo_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/digital_speedo_gauge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/digital_speedo_gauge" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/digit_speedo_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/digital_speedo_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/digital_speedo_info" style="@style/HintFont" />
+                <TableLayout android:id="@id/digital_table_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <TableRow android:id="@id/digit_addl_data_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/show_addl_data" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/show_additional_data" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <ToggleButton android:textSize="12.0sp" android:layout_gravity="right|center" android:id="@id/digit_addl_data_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="@string/on" android:textOff="@string/off" />
+                    </TableRow>
+                    <TextView android:id="@id/digit_addl_data_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/digit_addl_data_info" style="@style/HintFont" />
+                    <TableRow android:id="@id/max_speedo_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/max_speedo_limit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/max_speedo_limit" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <CheckBox android:layout_gravity="right|center" android:id="@id/max_speedo_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </TableRow>
+                    <TextView android:id="@id/speedo_limit_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/speedo_limit_info" style="@style/HintFont" />
+                    <TableRow android:id="@id/speedo_seekbar_row" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                        <SeekBar android:layout_gravity="center_vertical" android:id="@id/speedo_limit_seekbar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:max="600" android:layout_weight="1.0" />
+                        <TextView android:textSize="18.0sp" android:gravity="right|center" android:id="@id/speedo_limit_value" android:layout_width="90.0dip" android:layout_height="wrap_content" />
+                    </TableRow>
+                </TableLayout>
+                <TableRow android:id="@id/head_up_display_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/use_head_up_display" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/use_head_up_display" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/use_hud_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/head_up_display_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/head_up_display_info" style="@style/HintFont" />
+                <TableRow android:id="@id/advanced_hud_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/advanced_hud_mode" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/advanced_hud_mode" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/advanced_hud_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/advanced_hud_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/advanced_hud_info" style="@style/HintFont" />
+                <TableRow android:id="@id/advanced_zoom_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/advanced_zoom_mode" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/advanced_zoom_mode" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/advanced_zoom_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/advanced_zoom_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/advanced_zoom_info" style="@style/HintFont" />
+                <TableRow android:id="@id/customize_colors_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/customize_colors" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/customize_colors" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/custom_colors_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/custom_colors_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/custom_colors_info" style="@style/HintFont" />
+                <TableLayout android:id="@id/colors_table_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <TableRow android:id="@id/speed_bar_color_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/speed_bar_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/speed_bar_color" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <Button android:textSize="12.0sp" android:layout_gravity="center_vertical" android:id="@id/speed_bar_color_button" android:layout_width="99.0dip" android:layout_height="wrap_content" android:text="@string/pick_a_color" />
+                    </TableRow>
+                    <TextView android:id="@id/speed_color_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/speed_color_info" style="@style/HintFont" />
+                    <TableRow android:id="@id/primary_color_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/primary_text_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/primary_text_color" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <Button android:textSize="12.0sp" android:layout_gravity="center_vertical" android:id="@id/primary_color_button" android:layout_width="99.0dip" android:layout_height="wrap_content" android:text="@string/pick_a_color" />
+                    </TableRow>
+                    <TextView android:id="@id/primary_color_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/primary_color_info" style="@style/HintFont" />
+                    <TableRow android:id="@id/secondary_color_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/secondary_text_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/secondary_text_color" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <Button android:textSize="12.0sp" android:layout_gravity="center_vertical" android:id="@id/secondary_color_button" android:layout_width="99.0dip" android:layout_height="wrap_content" android:text="@string/pick_a_color" />
+                    </TableRow>
+                    <TextView android:id="@id/secondary_color_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/secondary_color_info" style="@style/HintFont" />
+                </TableLayout>
+            </TableLayout>
+            <TableLayout android:id="@id/recording_table_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/interface_table_layout">
+                <RelativeLayout android:id="@id/recording_group" android:background="#ff333333" android:layout_width="fill_parent" android:layout_height="24.0dip" android:layout_marginTop="25.0dip">
+                    <TextView android:id="@id/recording" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/recording" android:layout_centerVertical="true" style="@style/DividerFont" />
+                    <View android:id="@id/recording_divider" android:background="#ff444444" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+                <TableRow android:id="@id/run_in_bg_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/run_in_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/run_in_background" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/run_in_bg_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/run_in_bg_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/run_in_bg_info" style="@style/HintFont" />
+                <TableRow android:id="@id/track_logging_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/enable_track_logging" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/enable_track_logging" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/track_logging_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/track_logging_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/track_logging_info" style="@style/HintFont" />
+                <LinearLayout android:orientation="vertical" android:id="@id/frequency_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:id="@id/time_between_points" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text="@string/time_between_points" style="@style/CaptionFont" />
+                    <LinearLayout android:id="@id/time_interval_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/time_interval_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/time_interval_info" android:layout_weight="1.0" style="@style/HintFont" />
+                        <Spinner android:entries="@array/min_time_values" android:layout_gravity="right|center" android:id="@id/min_time_spinner" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="90.0dip" android:prompt="@string/time_between_points" />
+                    </LinearLayout>
+                    <TextView android:id="@id/distance_between_pts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text="@string/distance_between_pts" style="@style/CaptionFont" />
+                    <LinearLayout android:id="@id/min_distance_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/min_distance_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/min_distance_info" android:layout_weight="1.0" style="@style/HintFont" />
+                        <Spinner android:entries="@array/min_distance_values" android:layout_gravity="right|center" android:id="@id/min_distance_spinner" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="90.0dip" android:prompt="@string/distance_between_pts" />
+                    </LinearLayout>
+                </LinearLayout>
+            </TableLayout>
+            <TableLayout android:id="@id/filtering_table_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/recording_table_layout">
+                <RelativeLayout android:id="@id/filtering_group" android:background="#ff333333" android:layout_width="fill_parent" android:layout_height="24.0dip" android:layout_marginTop="25.0dip">
+                    <TextView android:id="@id/gps_filtering" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/gps_filtering" android:layout_centerVertical="true" style="@style/DividerFont" />
+                    <View android:id="@id/filtering_divider" android:background="#ff444444" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+                <TableRow android:id="@id/narrowing_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/narrow_speed_range" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/narrow_speed_range" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/narrowing_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/narrowing_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/narrowing_info" style="@style/HintFont" />
+                <TableRow android:id="@id/accuracy_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/minimum_accuracy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/minimum_accuracy" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <Spinner android:entries="@array/accuracy_values" android:layout_gravity="right|center" android:id="@id/accuracy_spinner" android:layout_width="wrap_content" android:layout_height="wrap_content" android:prompt="@string/minimum_accuracy" />
+                </TableRow>
+                <TextView android:id="@id/accuracy_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/accuracy_info" style="@style/HintFont" />
+            </TableLayout>
+            <TableLayout android:id="@id/misc_table_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/filtering_table_layout">
+                <RelativeLayout android:id="@id/misc_group" android:background="#ff333333" android:layout_width="fill_parent" android:layout_height="24.0dip" android:layout_marginTop="25.0dip">
+                    <TextView android:id="@id/miscellaneous" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/miscellaneous" android:layout_centerVertical="true" style="@style/DividerFont" />
+                    <View android:id="@id/misc_divider" android:background="#ff444444" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/street_address_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TableRow android:id="@id/street_address_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <TextView android:layout_gravity="center_vertical" android:id="@id/show_street_address" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/show_street_address" android:layout_weight="1.0" style="@style/CaptionFont" />
+                        <CheckBox android:layout_gravity="right|center" android:id="@id/street_address_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </TableRow>
+                    <TextView android:id="@id/street_address_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/street_address_info" style="@style/HintFont" />
+                </LinearLayout>
+                <TableRow android:id="@id/auto_rotation_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/disable_auto_rotation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/disable_auto_rotation" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/dsbl_rotation_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/auto_rotation_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auto_rotation_info" style="@style/HintFont" />
+                <TableRow android:id="@id/full_screen_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/open_in_full_screen" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/open_in_full_screen" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/full_screen_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+                <TextView android:id="@id/full_screen_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/full_screen_info" style="@style/HintFont" />
+                <TableRow android:id="@id/background_row" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/show_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/show_background" android:layout_weight="1.0" style="@style/CaptionFont" />
+                    <CheckBox android:layout_gravity="right|center" android:id="@id/background_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

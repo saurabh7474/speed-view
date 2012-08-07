@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.ads.AdView android:id="@id/adViewMain" android:layout_width="wrap_content" android:layout_height="wrap_content" ads:adUnitId="a14ca0e8b30bfea" ads:adSize="IAB_BANNER" ads:keywords="android,car,gps,speedometer,speed,compass,hud,acceleration,track,location" ads:loadAdOnCreate="false"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" />
