@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GPS测速</string>
+    <string name="starting_the_app">Starting SpeedView</string>
+    <string name="please_wait_a_moment">Please wait a moment</string>
+    <string name="searching_for_satellites">Searching for satellites</string>
+    <string name="no_satellites_found">0 satellites found</string>
+    <string name="waiting_for_gps_fix">Waiting for GPS fix</string>
+    <string name="satellites_found">satellites found</string>
+    <string name="satellite_found">satellite found</string>
+    <string name="satellites_tip">It may take a while for the GPS to locate the satellites. Make sure that you are outside and your phone has a clear view of the sky.</string>
+    <string name="gps_readings_tip">To improve GPS readings, move away from tall buildings, trees or overhead obstructions.</string>
+    <string name="gps_signal_weak">GPS signal is weak.</string>
+    <string name="gps_signal_not_available">GPS signal is weak or not available.</string>
+    <string name="gps_signal_tip">Please move to an open area and place your device in a location that will have a full exposure to the sky. Try to stay motionless until getting the GPS fix.</string>
+    <string name="low_position_accuracy">Low position accuracy</string>
+    <string name="accuracy_tip">GPS accuracy can be affected by atmospheric conditions, number of visible GPS satellites, noise in the radio signal or nearby buildings.</string>
+    <string name="not_available">n/a</string>
+    <string name="recording_is_stopped">Recording is stopped</string>
+    <string name="not_receiving_updates">Not receiving GPS data</string>
+    <string name="data_recording_tip">You can resume recording of the GPS data by going to the Advanced dashboard and tapping on the \"Start recording\" button.</string>
+    <string name="enabling_gps_tip">To enable GPS from the home screen press the Menu button, select Settings, then Location &amp; Security and check \"Use GPS satellites\".</string>
+    <string name="orientation">Orientation</string>
+    <string name="portrait">Portrait</string>
+    <string name="landscape">Landscape</string>
+    <string name="reverse_landscape">Reverse landscape</string>
+    <string name="speed_limit">Speed limit</string>
+    <string name="urban_area">Urban area</string>
+    <string name="highway">Highway</string>
+    <string name="freeway">Freeway</string>
+    <string name="turn_off">Turn off</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="startup">Startup</string>
+    <string name="main">Main</string>
+    <string name="compass">Compass</string>
+    <string name="hud_view">HUD view</string>
+    <string name="zoom_view">Zoom view</string>
+    <string name="advanced">Advanced</string>
+    <string name="clear_data">Clear data</string>
+    <string name="odometer_time">Odometer / Time traveled</string>
+    <string name="max_speed">Max speed</string>
+    <string name="accl_times">Acceleration times</string>
+    <string name="graph">Graph</string>
+    <string name="all">All</string>
+    <string name="minimize">Minimize</string>
+    <string name="exit">Exit</string>
+    <string name="share_location">Share location</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
+    <string name="changelog">Changelog</string>
+    <string name="featured_apps">Featured apps</string>
+    <string name="upgrade_to_pro">Upgrade to Pro</string>
+    <string name="speed_warning_off">Speed warning has been turned off</string>
+    <string name="odometer_time_reset">Total distance and time traveled have been successfully reset</string>
+    <string name="max_speed_reset">Max speed has been successfully reset</string>
+    <string name="accl_times_reset">Acceleration times have been successfully reset</string>
+    <string name="graph_cleared">The graph has been successfully cleared</string>
+    <string name="all_data_cleared">All data has been successfully cleared</string>
+    <string name="file_not_found">The alert sound file was not found</string>
+    <string name="speeding_warning">You are going over the speed limit</string>
+    <string name="screen_support_warning">Screen not supported</string>
+    <string name="not_optimized_to_run">This application is not optimized to run on your device. You can still use it, but it may not display properly.</string>
+    <string name="gps_is_disabled">GPS is disabled</string>
+    <string name="please_enable_gps">Please turn on GPS in the system settings.</string>
+    <string name="proceed">Proceed</string>
+    <string name="connection_warning">Connection warning</string>
+    <string name="no_internet_connection">You appear to have no Internet connection. Some features of SpeedView will not be able to function.</string>
+    <string name="reset_odometer">Reset odometer</string>
+    <string name="confirm_reset_odometer">Are you sure you want to reset your distance / time traveled?</string>
+    <string name="reset_max_speed">Reset max speed</string>
+    <string name="confirm_reset_max_speed">Are you sure you want to reset your max speed?</string>
+    <string name="reset_accl_times">Reset acceleration times</string>
+    <string name="confirm_reset_accl">Are you sure you want to reset your acceleration times?</string>
+    <string name="clear_graph">Clear the graph</string>
+    <string name="confirm_clear_graph">Are you sure you want to clear the graph?</string>
+    <string name="clear_all_data">Clear all data</string>
+    <string name="confirm_clear_all">Are you sure you want to clear all your saved data?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="please_contact_us">Please contact us via email so we can fix it.</string>
+    <string name="loading_address">Loading address...</string>
+    <string name="might_take_a_few_seconds">This might take a few seconds</string>
+    <string name="unable_to_get_address">Unable to get address</string>
+    <string name="where_are_you">Where on Earth are you?</string>
+    <string name="network_failure">Network failure</string>
+    <string name="internet_connection">Make sure you have Internet connection</string>
+    <string name="gps_is_unavailable">GPS is unavailable</string>
+    <string name="tap_on_screen_to_skip">Tap the screen to skip it</string>
+    <string name="make_sure_gps_enabled">Make sure to enable GPS in location settings</string>
+    <string name="gps_fix_acquired">GPS fix acquired</string>
+    <string name="no_fix">No fix</string>
+    <string name="sats">sats</string>
+    <string name="sat">sat</string>
+    <string name="used">used</string>
+    <string name="avg_speed">Avg speed</string>
+    <string name="speed">Speed</string>
+    <string name="odometer">Odometer</string>
+    <string name="elevation">Elevation</string>
+    <string name="time">Time</string>
+    <string name="sensor">Sensor</string>
+    <string name="gps">GPS</string>
+    <string name="heading">Heading</string>
+    <string name="total_distance">Total distance</string>
+    <string name="moving_time">Moving time</string>
+    <string name="stopped_time">Stopped time</string>
+    <string name="total_time">Total time</string>
+    <string name="moving_average">Moving average</string>
+    <string name="overall_average">Overall average</string>
+    <string name="advanced_upcoming">More features are coming in the future.</string>
+    <string name="car_acceleration">Car acceleration</string>
+    <string name="acceleration_info">Two commonly used performance measures for automotive acceleration. Note that you need to make a full stop before using these buttons.</string>
+    <string name="your_recent_results">Your most recent results are listed below.</string>
+    <string name="from_0_to_60_mph">0-60 mph time</string>
+    <string name="from_0_to_100_kmh">0-100 km/h time</string>
+    <string name="qtr_mile_time">1/4 mile time</string>
+    <string name="quarter_mile_time">Quarter mile time</string>
+    <string name="recording_info">You can pause the recording of the GPS data to prevent adjusting averages and other values.</string>
+    <string name="stop_recording">Stop recording</string>
+    <string name="start_recording">Start recording</string>
+    <string name="recording_stopped_info">Recording is stopped. This will remove any current registration for location updates and prevent the GPS data from altering the current values.</string>
+    <string name="gpx_track_export">GPX track export</string>
+    <string name="track_logging_disabled">Track logging is disabled in the application settings.</string>
+    <string name="gpx_not_generated">You have not generated a GPX file in this session.</string>
+    <string name="gpx_file_saved">A new GPX file has been created. You can find it on your SD card in the \"</string>
+    <string name="folder">\" folder.</string>
+    <string name="app_chooser_title">Select an application</string>
+    <string name="export_to_sd_card">Export to SD card</string>
+    <string name="send_gpx_file">Send GPX file</string>
+    <string name="no_data_to_export">No data to export</string>
+    <string name="make_sure_log_enabled">Make sure to enable track logging in the app settings.</string>
+    <string name="select_file_to_export">Select file to export</string>
+    <string name="exporting_gpx_file">Exporting. Please wait...</string>
+    <string name="email_subject">GPX track file</string>
+    <string name="email_text">This file has been sent using SpeedView, a GPS speedometer application for Android.</string>
+    <string name="quick_launch">Quick launch</string>
+    <string name="quick_launch_info">Links to some applications you may find useful.</string>
+    <string name="google_maps">Google Maps</string>
+    <string name="open_spot">Open Spot</string>
+    <string name="maverick">Maverick</string>
+    <string name="default_seconds">0.00 sec</string>
+    <string name="default_feet">0 ft</string>
+    <string name="sec">sec</string>
+    <string name="from_0_to_60_info">Once you are ready, start accelerating and the program will calculate how fast you can reach 60 mph from a stop.</string>
+    <string name="accelerate">Accelerate!</string>
+    <string name="from_0_to_60_result">You have reached 60 mph in</string>
+    <string name="confirm">Confirm</string>
+    <string name="discard_this_result">Discard this result</string>
+    <string name="default_meters">0 m</string>
+    <string name="from_0_to_100_info">Once you are ready, start accelerating and the program will calculate how fast you can reach 100 km/h from a stop.</string>
+    <string name="from_0_to_100_result">You have reached 100 km/h in</string>
+    <string name="default_speed">0 mph</string>
+    <string name="feet">feet</string>
+    <string name="meters">meters</string>
+    <string name="quarter_mile_info">Once you are ready, start accelerating and the program will calculate how fast you can reach 1/4 mile from a stop.</string>
+    <string name="quarter_mile_result">You have done the 1/4 mile in</string>
+    <string name="location_sharing">Location sharing</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="web_link">Web link</string>
+    <string name="map_image">Map image</string>
+    <string name="share_location_tip">Tap on the map to bring up zoom controls. You can also move and zoom the map with your fingers.</string>
+    <string name="select_application">Select application</string>
+    <string name="share_by_email">Share by email</string>
+    <string name="map_attach_notice">Some applications may not handle images properly. If not sure, use the \"Share by email\" button.</string>
+    <string name="sd_card_not_available">Error: SD Card is not available</string>
+    <string name="my_location">My location</string>
+    <string name="my_current_coords">Here are my current coordinates</string>
+    <string name="attached">attached</string>
+    <string name="error_attaching_map">There was an error attaching the map image</string>
+    <string name="sent_via_speedview">Created with SpeedView for Android</string>
+    <string name="location_is_unknown">Your current location is unknown. Wait until the GPS receiver has obtained a valid position and try again.</string>
+    <string name="error_getting_coords">Error getting coordinates</string>
+    <string name="basics">Basics</string>
+    <string name="display_units">Display units</string>
+    <string name="mph">mph</string>
+    <string name="kmh">km/h</string>
+    <string name="knots">knots</string>
+    <string name="units_info">Changes the units in which speed is displayed</string>
+    <string name="select_display_units">Select display units</string>
+    <string name="speed_warning">Speed warning</string>
+    <string name="warning_info">With this option enabled, the program will alert you if you have exceeded the chosen speed limit</string>
+    <string name="speed_limits_info">Set the speed limits for three different types of roads. You can switch between these preset limits by choosing \"Speed limit\" from the Options menu, or by long-tapping on the dashboards (except Advanced)</string>
+    <string name="current_speed_limit">Your current speed limit:</string>
+    <string name="within_towns">Within towns or cities</string>
+    <string name="town_limit_info">Select the speed limit for towns and urban areas</string>
+    <string name="highways">Highways/Rural roads</string>
+    <string name="highway_limit_info">For highways and roads outside built-up areas</string>
+    <string name="freeways">Expressways/Motorways</string>
+    <string name="freeway_limit_info">For freeways and other high speed roadways</string>
+    <string name="sound_notification">Sound notification</string>
+    <string name="sound_alert_info">Choose an alert sound from the available ringtones</string>
+    <string name="current_alert_sound">Current alert sound:</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="vibration_alert">Use vibration alert</string>
+    <string name="vibration_alert_info">The phone will vibrate as long as you are speeding</string>
+    <string name="user_interface">Interface</string>
+    <string name="digital_speedo_gauge">Digital speedo gauge</string>
+    <string name="digital_speedo_info">Shows a simple digital gauge instead of the \"analog\" speedo and provides some customization options</string>
+    <string name="show_additional_data">Show additional data</string>
+    <string name="data_to_display">Data to display</string>
+    <string name="digit_addl_data_info">Enables data such as total trip time, average speed and elevation to be displayed on the main screen</string>
+    <string name="selected_to_display">You have selected to display:</string>
+    <string name="max_speedo_limit">Max speedometer limit</string>
+    <string name="speedo_limit_info">Enables to set different top end speeds on the digital gauge. Note that if you set the speedometer limit to a number greater than its default value of 160 mph (or 240 km/h), you will need to disable the \"Narrow speed range\" option under the \"GPS filtering\" section below</string>
+    <string name="trip_time">Trip time</string>
+    <string name="average_speed">Average speed</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="time_of_day">Time of day</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="use_head_up_display">Use head-up display</string>
+    <string name="head_up_display_info">"Allows you to put your cellphone on your car's dash and see the speed reflected in the front glass"</string>
+    <string name="advanced_hud_mode">Advanced HUD mode</string>
+    <string name="advanced_hud_info">Display additional information in the HUD mode, such as total distance traveled, heading and altitude</string>
+    <string name="advanced_zoom_mode">Advanced zoom mode</string>
+    <string name="advanced_zoom_info">Display additional information in the zoom mode, such as total distance traveled, heading and altitude</string>
+    <string name="customize_colors">Customize UI colors</string>
+    <string name="custom_colors_info">Set different colors for main parts of the interface</string>
+    <string name="primary_text_color">Primary text color</string>
+    <string name="pick_a_color">Pick a color</string>
+    <string name="picked_color">Picked color</string>
+    <string name="primary_color_info">Text color for the current speed on all dashboards</string>
+    <string name="secondary_text_color">Secondary text color</string>
+    <string name="secondary_color_info">Text color that will be used for the additional info</string>
+    <string name="speed_bar_color">Speed bar color</string>
+    <string name="speed_color_info">Color of the speed bar in both speedometer readouts</string>
+    <string name="recording">Recording</string>
+    <string name="run_in_background">Run in the background</string>
+    <string name="run_in_bg_info">When enabled, pressing the Back or Home buttons will minimize the program and keep it running in the background. To completely exit the program you will need to select Exit from the Options menu</string>
+    <string name="enable_track_logging">Enable track logging</string>
+    <string name="track_logging_info">This option enables you to export your track data in the GPX format. Turning it off saves some memory</string>
+    <string name="time_between_points">Min time between points</string>
+    <string name="time_interval_info">Smallest time interval between two recordings of your position</string>
+    <string name="distance_between_pts">Min distance between points</string>
+    <string name="min_distance_info">Smallest distance between two recordings of your position</string>
+    <string name="gps_filtering">GPS filtering</string>
+    <string name="narrow_speed_range">Narrow speed range</string>
+    <string name="narrowing_info">Ignores speeds above 150 mph (approx. 240 km/h). Useful when getting erratic speed readings</string>
+    <string name="minimum_accuracy">Minimum accuracy</string>
+    <string name="accuracy_info">The data coming from the GPS receiver will be ignored if your position is not at least this accurate</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="show_street_address">Show street address</string>
+    <string name="street_address_info">This feature requires Internet connection. Note that access to and use of the Internet may require payment of a separate fee to a service provider</string>
+    <string name="disable_auto_rotation">Disable auto-rotation</string>
+    <string name="auto_rotation_info">This option comes in handy when you place your phone in a car dock. It prevents the accelerometer from randomly changing the screen from portrait to landscape when driving on bumpy roads</string>
+    <string name="open_in_full_screen">Open in full screen</string>
+    <string name="full_screen_info">Uncheck this option to show status bar. This setting is applicable only to portrait screen orientation</string>
+    <string name="show_background">Show background</string>
+    <string name="reset_colors">Reset colors</string>
+    <string name="reset_all_settings">Reset all settings</string>
+    <string name="confirm_colors_reset">Are you sure you want to reset the colors to their defaults?</string>
+    <string name="confirm_settings_reset">Are you sure you want to reset all settings to their defaults?</string>
+    <string name="colors_reset">Colors have been successfully reset</string>
+    <string name="settings_reset">All settings have been successfully reset</string>
+    <string name="maverick_summary">Off-road GPS navigator with offline maps support, compass and track recording.</string>
+    <string name="maverick_description">Use offline maps and GPS even without an internet connection. This app is great for hiking, boating, geocaching and other outdoor activities.</string>
+    <string name="download">Download</string>
+    <string name="learn_more">Learn more</string>
+    <string name="lookout_security">Lookout Security &amp; Antivirus</string>
+    <string name="lookout_summary">Protect your phone with award-winning security &amp; antivirus from Lookout.</string>
+    <string name="lookout_description">Antivirus, Phone Locator, Data Backup and more! Lookout is the #1 Security &amp; Antivirus App for Android. Over 10,000,000 users trust Lookout to protect their phones.</string>
+    <string name="open">Open</string>
+    <string name="widget_is_idle">SpeedView is idle</string>
+    <string name="tap_to_start">Tap to start</string>
+    <string name="starting_the_widget">Starting the widget</string>
+    <string name="please_wait">Please wait</string>
+    <string name="starting">Starting</string>
+    <string name="track_logging_enabled">Track logging enabled</string>
+    <string name="zero_found">0 found</string>
+    <string name="sat_found">sat found</string>
+    <string name="sats_found">sats found</string>
+    <string name="odo">ODO</string>
+    <string name="max">MAX</string>
+    <string name="widget_already_added">The widget is already added</string>
+    <string name="app_already_running">SpeedView is already running</string>
+    <string name="tap_to_try_again">Tap to try again</string>
+    <string name="notify_us">Notify us</string>
+    <string name="widget">widget</string>
+    <string name="first_startup">First startup</string>
+    <string name="startup_title">Welcome to SpeedView</string>
+    <string name="version">Version</string>
+    <string name="pro">Pro</string>
+    <string name="free">Free</string>
+    <string name="startup_intro">If you are new to SpeedView or GPS-enabled software in general, please read the following section before proceeding. It briefly describes the key features of this app and answers the most commonly asked questions.</string>
+    <string name="startup_text_pro"><b>Can I use it without a GPS connection?</b>"
+
+Yes, you can review your saved data, use the compass and export your tracks as GPX files. Just tap on the startup screen to skip it.
+
+"<b>How does the compass work?</b>"
+
+When you are moving slower than 3 mph (about 5 km/h) the phone's orientation sensor is used to determine your heading. If you are moving faster than that the GPS is used to determine your heading.
+
+"<b>What is HUD? How do I use it?</b>"
+
+HUD stands for \"head-up display\" and was initially developed for military aviation. In this app, the HUD mode allows you to put your device on your car's dashboard and see the speed reflected in the front glass. This can be useful when driving at night.
+
+"<b>The speedometer stops at 150 mph. Why?</b>"
+
+Because of the \"Narrow speed range\" option that is used to suppress outliers (spikes) in the GPS data, so you will not have erratic top speed numbers (like 345 mph or higher) popping out of nowhere due to GPS errors. This option is turned on by default. You can disable it any time in the app's settings.
+
+"<b>Why does it take so long to get a GPS fix?</b>"
+
+The time required to get a GPS fix is dependent on the number of satellites in view and reception strength of each GPS satellite. This process normally takes 1-2 minutes, however you should not worry if it takes up to 20 minutes on the first occasion. If the receiver in your device will still not acquire a fix, you might want to restart your device. Also note that GPS will not work through heated or heat reflective windscreens. This is due to a metal layer in them which stops the signal.
+
+"<b>The app lags, off by a few mph, etc.</b>"
+
+GPS accuracy depends on a number of factors, most notably signal to noise ratio, satellite position, atmospheric conditions and obstructions of satellite signals. These factors can create errors in your perceived location. For example, objects such as buildings or mountains between the satellite and the receiver can produce an error up to 30 meters.
+
+"<b>It drains the battery. Can you add a powersafe mode, only query GPS speed?</b>"
+
+No, that is not how GPS works. In basic terms, GPS satellites send out an identifying signal, a GPS receiver picks up that signal and then the software can determine things such as longitude and latitude, direction, speed, etc.
+
+"<b>How does the track logging feature work?</b>"
+
+It generates a separate log file for each day that you use the app with the track logging option turned on. After a while, SpeedView erases the outdated log files, leaving only the most recent three. When exporting, you will be presented with a choice of which one to convert to the GPX format.
+
+"<b>How often does SpeedView refresh the address in the Pro version?</b>"
+
+Every 100 meters if you are moving slower than 35 mph (about 60 km/h), or every 1000 meters if you are moving faster than that."</string>
+    <string name="startup_text_free"><b>Can I use it without a GPS connection?</b>"
+
+Yes, you can review your saved data, use the compass and export your tracks as GPX files. Just tap on the startup screen to skip it.
+
+"<b>How does the compass work?</b>"
+
+When you are moving slower than 3 mph (about 5 km/h) the phone's orientation sensor is used to determine your heading. If you are moving faster than that the GPS is used to determine your heading.
+
+"<b>What is HUD? How do I use it?</b>"
+
+HUD stands for \"head-up display\" and was initially developed for military aviation. In this app, the HUD mode allows you to put your device on your car's dashboard and see the speed reflected in the front glass. This can be useful when driving at night.
+
+"<b>The speedometer stops at 150 mph. Why?</b>"
+
+Because of the \"Narrow speed range\" option that is used to suppress outliers (spikes) in the GPS data, so you will not have erratic top speed numbers (like 345 mph or higher) popping out of nowhere due to GPS errors. This option is turned on by default. You can disable it any time in the app's settings.
+
+"<b>Why does it take so long to get a GPS fix?</b>"
+
+The time required to get a GPS fix is dependent on the number of satellites in view and reception strength of each GPS satellite. This process normally takes 1-2 minutes, however you should not worry if it takes up to 20 minutes on the first occasion. If the receiver in your device will still not acquire a fix, you might want to restart your device. Also note that GPS will not work through heated or heat reflective windscreens. This is due to a metal layer in them which stops the signal.
+
+"<b>The app lags, off by a few mph, etc.</b>"
+
+GPS accuracy depends on a number of factors, most notably signal to noise ratio, satellite position, atmospheric conditions and obstructions of satellite signals. These factors can create errors in your perceived location. For example, objects such as buildings or mountains between the satellite and the receiver can produce an error up to 30 meters.
+
+"<b>It drains the battery. Can you add a powersafe mode, only query GPS speed?</b>"
+
+No, that is not how GPS works. In basic terms, GPS satellites send out an identifying signal, a GPS receiver picks up that signal and then the software can determine things such as longitude and latitude, direction, speed, etc.
+
+"<b>How does the track logging feature work?</b>"
+
+It generates a separate log file for each day that you use the app with the track logging option turned on. After a while, SpeedView erases the outdated log files, leaving only the most recent three. When exporting, you will be presented with a choice of which one to convert to the GPX format."</string>
+    <string name="app_web_page">App web page</string>
+    <string name="speedview_pro">SpeedView Pro</string>
+    <string name="speedview_pro_info">An ad-free version with more features is available on the Android Market.</string>
+    <string name="check_it_out">Check it out</string>
+    <string name="close">Close</string>
+    <string name="about_this_release">About this release</string>
+    <string name="release_info">This is a major update that adds some often requested features, such as a widget and an ability to quickly tweak speed limits. Please make sure to read the section below for a brief overview of how the widget works.</string>
+    <string name="whats_new">"What's new"</string>
+    <string name="whats_new_info_pro">"• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements"</string>
+    <string name="whats_new_info_free">"• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements"</string>
+    <string name="start">Start</string>
+    <string name="new_feature_info">"What's new"</string>
+    <string name="feature_description">This update fixes remaining issues with the background service, sharing location and the widget. The next release will feature major design changes, so stay tuned!</string>
+    <string name="help_title">Quick help</string>
+    <string name="help_text">If you are a new user or experiencing difficulties, we strongly recommend reading the <b>FAQ</b>" first. You can view it by tapping on the corresponding button in the bottom right corner of the screen.
+
+To switch between landscape and portrait modes, use the "<b>Orientation</b>" button under the Options menu. The screen orientation will be restored next time you start SpeedView.
+
+To switch to the "<b>Compass</b> mode, tap once on the linear compass. To enter the <b>HUD mode</b>, tap anywhere on the speedometer area. To quickly reset the <b>odometer</b> or <b>maximum speed</b> to zero, tap on the corresponding field. To open the <b>Advanced</b> screen, tap on the speed graph. You can find the corresponding buttons if you open the Options menu and select <b>Dashboard</b>". To return to default view while in one of these modes, tap anywhere on the screen. You can also use the Back button to return to main screen.
+
+To quickly switch between speed limits, "<b>long-tap</b>" anywhere on one of the main dashboards (excluding Advanced) to select a different speed limit. Then long-tap anywhere on that screen (or use the regular \"Back\" button) to confirm your changes and return to the previous dashboard.
+
+To reset odometer and time traveled, maximum speed, speed graph or all data at once, tap the "<b>Reset data</b>" button.
+
+To change display units, define speed limits, set sound alert, minimum accuracy and other preferences, use the "<b>Settings</b>" menu item.
+
+If you want to use the app without a GPS connection, tap anywhere on the Startup screen to skip it. Note that you can pause the recording of the GPS data anytime by going to the "<b>Advanced</b> dashboard, then tapping on the <b>Stop recording</b>" button.
+
+In case you are experiencing an erratic speed issue or the program freezes after acquiring a GPS fix, try setting the "<b>minimum accuracy</b>" value to 50 meters to ignore most inaccurate data.
+
+If there are any other problems, please do not hesitate to submit a ticket or contact us directly at "<i>speedview@codesector.com</i>.</string>
+    <string name="read_the_faq">Read the FAQ</string>
+    <string name="faq_title">FAQ</string>
+    <string name="back">Back</string>
+    <string name="about_title">About SpeedView</string>
+    <string name="about_text">"SpeedView is an advanced speedometer application that uses the phone's GPS location to calculate speed and distance traveled. Some of the features include: compass, HUD mode, speed graph, maximum and average speed, time traveled, speed warning, background mode, GPX track export and more. This app is suitable for running, car driving, biking or hiking.
+
+Please note that the accuracy of speed readings depends on your GPS reception quality, which can be affected by a multitude of error-introducing factors.
+
+In addition, note that this application is not optimized to run on 7-inch tablets or devices with uncommon screen resolutions. You will be able to run and use it, but it may not display properly. If you have any questions or comments, feel free to post them on our blog.
+
+We would also like to indicate that we reserve the right to anonymously track and report a user's activity inside of SpeedView. We use this data to better understand and improve how this app is being used. If you have any questions or comments, feel free to post them on our blog or send us an email directly using the button below. Your feedback is important to us.
+
+"<i>Thank you for using this app.</i>"
+
+"<b>Copyright © 2010-2012 Code Sector</b></string>
+    <string name="send_us_email">Send us email</string>
+    <string name="changelog_title">Changelog</string>
+    <string name="changelog_text_pro"><b>Version 2.9 - Feb 5, 2012</b>"
+
+• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements
+
+"<b>Version 2.8 - Oct 21, 2011</b>"
+
+• Quickly switch speed limits
+• Share your location
+• Support for 10-inch screens
+• Featured apps section
+• Fixed: Multiple bugs on Honeycomb
+• Numerous minor tweaks
+
+"<b>Version 2.7 - Jul 14, 2011</b>"
+
+• Basic Honeycomb support
+• Enable screen auto-rotation
+• Maximum digital speedo limit
+• Show additional data on the digital gauge
+• Updated speed limit presets
+• Lots of minor improvements
+
+"<b>Version 2.6 - Mar 24, 2011</b>"
+
+• Digital speedo gauge
+• Improved GPX export
+• Vibration alert
+• Reverse landscape mode (Android 2.3)
+• Disable street address
+• Many bug fixes and UI tweaks
+
+"<b>Version 2.5 - Nov 9, 2010</b>"
+
+• 0 to 100 km/h time
+• Improved car acceleration modes
+• The app now restores the recording state
+• Fixed: Alert sound bug on some phones
+
+"<b>Version 2.4 - Oct 8, 2010</b>"
+
+• 0 to 60 mph time
+• Quarter mile time
+• Stop/Start recording data
+• Quickly reset odometer and max speed
+• Reset colors to default values
+
+"<b>Version 2.3 - Sep 25, 2010</b>"
+
+• Street address
+• Position accuracy indicator
+• Number of sats used in fix
+• Advanced logging settings"</string>
+    <string name="changelog_text_free"><b>Version 2.9 - Feb 5, 2012</b>"
+
+• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements
+
+"<b>Version 2.8 - Oct 21, 2011</b>"
+
+• Quickly switch speed limits
+• Share your location
+• Support for 10-inch screens
+• Featured apps section
+• Fixed: Multiple bugs on Honeycomb
+• Numerous minor tweaks
+
+"<b>Version 2.7 - Jul 14, 2011</b>"
+
+• Basic Honeycomb support
+• Enable screen auto-rotation
+• Maximum digital speedo limit
+• Show additional data on the digital gauge
+• Updated speed limit presets
+• Lots of minor improvements
+
+"<b>Version 2.6 - Mar 24, 2011</b>"
+
+• Digital speedo gauge
+• Improved GPX export
+• Vibration alert
+• Reverse landscape mode (Android 2.3)
+• Many bug fixes and UI tweaks
+
+"<b>Version 2.5 - Nov 9, 2010</b>"
+
+• 0 to 100 km/h time
+• Improved car acceleration modes
+• The app now restores the recording state
+• Fixed: Alert sound bug on some phones
+
+"<b>Version 2.4 - Oct 8, 2010</b>"
+
+• 0 to 60 mph time
+• Quarter mile time
+• Stop/Start recording data
+• Quickly reset odometer and max speed
+• Reset colors to default values
+
+"<b>Version 2.3 - Sep 25, 2010</b>"
+
+• Orientation sensor compass
+• Advanced zoom mode
+• Zoom/HUD color options
+
+"<b>Version 2.2 - Aug 28, 2010</b>"
+
+• New track logging algorithm
+• Zoom view added
+• Fixed: Problem with background service
+
+"<b>Version 2.1 - Aug 18, 2010</b>"
+
+• Move to SD Card support
+• Changelog added
+• Fixed: Force closes in landscape mode
+
+"<b>Version 2.0 - Aug 17, 2010</b>"
+
+• Run in the background
+• GPX track export
+• Average speed
+• Time traveled"</string>
+    <string name="visit_our_blog">Visit our blog</string>
+    <string name="how_the_widget_works">How the widget works</string>
+    <string name="widget_information">The widget works in conjunction with the app in that it does not have its own configurable settings. Instead, it uses the current preferences set in SpeedView, such as display units, your current speed limit, track logging options, etc. The widget saves the data when you stop it by tapping on it, or when you start the application while the widget is running.</string>
+    <string name="resetting_settings">Resetting settings</string>
+    <string name="reset_information">You can reset your settings via the Options menu in the Settings screen.</string>
+</resources>

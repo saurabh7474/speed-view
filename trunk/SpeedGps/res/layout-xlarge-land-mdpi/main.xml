@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/SpeedView" android:background="@drawable/app_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/startup_screen" android:background="@drawable/app_background" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/logo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:layout_marginRight="30.0dip" android:src="@drawable/app_logo_pro" android:layout_alignParentRight="true" />
+        <RelativeLayout android:id="@id/status_layout" android:background="#25000000" android:layout_width="fill_parent" android:layout_height="96.0dip" android:layout_centerVertical="true">
+            <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_centerHorizontal="true">
+                <com.codesector.speedview.pro.SatelliteView android:id="@id/SatelliteView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" />
+                <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:id="@id/status_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="15.0dip" android:text="@string/starting_the_app" android:layout_toRightOf="@id/SatelliteView" />
+                <TextView android:textSize="18.0sp" android:textColor="#ffcccccc" android:id="@id/num_of_satellites" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="@string/please_wait_a_moment" android:layout_below="@id/status_message" android:layout_alignLeft="@id/status_message" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <LinearLayout android:id="@id/tips_layout" android:background="#25000000" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+            <TextView android:textSize="17.0sp" android:textColor="#ffffffff" android:id="@id/tip_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/satellites_tip" />
+        </LinearLayout>
+        <ImageView android:id="@id/upgrade_banner" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upgrade_banner" android:layout_alignParentBottom="true" />
+        <com.google.ads.AdView android:id="@id/adViewStartup" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" ads:adUnitId="a14ca0e8b30bfea" ads:adSize="IAB_BANNER" ads:keywords="android,car,gps,speedometer,speed,compass,hud,acceleration,track,location" ads:loadAdOnCreate="false"
+          xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/main_screen" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/left_column" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="68.0dip" android:layout_marginTop="48.0dip" android:layout_marginBottom="48.0dip">
+            <com.codesector.speedview.pro.SpeedometerView android:id="@id/SpeedometerView" android:layout_width="480.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <LinearLayout android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/indicators" android:background="#25000000" android:layout_width="444.0dip" android:layout_height="36.0dip" android:layout_marginLeft="12.0dip" android:layout_marginRight="12.0dip" android:layout_marginBottom="24.0dip">
+                <ImageView android:id="@id/odometer_field" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/odometer_field" />
+                <TextView android:textSize="24.0sp" android:textStyle="bold" android:textColor="#ffcccccc" android:layout_gravity="center_vertical" android:id="@id/odometer" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip" android:layout_marginRight="22.0dip" android:minWidth="90.0dip" android:text="@string/not_available" />
+                <ImageView android:id="@id/max_field" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/max_field" />
+                <TextView android:textSize="24.0sp" android:textStyle="bold" android:textColor="#ffcccccc" android:layout_gravity="center_vertical" android:id="@id/max_speed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip" android:minWidth="40.0dip" android:text="@string/not_available" />
+            </LinearLayout>
+            <com.codesector.speedview.pro.GraphView android:layout_gravity="center_horizontal" android:id="@id/GraphView" android:layout_width="444.0dip" android:layout_height="155.0dip" />
+            <RelativeLayout android:id="@id/accuracy_notification" android:background="#25000000" android:padding="24.0dip" android:visibility="gone" android:layout_width="444.0dip" android:layout_height="155.0dip">
+                <TextView android:textSize="20.0sp" android:textColor="#ffcccccc" android:id="@id/low_accuracy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/low_position_accuracy" />
+                <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@id/accuracy_tip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="@string/accuracy_tip" android:layout_below="@id/low_accuracy" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/center_column" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/right_column" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginTop="48.0dip" android:layout_marginRight="68.0dip" android:layout_marginBottom="44.0dip">
+            <ViewStub android:id="@id/AddressStub" android:layout="@layout/address_stub" android:layout_width="468.0dip" android:layout_height="75.0dip" />
+            <RelativeLayout android:layout_width="468.0dip" android:layout_height="wrap_content">
+                <ImageView android:id="@id/lookout_banner" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/lookout_banner" android:layout_centerHorizontal="true" />
+                <ViewStub android:id="@id/AdMobStub" android:layout="@layout/admob_stub" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <com.codesector.speedview.pro.CompassView android:id="@id/CompassView" android:layout_width="468.0dip" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" />
+            <TableLayout android:id="@id/advanced_data_t" android:layout_width="468.0dip" android:layout_height="wrap_content" android:layout_marginTop="48.0dip">
+                <TableRow android:id="@id/moving_time_row_t" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/moving_time_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/moving_time" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_time_moving_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/stopped_time_row_t" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/stopped_time_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/stopped_time" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_time_stopped_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/total_time_row_t" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/total_time_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/total_time" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_time_total_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/moving_average_row_t" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/moving_average_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/moving_average" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/speed_moving_avg_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/overall_average_row_t" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/overall_average_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/overall_average" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/speed_overall_avg_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+            </TableLayout>
+            <LinearLayout android:id="@id/acceleration_layout_t" android:layout_width="468.0dip" android:layout_height="wrap_content" android:layout_marginTop="24.0dip">
+                <TableLayout android:id="@id/acceleration_times_t" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TableRow android:id="@id/from_0_to_60_row_t" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/from_0_to_60_mph_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_0_to_60_mph" android:layout_weight="1.0" />
+                        <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/from_0_to_60_result_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                    </TableRow>
+                    <TableRow android:id="@id/from_0_to_100_row_t" android:background="#25cccccc" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/from_0_to_100_kmh_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_0_to_100_kmh" android:layout_weight="1.0" />
+                        <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/from_0_to_100_result_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                    </TableRow>
+                    <TableRow android:id="@id/quarter_mile_row_t" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/qtr_mile_time_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/qtr_mile_time" android:layout_weight="1.0" />
+                        <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/quarter_mile_result_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@id/quick_launch_layout_t" android:layout_width="468.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <Button android:layout_gravity="bottom" android:id="@id/google_maps_button_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/google_maps" android:layout_weight="1.0" />
+                <Button android:enabled="false" android:layout_gravity="bottom" android:id="@id/open_spot_button_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:text="@string/open_spot" android:layout_weight="1.0" />
+                <Button android:enabled="false" android:layout_gravity="bottom" android:id="@id/maverick_button_t" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:text="@string/maverick" android:layout_weight="1.0" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@id/compass_screen" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.codesector.speedview.pro.CompassMode android:id="@id/CompassMode" android:layout_width="600.0dip" android:layout_height="600.0dip" android:layout_centerInParent="true" />
+        <TextView android:textSize="33.0sp" android:textColor="#ffcccccc" android:id="@id/compass_speed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginTop="30.0dip" android:text="@string/speed" />
+        <TextView android:textSize="33.0sp" android:textColor="#ffcccccc" android:id="@id/compass_odometer" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:layout_marginRight="30.0dip" android:text="@string/odometer" android:layout_alignParentRight="true" />
+        <TextView android:textSize="33.0sp" android:textColor="#ffcccccc" android:id="@id/compass_elevation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginBottom="30.0dip" android:text="@string/elevation" android:layout_alignParentBottom="true" />
+        <TextView android:textSize="33.0sp" android:textColor="#ffcccccc" android:id="@id/compass_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="30.0dip" android:layout_marginBottom="30.0dip" android:text="@string/time" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+        <TextView android:textSize="27.0sp" android:textColor="#ffcccccc" android:id="@id/compass_source" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sensor" android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/hud_screen" android:background="@drawable/bg_filler" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.codesector.speedview.pro.HudMode android:id="@id/HudMode" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/advanced_screen" android:background="@drawable/app_background" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/left_side" android:padding="30.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <TableLayout android:id="@id/advanced_data" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TableRow android:id="@id/total_distance_row" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/total_distance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/total_distance" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_distance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/moving_time_row" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/moving_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/moving_time" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_time_moving" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/stopped_time_row" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/stopped_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/stopped_time" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_time_stopped" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/total_time_row" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/total_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/total_time" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/trip_time_total" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/moving_average_row" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/moving_average" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/moving_average" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/speed_moving_avg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+                <TableRow android:id="@id/overall_average_row" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/overall_average" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/overall_average" android:layout_weight="1.0" />
+                    <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/speed_overall_avg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                </TableRow>
+            </TableLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/acceleration_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dip">
+                <TextView android:textSize="26.0sp" android:textColor="#ffffffff" android:id="@id/car_acceleration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/car_acceleration" />
+                <View android:id="@id/acceleration_divider" android:background="#ffcccccc" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="10.0dip" />
+                <TextView android:textSize="18.0sp" android:textColor="#ffcccccc" android:id="@id/acceleration_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/acceleration_info" />
+                <TableLayout android:id="@id/acceleration_times" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip">
+                    <TableRow android:id="@id/from_0_to_60_row" android:background="#25555555" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/from_0_to_60_mph" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_0_to_60_mph" android:layout_weight="1.0" />
+                        <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/from_0_to_60_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                    </TableRow>
+                    <TableRow android:id="@id/from_0_to_100_row" android:background="#25555555" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/from_0_to_100_kmh" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_0_to_100_kmh" android:layout_weight="1.0" />
+                        <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/from_0_to_100_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                    </TableRow>
+                    <TableRow android:id="@id/quarter_mile_row" android:background="#25cccccc" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/qtr_mile_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/qtr_mile_time" android:layout_weight="1.0" />
+                        <TextView android:textSize="24.0sp" android:textColor="#ffcccccc" android:layout_gravity="right|center" android:id="@id/quarter_mile_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/not_available" />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@id/acceleration_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip">
+                <Button android:enabled="false" android:id="@id/from_0_to_60_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_0_to_60_mph" />
+                <Button android:enabled="false" android:id="@id/from_0_to_100_button" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_0_to_100_kmh" />
+                <Button android:enabled="false" android:id="@id/quarter_mile_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/quarter_mile_time" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/right_side" android:padding="30.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <LinearLayout android:orientation="vertical" android:id="@id/recording_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="18.0sp" android:textColor="#ffcccccc" android:id="@id/recording_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/recording_info" />
+                <Button android:id="@id/recording_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/stop_recording" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/gpx_export_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dip">
+                <TextView android:textSize="26.0sp" android:textColor="#ffffffff" android:id="@id/gpx_track_export" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/gpx_track_export" />
+                <View android:id="@id/gpx_export_divider" android:background="#ffcccccc" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="10.0dip" />
+                <TextView android:textSize="18.0sp" android:textColor="#ffcccccc" android:id="@id/gpx_export_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/track_logging_disabled" />
+                <LinearLayout android:id="@id/gpx_export_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip">
+                    <Button android:enabled="false" android:id="@id/export_gpx_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/export_to_sd_card" />
+                    <Button android:enabled="false" android:id="@id/send_gpx_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/send_gpx_file" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/quick_launch_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dip">
+                <TextView android:textSize="26.0sp" android:textColor="#ffffffff" android:id="@id/quick_launch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/quick_launch" />
+                <View android:id="@id/quick_launch_divider" android:background="#ffcccccc" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="10.0dip" />
+                <TextView android:textSize="18.0sp" android:textColor="#ffcccccc" android:id="@id/quick_launch_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/quick_launch_info" />
+                <LinearLayout android:id="@id/quick_launch_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip">
+                    <Button android:id="@id/google_maps_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/google_maps" />
+                    <Button android:enabled="false" android:id="@id/open_spot_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/open_spot" />
+                    <Button android:enabled="false" android:id="@id/maverick_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/maverick" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/from_0_to_60_screen" android:background="@drawable/bg_filler" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/from_0_to_60_left" android:layout_width="800.0dip" android:layout_height="fill_parent">
+            <TextView android:textSize="56.0sp" android:textColor="#ffffffff" android:id="@id/from_0_to_60_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginTop="30.0dip" android:text="@string/default_seconds" />
+            <TextView android:textSize="56.0sp" android:textColor="#ffffffff" android:id="@id/from_0_to_60_feet" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:layout_marginRight="30.0dip" android:text="@string/default_feet" android:layout_alignParentRight="true" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/from_0_to_60_speed_layer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="256.0sp" android:textColor="#ffffffff" android:id="@id/from_0_to_60_speed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="60.0dip" android:text="0" />
+                <TextView android:textSize="72.0sp" android:textColor="#ffcccccc" android:id="@id/from_0_to_60_units" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/mph" />
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/from_0_to_60_right" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/from_0_to_60_info_layer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="32.0sp" android:textColor="#ffcccccc" android:gravity="center" android:id="@id/from_0_to_60_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" android:text="@string/from_0_to_60_info" android:minLines="6" />
+            </LinearLayout>
+            <Button android:enabled="false" android:id="@id/confirm_0_60_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="15.0dip" android:text="Confirm" />
+            <Button android:enabled="false" android:id="@id/discard_0_60_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="30.0dip" android:text="Discard this result" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/from_0_to_100_screen" android:background="@drawable/bg_filler" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/from_0_to_100_left" android:layout_width="800.0dip" android:layout_height="fill_parent">
+            <TextView android:textSize="56.0sp" android:textColor="#ffffffff" android:id="@id/from_0_to_100_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginTop="30.0dip" android:text="@string/default_seconds" />
+            <TextView android:textSize="56.0sp" android:textColor="#ffffffff" android:id="@id/from_0_to_100_meters" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:layout_marginRight="30.0dip" android:text="@string/default_meters" android:layout_alignParentRight="true" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/from_0_to_100_speed_layer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="256.0sp" android:textColor="#ffffffff" android:id="@id/from_0_to_100_speed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="60.0dip" android:text="0" />
+                <TextView android:textSize="72.0sp" android:textColor="#ffcccccc" android:id="@id/from_0_to_100_units" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/kmh" />
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/from_0_to_100_right" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/from_0_to_100_info_layer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="32.0sp" android:textColor="#ffcccccc" android:gravity="center" android:id="@id/from_0_to_100_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:text="@string/from_0_to_100_info" android:minLines="6" />
+            </LinearLayout>
+            <Button android:enabled="false" android:id="@id/confirm_0_100_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="20.0dip" android:text="Confirm" />
+            <Button android:enabled="false" android:id="@id/discard_0_100_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="30.0dip" android:text="Discard this result" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/quarter_mile_screen" android:background="@drawable/bg_filler" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/quarter_mile_left" android:layout_width="800.0dip" android:layout_height="fill_parent">
+            <TextView android:textSize="56.0sp" android:textColor="#ffffffff" android:id="@id/quarter_mile_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginTop="30.0dip" android:text="@string/default_seconds" />
+            <TextView android:textSize="56.0sp" android:textColor="#ffffffff" android:id="@id/quarter_mile_speed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:layout_marginRight="30.0dip" android:text="@string/default_speed" android:layout_alignParentRight="true" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/qtr_mile_meters_layer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="256.0sp" android:textColor="#ffffffff" android:id="@id/quarter_mile_dist" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="60.0dip" android:text="0" />
+                <TextView android:textSize="72.0sp" android:textColor="#ffcccccc" android:id="@id/quarter_mile_units" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/feet" />
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/quarter_mile_right" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/from_0_to_60_info_layer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="32.0sp" android:textColor="#ffcccccc" android:gravity="center" android:id="@id/quarter_mile_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:text="@string/quarter_mile_info" android:minLines="6" />
+            </LinearLayout>
+            <Button android:enabled="false" android:id="@id/confirm_qtr_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="20.0dip" android:text="Confirm" />
+            <Button android:enabled="false" android:id="@id/discard_qtr_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" android:layout_marginBottom="30.0dip" android:text="Discard this result" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@id/switchboard" android:background="#cc000000" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <RelativeLayout android:id="@id/town_limit_toggle" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                <ImageView android:id="@id/town_limit_sign" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/speed_limit_sign" android:layout_centerInParent="true" />
+                <TextView android:textSize="90.0sp" android:textColor="#ff000000" android:id="@id/town_limit_numbers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+                <ImageView android:id="@id/town_limit_inc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="30.0dip" android:src="@drawable/speed_limit_inc" android:layout_above="@id/town_limit_sign" android:layout_centerHorizontal="true" />
+                <ImageView android:id="@id/town_limit_dec" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:src="@drawable/speed_limit_dec" android:layout_below="@id/town_limit_sign" android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <RelativeLayout android:id="@id/highway_limit_toggle" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="45.0dip" android:layout_toRightOf="@id/town_limit_toggle">
+                <ImageView android:id="@id/highway_limit_sign" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/speed_limit_sign" android:layout_centerInParent="true" />
+                <TextView android:textSize="90.0sp" android:textColor="#ff000000" android:id="@id/highway_limit_numbers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+                <ImageView android:id="@id/highway_limit_inc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="30.0dip" android:src="@drawable/speed_limit_inc" android:layout_above="@id/highway_limit_sign" android:layout_centerHorizontal="true" />
+                <ImageView android:id="@id/highway_limit_dec" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:src="@drawable/speed_limit_dec" android:layout_below="@id/highway_limit_sign" android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <RelativeLayout android:id="@id/freeway_limit_toggle" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="45.0dip" android:layout_toRightOf="@id/highway_limit_toggle">
+                <ImageView android:id="@id/freeway_limit_sign" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/speed_limit_sign" android:layout_centerInParent="true" />
+                <TextView android:textSize="90.0sp" android:textColor="#ff000000" android:id="@id/freeway_limit_numbers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+                <ImageView android:id="@id/freeway_limit_inc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="30.0dip" android:src="@drawable/speed_limit_inc" android:layout_above="@id/freeway_limit_sign" android:layout_centerHorizontal="true" />
+                <ImageView android:id="@id/freeway_limit_dec" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:src="@drawable/speed_limit_dec" android:layout_below="@id/freeway_limit_sign" android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

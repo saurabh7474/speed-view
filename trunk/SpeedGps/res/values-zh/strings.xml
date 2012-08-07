@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GPS测速</string>
+    <string name="starting_the_app">启动GPS测速</string>
+    <string name="please_wait_a_moment">请稍等一会</string>
+    <string name="searching_for_satellites">寻找卫星</string>
+    <string name="no_satellites_found">未发现卫星</string>
+    <string name="waiting_for_gps_fix">等待GPS配对</string>
+    <string name="satellites_found">颗卫星发现</string>
+    <string name="satellite_found">颗卫星发现</string>
+    <string name="satellites_tip">可能需要一段时间来为GPS卫星定位。确保你在室外并且你的手机有一个可见度较好的天气。</string>
+    <string name="gps_readings_tip">为了提高GPS读取,远离高楼大厦、树木或障碍物阴影。</string>
+    <string name="gps_signal_weak">GPS信号很弱。</string>
+    <string name="gps_signal_not_available">GPS信号较弱或不可用。</string>
+    <string name="gps_signal_tip">请移动到一个开阔地段、保持静止,直到得到GPS的位置。</string>
+    <string name="low_position_accuracy">位置精度低</string>
+    <string name="accuracy_tip">GPS准确度会受到大气条件,可见的GPS卫星数目,噪音或附近建筑无线电信号的影响。</string>
+    <string name="not_available">n/a</string>
+    <string name="recording_is_stopped">记录停止</string>
+    <string name="not_receiving_updates">没有接受GPS数据</string>
+    <string name="data_recording_tip">你可以继续进入高级仪表盘记录的GPS数据,点击\"开始记录\"按钮。</string>
+    <string name="enabling_gps_tip">为了使GPS能够工作请从主页点击菜单按钮，选择设置，然后位置，检查并保证\"使用GPS卫星\"。</string>
+    <string name="orientation">方向</string>
+    <string name="portrait">竖向</string>
+    <string name="landscape">右侧横向</string>
+    <string name="reverse_landscape">左侧横向</string>
+    <string name="speed_limit">限速</string>
+    <string name="urban_area">市区</string>
+    <string name="highway">公路</string>
+    <string name="freeway">高速公路</string>
+    <string name="turn_off">关闭</string>
+    <string name="dashboard">仪表盘</string>
+    <string name="startup">启动</string>
+    <string name="main">主要</string>
+    <string name="compass">指南针</string>
+    <string name="hud_view">HUD视图</string>
+    <string name="zoom_view">缩放视图</string>
+    <string name="advanced">高级的</string>
+    <string name="clear_data">清除数据</string>
+    <string name="odometer_time">行程里程/时间</string>
+    <string name="max_speed">最高速度</string>
+    <string name="accl_times">加速时间</string>
+    <string name="graph">曲线图</string>
+    <string name="all">所有</string>
+    <string name="minimize">最小化</string>
+    <string name="exit">退出</string>
+    <string name="share_location">分享位置</string>
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="about">关于</string>
+    <string name="changelog">更新日志</string>
+    <string name="featured_apps">精选程序</string>
+    <string name="upgrade_to_pro">升级到专业版</string>
+    <string name="speed_warning_off">速度警告已被关闭了</string>
+    <string name="odometer_time_reset">总距离和旅行时间已经重置成功</string>
+    <string name="max_speed_reset">最高速度已重置成功</string>
+    <string name="accl_times_reset">加速时间已经重置成功</string>
+    <string name="graph_cleared">曲线图已成功清除</string>
+    <string name="all_data_cleared">所有的数据已成功清除</string>
+    <string name="file_not_found">警示声音文件没有找到</string>
+    <string name="speeding_warning">你超过了速度限制</string>
+    <string name="screen_support_warning">屏幕不支持</string>
+    <string name="not_optimized_to_run">这个应用程序不适合在你的设备运行。你可以仍旧使用它,但它可能显示并不正确。</string>
+    <string name="gps_is_disabled">GPS未启用</string>
+    <string name="please_enable_gps">请在系统设置里面打开GPS。</string>
+    <string name="proceed">继续进行</string>
+    <string name="connection_warning">连接警告</string>
+    <string name="no_internet_connection">你似乎没有互联网的连接。SpeedView的一些功能不能工作。</string>
+    <string name="reset_odometer">重置里程</string>
+    <string name="confirm_reset_odometer">你确定你想要重新设置你的旅行距离/时间吗？</string>
+    <string name="reset_max_speed">重置最高速度</string>
+    <string name="confirm_reset_max_speed">你确定你要重置你的最高速度吗？</string>
+    <string name="reset_accl_times">重置加速时间</string>
+    <string name="confirm_reset_accl">你确定你要重置你的加速时间吗？</string>
+    <string name="clear_graph">清除该曲线图</string>
+    <string name="confirm_clear_graph">你确定你想要清除这个曲线图吗？</string>
+    <string name="clear_all_data">清除所有的数据</string>
+    <string name="confirm_clear_all">你确定你想要清除所有您保存的数据吗？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="something_went_wrong">出现了错误</string>
+    <string name="please_contact_us">通过电子邮件,请联系我们,这样我们才能修好它。</string>
+    <string name="loading_address">加载地址...</string>
+    <string name="might_take_a_few_seconds">这样可能要花费几秒钟</string>
+    <string name="unable_to_get_address">无法获取地址</string>
+    <string name="where_are_you">你究竟在地球上的什么位置？</string>
+    <string name="network_failure">网络失败</string>
+    <string name="internet_connection">确保你有互联网连接</string>
+    <string name="gps_is_unavailable">GPS是无效的</string>
+    <string name="tap_on_screen_to_skip">点击屏幕跳过</string>
+    <string name="make_sure_gps_enabled">确保GPS的位置设置可用</string>
+    <string name="gps_fix_acquired">GPS定位完成</string>
+    <string name="no_fix">不能定位</string>
+    <string name="sats">sats</string>
+    <string name="sat">sat</string>
+    <string name="used">used</string>
+    <string name="avg_speed">平均速度</string>
+    <string name="speed">速度</string>
+    <string name="odometer">里程</string>
+    <string name="elevation">海拔</string>
+    <string name="time">时间</string>
+    <string name="sensor">传感器</string>
+    <string name="gps">GPS</string>
+    <string name="heading">航向</string>
+    <string name="total_distance">总距离</string>
+    <string name="moving_time">移动时间</string>
+    <string name="stopped_time">停止时间</string>
+    <string name="total_time">总时间</string>
+    <string name="moving_average">移动平均值</string>
+    <string name="overall_average">总平均值</string>
+    <string name="advanced_upcoming">更多的功能将要到来。</string>
+    <string name="car_acceleration">汽车加速</string>
+    <string name="acceleration_info">两种常用指标为汽车的加速度。注意,使用这些按钮前，你需要做一个完整的停车。</string>
+    <string name="your_recent_results">你最近的结果列在了下面。</string>
+    <string name="from_0_to_60_mph">0-60 mph 时间</string>
+    <string name="from_0_to_100_kmh">0-100 km/h 时间</string>
+    <string name="qtr_mile_time">1/4 英里时间</string>
+    <string name="quarter_mile_time">1/4 英里时间</string>
+    <string name="recording_info">你可以暂停录下GPS数据防止调整平均值和其他值。</string>
+    <string name="stop_recording">停止记录</string>
+    <string name="start_recording">开始记录</string>
+    <string name="recording_stopped_info">记录被停止。这将会去除任何当前位置更新,防止GPS数据从当前值改变。</string>
+    <string name="gpx_track_export">GPX轨迹导出</string>
+    <string name="track_logging_disabled">轨迹记录在程序设置中被禁用。</string>
+    <string name="gpx_not_generated">你没有产生一个GPX文件在这次对话。</string>
+    <string name="gpx_file_saved">一个新的GPX文件已经被创造出来。你能找到它，在您的SD卡\"</string>
+    <string name="folder">\" 文件夹。</string>
+    <string name="app_chooser_title">选择一个应用</string>
+    <string name="export_to_sd_card">导出到SD卡</string>
+    <string name="send_gpx_file">发送GPX文件</string>
+    <string name="no_data_to_export">没有数据可导出</string>
+    <string name="make_sure_log_enabled">确定应用设置里面轨迹记录是可用的。</string>
+    <string name="select_file_to_export">选择文件进行导出</string>
+    <string name="exporting_gpx_file">导出中。请稍等...</string>
+    <string name="email_subject">GPX轨迹文件</string>
+    <string name="email_text">该文件已经被发送使用SpeedView,一个Android应用的GPS测速仪。</string>
+    <string name="quick_launch">快速运行</string>
+    <string name="quick_launch_info">你可以连接到一些应用程序得到些有用信息。</string>
+    <string name="google_maps">Google Maps</string>
+    <string name="open_spot">Open Spot</string>
+    <string name="maverick">Maverick</string>
+    <string name="default_seconds">0.00 秒</string>
+    <string name="default_feet">0 英尺</string>
+    <string name="sec">秒</string>
+    <string name="from_0_to_60_info">一旦你已经准备好了，开始加速，该程序将计算到底多快可以从一个停止到达60英里/小时。</string>
+    <string name="accelerate">加速!</string>
+    <string name="from_0_to_60_result">你已经达到60英里/小时</string>
+    <string name="confirm">确认</string>
+    <string name="discard_this_result">丢弃这个结果</string>
+    <string name="default_meters">0 米</string>
+    <string name="from_0_to_100_info">一旦你已经准备好了，开始加速，该程序将计算到底多快可以从一个停止到达100公里/小时。</string>
+    <string name="from_0_to_100_result">你已经达到100公里/小时</string>
+    <string name="default_speed">0 英里/小时</string>
+    <string name="feet">英尺</string>
+    <string name="meters">米</string>
+    <string name="quarter_mile_info">一旦你已经准备好了，开始加速，该程序将计算你从停止到达1/4英里能有多快。</string>
+    <string name="quarter_mile_result">你已经行驶了1/4英里</string>
+    <string name="location_sharing">位置共享</string>
+    <string name="latitude">纬度</string>
+    <string name="longitude">经度</string>
+    <string name="web_link">网站的链接</string>
+    <string name="map_image">地图图像</string>
+    <string name="share_location_tip">在地图上点击调出缩放控制。你也可以用你的手指移动、缩放地图。</string>
+    <string name="select_application">选择应用</string>
+    <string name="share_by_email">通过电子邮件分享</string>
+    <string name="map_attach_notice">一些应用程序可能无法正确处理图像。如果不确定，使用\"通过电子邮件分享\"按钮。</string>
+    <string name="sd_card_not_available">错误:SD卡是不可用的。</string>
+    <string name="my_location">我的位置</string>
+    <string name="my_current_coords">这里是您当前的坐标</string>
+    <string name="attached">附加的</string>
+    <string name="error_attaching_map">附加地图图像时出现一个错误</string>
+    <string name="sent_via_speedview">经过SpeedView安卓版发送</string>
+    <string name="location_is_unknown">您目前的位置是未知的。等到GPS接收器已获得一个有效的位置,然后再试一次。</string>
+    <string name="error_getting_coords">获取坐标错误</string>
+    <string name="basics">基本</string>
+    <string name="display_units">单位显示</string>
+    <string name="mph">Mph英里/小时</string>
+    <string name="kmh">Kmh公里/小时</string>
+    <string name="knots">节(海里/小时)</string>
+    <string name="units_info">速度变化的显示单位</string>
+    <string name="select_display_units">选择显示单位</string>
+    <string name="speed_warning">速度警告</string>
+    <string name="warning_info">激活这个选项，如果你超出了选择的速度限制,该选项将提醒你</string>
+    <string name="speed_limits_info">更具三种不同类型的道路设置对应的速度限制。你可以转换这些预设的范围，通过从选项菜单选择\"速度限制\"，或者通过长按仪表盘(除了高级)。</string>
+    <string name="current_speed_limit">你目前的速度限制:</string>
+    <string name="within_towns">城市或城镇内</string>
+    <string name="town_limit_info">为城市和城镇选择速度限制</string>
+    <string name="highways">公路/农村道路</string>
+    <string name="highway_limit_info">为高速公路及其他建筑物外的道路</string>
+    <string name="freeways">高速公路</string>
+    <string name="freeway_limit_info">为高速公路及其他高速道</string>
+    <string name="sound_notification">声音通知</string>
+    <string name="sound_alert_info">从提供的铃声中选择一个警报音</string>
+    <string name="current_alert_sound">当前警报音:</string>
+    <string name="on">开</string>
+    <string name="off">关</string>
+    <string name="vibration_alert">使用振动警报</string>
+    <string name="vibration_alert_info">你一旦超速，电话将会震¨</string>
+    <string name="user_interface">界面</string>
+    <string name="digital_speedo_gauge">数字仪表</string>
+    <string name="digital_speedo_info">显示一个简单的数字测量替代\"虚拟\"速度计和提供一些定制的选项</string>
+    <string name="show_additional_data">显示额外的数据</string>
+    <string name="data_to_display">数据显示</string>
+    <string name="digit_addl_data_info">开启数据显示到主屏幕比如总行程时间，平均数度和海拔</string>
+    <string name="selected_to_display">你选择的显示:</string>
+    <string name="max_speedo_limit">最大速度计限制</string>
+    <string name="speedo_limit_info">启用在数字仪表设置不同最高速度。注意：如果你设定测速器的限制数值大于它的默认值为160英里/小时(或240公里/小时)，你将会需要禁用\"限制速度范围\"选项在\"GPS过滤\"的下方。</string>
+    <string name="trip_time">出行时间</string>
+    <string name="average_speed">平均速度</string>
+    <string name="accuracy">精度</string>
+    <string name="time_of_day">当日时间</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="use_head_up_display">使用平视显示</string>
+    <string name="head_up_display_info">允许你把你的手机放置在你的车前台并查看速度反射在挡风玻璃</string>
+    <string name="advanced_hud_mode">高级平视模式</string>
+    <string name="advanced_hud_info">显示平时模式额外的信息,如总距离,航向和高度</string>
+    <string name="advanced_zoom_mode">高级缩放模式</string>
+    <string name="advanced_zoom_info">显示缩放模式额外的信息,如总距离,航向和高度</string>
+    <string name="customize_colors">定制UI颜色</string>
+    <string name="custom_colors_info">为主要部分的界面设定不同的颜色</string>
+    <string name="primary_text_color">主要文本颜色</string>
+    <string name="pick_a_color">选择一种颜色</string>
+    <string name="picked_color">挑选的颜色</string>
+    <string name="primary_color_info">在所有仪表板上当前的速度的文本颜色</string>
+    <string name="secondary_text_color">次要文本颜色</string>
+    <string name="secondary_color_info">补充信息的文本颜色</string>
+    <string name="speed_bar_color">速度栏颜色</string>
+    <string name="speed_color_info">在两个里程计读数的速度栏的颜色</string>
+    <string name="recording">记录中</string>
+    <string name="run_in_background">在后台运行</string>
+    <string name="run_in_bg_info">当可用时，按返回键或主页键将最小化程序并保持它在后台运行。完全退出程序,你需要选择菜单选项退出。</string>
+    <string name="enable_track_logging">允许轨迹记录</string>
+    <string name="track_logging_info">这个选项允许你导出你的轨迹数据在GPX格式。关闭它可以省下一些内存。</string>
+    <string name="time_between_points">点之间的最短时间</string>
+    <string name="time_interval_info">两个的记录之间你的位置的最短时间</string>
+    <string name="distance_between_pts">点之间的最小距离</string>
+    <string name="min_distance_info">两个的记录之间你的位置的最小距离</string>
+    <string name="gps_filtering">GPS过滤</string>
+    <string name="narrow_speed_range">限制速度范围</string>
+    <string name="narrowing_info">忽视速度在150英里/小时以上(大约240公里/小时)。当在不确定的速度下对读取数度很有用。</string>
+    <string name="minimum_accuracy">最小的精度</string>
+    <string name="accuracy_info">如果你最后这个位置不准确，那么来自GPS接收器的数据将会被忽略。</string>
+    <string name="miscellaneous">杂项</string>
+    <string name="show_street_address">显示街道地址</string>
+    <string name="street_address_info">这个功能需要上网。注意,访问和利用因特网可能单独要求支付费用给服务运营商。</string>
+    <string name="disable_auto_rotation">禁用自动旋转</string>
+    <string name="auto_rotation_info">这个选项当你把你的手机放在你车头时会用到。当行驶在不平整的道路上时它防止重力加速器改变屏幕横向和纵向。</string>
+    <string name="open_in_full_screen">打开全屏</string>
+    <string name="full_screen_info">不选择此项显示状态栏。这个设置只适用于肖像屏幕方向</string>
+    <string name="show_background">显示背景</string>
+    <string name="reset_colors">重置颜色</string>
+    <string name="reset_all_settings">重置所有设置</string>
+    <string name="confirm_colors_reset">你确定你要重置颜色到它们的默认值吗?</string>
+    <string name="confirm_settings_reset">你确定你要重置所有设置到它们的默认值吗?</string>
+    <string name="colors_reset">颜色已经重置成功</string>
+    <string name="settings_reset">所有设置已经重置成功</string>
+    <string name="maverick_summary">越野GPS导航支持离线地图,指南针和跟踪记录。</string>
+    <string name="maverick_description">即使没有一个互联网连接也可以使用离线地图和GPS。这个应用对徒步旅行、划船、探险和其他户外活动来说很有用。</string>
+    <string name="download">下载</string>
+    <string name="learn_more">学习更多的</string>
+    <string name="lookout_security">注意安全；杀毒软件</string>
+    <string name="lookout_summary">用award-winning保护你的手机，监控杀毒。</string>
+    <string name="lookout_description">防病毒，手机定位，数据备份还有跟多！注意 #1 安全性；杀毒软件安卓版。超过10,000,000个用户接受保护他们的手机。</string>
+    <string name="open">打开</string>
+    <string name="widget_is_idle">SpeedView是空闲的</string>
+    <string name="tap_to_start">点击开始</string>
+    <string name="starting_the_widget">启动部件</string>
+    <string name="please_wait">请稍等</string>
+    <string name="starting">启动</string>
+    <string name="track_logging_enabled">轨迹记录可用</string>
+    <string name="zero_found">0 找到</string>
+    <string name="sat_found">sat 找到</string>
+    <string name="sats_found">sats 找到</string>
+    <string name="odo">ODO</string>
+    <string name="max">最大值</string>
+    <string name="widget_already_added">插件已经添加</string>
+    <string name="app_already_running">GPS测速已经运行</string>
+    <string name="tap_to_try_again">点击再试一次</string>
+    <string name="notify_us">通知我们</string>
+    <string name="widget">插件</string>
+    <string name="first_startup">第一次启动</string>
+    <string name="startup_title">欢迎使用SpeedView</string>
+    <string name="version">版本</string>
+    <string name="pro">专业版 By XDA汉化组</string>
+    <string name="free">免费版 By XDA汉化组</string>
+    <string name="startup_intro">如果你是刚开始用SpeedView或GPS功能的软件，请在继续之前阅读下面的部分。简要介绍了应用程序的关键功能和回答最常被问到的问题。</string>
+    <string name="startup_text_pro"><b>我可以用它没有GPS连接吗?</b>"
+是的,你能看到你保存的数据,利用指南针和导出的轨迹作为GPX文件。只需要点击开始页面跳过它。
+
+"<b>指南针是如何工作?</b>"
+
+When you are moving slower than 3 mph (about 5 km/h) the phone's orientation sensor is used to determine your heading. If you are moving faster than that the GPS is used to determine your heading.
+
+"<b>What is HUD? How do I use it?</b>"
+
+HUD stands for \"head-up display\" and was initially developed for military aviation. In this app, the HUD mode allows you to put your device on your car's dashboard and see the speed reflected in the front glass. This can be useful when driving at night.
+
+"<b>The speedometer stops at 150 mph. Why?</b>"
+
+Because of the \"Narrow speed range\" option that is used to suppress outliers (spikes) in the GPS data, so you will not have erratic top speed numbers (like 345 mph or higher) popping out of nowhere due to GPS errors. This option is turned on by default. You can disable it any time in the app's settings.
+
+"<b>Why does it take so long to get a GPS fix?</b>"
+
+The time required to get a GPS fix is dependent on the number of satellites in view and reception strength of each GPS satellite. This process normally takes 1-2 minutes, however you should not worry if it takes up to 20 minutes on the first occasion. If the receiver in your device will still not acquire a fix, you might want to restart your device. Also note that GPS will not work through heated or heat reflective windscreens. This is due to a metal layer in them which stops the signal.
+
+"<b>The app lags, off by a few mph, etc.</b>"
+
+GPS accuracy depends on a number of factors, most notably signal to noise ratio, satellite position, atmospheric conditions and obstructions of satellite signals. These factors can create errors in your perceived location. For example, objects such as buildings or mountains between the satellite and the receiver can produce an error up to 30 meters.
+
+"<b>It drains the battery. Can you add a powersafe mode, only query GPS speed?</b>"
+
+No, that is not how GPS works. In basic terms, GPS satellites send out an identifying signal, a GPS receiver picks up that signal and then the software can determine things such as longitude and latitude, direction, speed, etc.
+
+"<b>How does the track logging feature work?</b>"
+
+It generates a separate log file for each day that you use the app with the track logging option turned on. After a while, SpeedView erases the outdated log files, leaving only the most recent three. When exporting, you will be presented with a choice of which one to convert to the GPX format.
+
+"<b>How often does SpeedView refresh the address in the Pro version?</b>"
+
+Every 100 meters if you are moving slower than 35 mph (about 60 km/h), or every 1000 meters if you are moving faster than that."</string>
+    <string name="startup_text_free"><b>我可以用它没有GPS连接吗?</b>"
+
+是的,你能看到你保存的数据,利用指南针和导出的轨迹作为GPX文件。只需要点击开始页面跳过它。
+
+"<b>指南针是如何工作?</b>"
+
+When you are moving slower than 3 mph (about 5 km/h) the phone's orientation sensor is used to determine your heading. If you are moving faster than that the GPS is used to determine your heading.
+
+"<b>What is HUD? How do I use it?</b>"
+
+HUD stands for \"head-up display\" and was initially developed for military aviation. In this app, the HUD mode allows you to put your device on your car's dashboard and see the speed reflected in the front glass. This can be useful when driving at night.
+
+"<b>The speedometer stops at 150 mph. Why?</b>"
+
+Because of the \"Narrow speed range\" option that is used to suppress outliers (spikes) in the GPS data, so you will not have erratic top speed numbers (like 345 mph or higher) popping out of nowhere due to GPS errors. This option is turned on by default. You can disable it any time in the app's settings.
+
+"<b>Why does it take so long to get a GPS fix?</b>"
+
+The time required to get a GPS fix is dependent on the number of satellites in view and reception strength of each GPS satellite. This process normally takes 1-2 minutes, however you should not worry if it takes up to 20 minutes on the first occasion. If the receiver in your device will still not acquire a fix, you might want to restart your device. Also note that GPS will not work through heated or heat reflective windscreens. This is due to a metal layer in them which stops the signal.
+
+"<b>The app lags, off by a few mph, etc.</b>"
+
+GPS accuracy depends on a number of factors, most notably signal to noise ratio, satellite position, atmospheric conditions and obstructions of satellite signals. These factors can create errors in your perceived location. For example, objects such as buildings or mountains between the satellite and the receiver can produce an error up to 30 meters.
+
+"<b>It drains the battery. Can you add a powersafe mode, only query GPS speed?</b>"
+
+No, that is not how GPS works. In basic terms, GPS satellites send out an identifying signal, a GPS receiver picks up that signal and then the software can determine things such as longitude and latitude, direction, speed, etc.
+
+"<b>How does the track logging feature work?</b>"
+
+It generates a separate log file for each day that you use the app with the track logging option turned on. After a while, SpeedView erases the outdated log files, leaving only the most recent three. When exporting, you will be presented with a choice of which one to convert to the GPX format."</string>
+    <string name="app_web_page">程序网页</string>
+    <string name="speedview_pro">GPS测速PRO</string>
+    <string name="speedview_pro_info">一个没有广告与更多的可用功能的版本在Android Market。</string>
+    <string name="check_it_out">查看</string>
+    <string name="close">关闭</string>
+    <string name="about_this_release">关于这个版本</string>
+    <string name="release_info">This is a major update that adds some often requested features, such as a widget and an ability to quickly tweak speed limits. Please make sure to read the section below for a brief overview of how the widget works.</string>
+    <string name="whats_new">"What's new"</string>
+    <string name="whats_new_info_pro">"• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements"</string>
+    <string name="whats_new_info_free">"• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements"</string>
+    <string name="start">开始</string>
+    <string name="new_feature_info">"What's new"</string>
+    <string name="feature_description">This is a bug fix update that should take care of the problem with adverts appearing in the Pro version. This issue only affects European users and was triggered by a third-party library that we use in the app. Sorry for the inconvenience.</string>
+    <string name="help_title">快速帮助</string>
+    <string name="help_text">If you are a new user or experiencing difficulties, we strongly recommend reading the <b>FAQ</b>" first. You can view it by tapping on the corresponding button in the bottom right corner of the screen.
+
+To switch between landscape and portrait modes, use the "<b>Orientation</b>" button under the Options menu. The screen orientation will be restored next time you start SpeedView.
+
+To switch to the "<b>Compass</b> mode, tap once on the linear compass. To enter the <b>HUD mode</b>, tap anywhere on the speedometer area. To quickly reset the <b>odometer</b> or <b>maximum speed</b> to zero, tap on the corresponding field. To open the <b>Advanced</b> screen, tap on the speed graph. You can find the corresponding buttons if you open the Options menu and select <b>Dashboard</b>". To return to default view while in one of these modes, tap anywhere on the screen. You can also use the Back button to return to main screen.
+
+To quickly switch between speed limits, "<b>long-tap</b>" anywhere on one of the main dashboards (excluding Advanced) to select a different speed limit. Then long-tap anywhere on that screen (or use the regular \"Back\" button) to confirm your changes and return to the previous dashboard.
+
+To reset odometer and time traveled, maximum speed, speed graph or all data at once, tap the "<b>Reset data</b>" button.
+
+To change display units, define speed limits, set sound alert, minimum accuracy and other preferences, use the "<b>Settings</b>" menu item.
+
+If you want to use the app without a GPS connection, tap anywhere on the Startup screen to skip it. Note that you can pause the recording of the GPS data anytime by going to the "<b>Advanced</b> dashboard, then tapping on the <b>Stop recording</b>" button.
+
+In case you are experiencing an erratic speed issue or the program freezes after acquiring a GPS fix, try setting the "<b>minimum accuracy</b>" value to 50 meters to ignore most inaccurate data.
+
+If there are any other problems, please do not hesitate to submit a ticket or contact us directly at "<i>speedview@codesector.com</i>.</string>
+    <string name="read_the_faq">阅读FAQ</string>
+    <string name="faq_title">FAQ</string>
+    <string name="back">返回</string>
+    <string name="about_title">关于SpeedView</string>
+    <string name="about_text">"SpeedView is an advanced speedometer application that uses the phone's GPS location to calculate speed and distance traveled. Some of the features include: compass, HUD mode, speed graph, maximum and average speed, time traveled, speed warning, background mode, GPX track export and more. This app is suitable for running, car driving, biking or hiking.
+
+Please note that the accuracy of speed readings depends on your GPS reception quality, which can be affected by a multitude of error-introducing factors.
+
+In addition, note that this application is not optimized to run on 7-inch tablets or devices with uncommon screen resolutions. You will be able to run and use it, but it may not display properly. If you have any questions or comments, feel free to post them on our blog.
+
+We would also like to indicate that we reserve the right to anonymously track and report a user's activity inside of SpeedView. We use this data to better understand and improve how this app is being used. If you have any questions or comments, feel free to post them on our blog or send us an email directly using the button below. Your feedback is important to us.
+
+"<i>Thank you for using this app.</i>"
+
+"<b>Copyright © 2010-2012 Code Sector</b></string>
+    <string name="send_us_email">给我们发送邮件</string>
+    <string name="changelog_title">更新日志</string>
+    <string name="changelog_text_pro"><b>Version 2.9 - Feb 5, 2012</b>"
+
+• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements
+
+"<b>Version 2.8 - Oct 21, 2011</b>"
+
+• Quickly switch speed limits
+• Share your location
+• Support for 10-inch screens
+• Featured apps section
+• Fixed: Multiple bugs on Honeycomb
+• Numerous minor tweaks
+
+"<b>Version 2.7 - Jul 14, 2011</b>"
+
+• Basic Honeycomb support
+• Enable screen auto-rotation
+• Maximum digital speedo limit
+• Show additional data on the digital gauge
+• Updated speed limit presets
+• Lots of minor improvements
+
+"<b>Version 2.6 - Mar 24, 2011</b>"
+
+• Digital speedo gauge
+• Improved GPX export
+• Vibration alert
+• Reverse landscape mode (Android 2.3)
+• Disable street address
+• Many bug fixes and UI tweaks
+
+"<b>Version 2.5 - Nov 9, 2010</b>"
+
+• 0 to 100 km/h time
+• Improved car acceleration modes
+• The app now restores the recording state
+• Fixed: Alert sound bug on some phones
+
+"<b>Version 2.4 - Oct 8, 2010</b>"
+
+• 0 to 60 mph time
+• Quarter mile time
+• Stop/Start recording data
+• Quickly reset odometer and max speed
+• Reset colors to default values
+
+"<b>Version 2.3 - Sep 25, 2010</b>"
+
+• Street address
+• Position accuracy indicator
+• Number of sats used in fix
+• Advanced logging settings"</string>
+    <string name="changelog_text_free"><b>Version 2.9 - Feb 5, 2012</b>"
+
+• Simple text widget (4x1)
+• Quickly adjust speed limits
+• Improved background service
+• More color customization
+• Other minor improvements
+
+"<b>Version 2.8 - Oct 21, 2011</b>"
+
+• Quickly switch speed limits
+• Share your location
+• Support for 10-inch screens
+• Featured apps section
+• Fixed: Multiple bugs on Honeycomb
+• Numerous minor tweaks
+
+"<b>Version 2.7 - Jul 14, 2011</b>"
+
+• Basic Honeycomb support
+• Enable screen auto-rotation
+• Maximum digital speedo limit
+• Show additional data on the digital gauge
+• Updated speed limit presets
+• Lots of minor improvements
+
+"<b>Version 2.6 - Mar 24, 2011</b>"
+
+• Digital speedo gauge
+• Improved GPX export
+• Vibration alert
+• Reverse landscape mode (Android 2.3)
+• Many bug fixes and UI tweaks
+
+"<b>Version 2.5 - Nov 9, 2010</b>"
+
+• 0 to 100 km/h time
+• Improved car acceleration modes
+• The app now restores the recording state
+• Fixed: Alert sound bug on some phones
+
+"<b>Version 2.4 - Oct 8, 2010</b>"
+
+• 0 to 60 mph time
+• Quarter mile time
+• Stop/Start recording data
+• Quickly reset odometer and max speed
+• Reset colors to default values
+
+"<b>Version 2.3 - Sep 25, 2010</b>"
+
+• Orientation sensor compass
+• Advanced zoom mode
+• Zoom/HUD color options
+
+"<b>Version 2.2 - Aug 28, 2010</b>"
+
+• New track logging algorithm
+• Zoom view added
+• Fixed: Problem with background service
+
+"<b>Version 2.1 - Aug 18, 2010</b>"
+
+• Move to SD Card support
+• Changelog added
+• Fixed: Force closes in landscape mode
+
+"<b>Version 2.0 - Aug 17, 2010</b>"
+
+• Run in the background
+• GPX track export
+• Average speed
+• Time traveled"</string>
+    <string name="visit_our_blog">访问我们的博客</string>
+    <string name="how_the_widget_works">插件工作如何</string>
+    <string name="widget_information">The widget works in conjunction with the app in that it does not have its own configurable settings. Instead, it uses the current preferences set in SpeedView, such as display units, your current speed limit, track logging options, etc. The widget saves the data when you stop it by tapping on it, or when you start the application while the widget is running.</string>
+    <string name="resetting_settings">重置设置</string>
+    <string name="reset_information">在设置页面您可以重置您的设置通过选项菜单。</string>
+</resources>
