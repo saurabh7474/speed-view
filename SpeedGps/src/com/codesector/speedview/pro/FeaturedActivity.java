@@ -21,10 +21,6 @@ import java.util.List;
 public class FeaturedActivity extends Activity
 {
 
-    public FeaturedActivity()
-    {
-    }
-
     private boolean checkIfLookoutInst()
     {
         boolean flag;
