@@ -18,17 +18,15 @@ import java.lang.reflect.Array;
 // Referenced classes of package com.codesector.speedview.pro:
 //            SpeedView, ColorPickerDialog
 
-public class SettingsActivity extends Activity
-    implements ColorPickerDialog.OnColorChangedListener
-{
+public class SettingsActivity extends Activity implements
+		ColorPickerDialog.OnColorChangedListener {
 
-    public SettingsActivity()
-    {
-        mTempSpeedoLimit = -1;
-        mAlertSoundUri = null;
-    }
+	public SettingsActivity() {
+		mTempSpeedoLimit = -1;
+		mAlertSoundUri = null;
+	}
 
-    private int getArrayIndex(String as[], String s)
+	private int getArrayIndex(String as[], String s)
     {
         int i;
         int j;
@@ -48,69 +46,69 @@ _L3:
 _L5:
     }
 
-    private boolean isNetworkAvailable()
-    {
-        boolean flag;
-        if(((ConnectivityManager)getSystemService("connectivity")).getActiveNetworkInfo() != null)
-            flag = true;
-        else
-            flag = false;
-        return flag;
-    }
+	private boolean isNetworkAvailable() {
+		boolean flag;
+		if (((ConnectivityManager) getSystemService("connectivity"))
+				.getActiveNetworkInfo() != null)
+			flag = true;
+		else
+			flag = false;
+		return flag;
+	}
 
-    private void setFullScreenMode(boolean flag)
-    {
-        android.view.WindowManager.LayoutParams layoutparams = getWindow().getAttributes();
-        if(flag)
-            layoutparams.flags = 1024 | layoutparams.flags;
-        else
-            layoutparams.flags = -1025 & layoutparams.flags;
-        getWindow().setAttributes(layoutparams);
-    }
+	private void setFullScreenMode(boolean flag) {
+		android.view.WindowManager.LayoutParams layoutparams = getWindow()
+				.getAttributes();
+		if (flag)
+			layoutparams.flags = 1024 | layoutparams.flags;
+		else
+			layoutparams.flags = -1025 & layoutparams.flags;
+		getWindow().setAttributes(layoutparams);
+	}
 
-    public void colorChanged(int i)
-    {
-        if(mFromButton.equals(mColors[0]))
-        {
-            mSpeedBarColorButton.setText(2131099869);
-            mSpeedBarColorButton.setTextColor(i);
-            mSpeedBarColor = i;
-        } else
-        if(mFromButton.equals(mColors[1]))
-        {
-            mPrimaryColorButton.setText(2131099869);
-            mPrimaryColorButton.setTextColor(i);
-            mPrimaryTextColor = i;
-        } else
-        {
-            mSecondaryColorButton.setText(2131099869);
-            mSecondaryColorButton.setTextColor(i);
-            mSecondaryTextColor = i;
-        }
-    }
+	public void colorChanged(int i) {
+		if (mFromButton.equals(mColors[0])) {
+			mSpeedBarColorButton.setText(2131099869);
+			mSpeedBarColorButton.setTextColor(i);
+			mSpeedBarColor = i;
+		} else if (mFromButton.equals(mColors[1])) {
+			mPrimaryColorButton.setText(2131099869);
+			mPrimaryColorButton.setTextColor(i);
+			mPrimaryTextColor = i;
+		} else {
+			mSecondaryColorButton.setText(2131099869);
+			mSecondaryColorButton.setTextColor(i);
+			mSecondaryTextColor = i;
+		}
+	}
 
-    protected void onActivityResult(int i, int j, Intent intent)
-    {
-        if(i != 1) goto _L2; else goto _L1
-_L1:
-        if(j != 0) goto _L4; else goto _L3
-_L3:
-        mSoundAlertStatus.setText(2131099838);
-        mSoundAlertButton.setChecked(false);
-        mSoundAlertToggled = false;
-_L2:
-        return;
-_L4:
-        if(intent != null)
-        {
-            mAlertSoundUri = (Uri)intent.getParcelableExtra("android.intent.extra.ringtone.PICKED_URI");
-            mSoundAlertStatus.setText((new StringBuilder(String.valueOf(getString(2131099839)))).append(" ").append(RingtoneManager.getRingtone(getBaseContext(), mAlertSoundUri).getTitle(getBaseContext())).toString());
-        }
-        if(true) goto _L2; else goto _L5
-_L5:
-    }
+	protected void onActivityResult(int i, int j, Intent intent) {
+		if (i != 1)
+			return;
+		if (j == 0) {
+			mSoundAlertStatus.setText(2131099838);
+			mSoundAlertButton.setChecked(false);
+			mSoundAlertToggled = false;
+			return;
+		}
+		if (intent == null) {
+			return;
+		} else {
+			mAlertSoundUri = (Uri) intent
+					.getParcelableExtra("android.intent.extra.ringtone.PICKED_URI");
+			String s = String.valueOf(getString(2131099839));
+			StringBuilder stringbuilder = (new StringBuilder(s)).append(" ");
+			Context context = getBaseContext();
+			Ringtone ringtone = RingtoneManager.getRingtone(context,
+					mAlertSoundUri);
+			String s1 = ringtone.getTitle(getBaseContext());
+			String s2 = stringbuilder.append(s1).toString();
+			mSoundAlertStatus.setText(s2);
+			return;
+		}
+	}
 
-    public void onCreate(Bundle bundle)
+	public void onCreate(Bundle bundle)
     {
         super.onCreate(bundle);
         getWindow().setFlags(128, 128);
@@ -450,14 +448,6 @@ _L5:
             public void onNothingSelected(AdapterView adapterview)
             {
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mWarningCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -473,14 +463,6 @@ _L5:
                 tablelayout.setVisibility(i);
                 mWarningChecked = flag;
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mUrbanAreaButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -493,14 +475,6 @@ _L5:
                 mTownLimitLayout.setVisibility(0);
                 mHighwayLimitLayout.setVisibility(8);
                 mFreewayLimitLayout.setVisibility(8);
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -515,14 +489,6 @@ _L5:
                 mTownLimitLayout.setVisibility(8);
                 mFreewayLimitLayout.setVisibility(8);
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mFreewayButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -536,14 +502,6 @@ _L5:
                 mHighwayLimitLayout.setVisibility(8);
                 mTownLimitLayout.setVisibility(8);
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mTownLimitSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
@@ -556,18 +514,6 @@ _L5:
                     mTownLimitValue.setText((new StringBuilder(String.valueOf(mTownLimitSpinner.getSelectedItem().toString()))).append(" ").append(mUnitsSpinner.getSelectedItem().toString()).toString());
                 }
                 mTownLimitSeekBar.setProgress(mTownSpeedLimit);
-            }
-
-            public void onNothingSelected(AdapterView adapterview)
-            {
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -600,14 +546,6 @@ _L5:
                 spinner.setSelection(i);
                 mTownSpeedLimit = seekbar.getProgress();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mHighwayLimitSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
@@ -624,14 +562,6 @@ _L5:
 
             public void onNothingSelected(AdapterView adapterview)
             {
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -664,14 +594,6 @@ _L5:
                 spinner.setSelection(i);
                 mHighwaySpeedLimit = seekbar.getProgress();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mFreewayLimitSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
@@ -688,14 +610,6 @@ _L5:
 
             public void onNothingSelected(AdapterView adapterview)
             {
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -728,14 +642,6 @@ _L5:
                 spinner.setSelection(i);
                 mFreewaySpeedLimit = seekbar.getProgress();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mSoundAlertButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -761,14 +667,6 @@ _L5:
                     mSoundAlertToggled = false;
                 }
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mVibrationCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -776,14 +674,6 @@ _L5:
             public void onCheckedChanged(CompoundButton compoundbutton, boolean flag)
             {
                 mVibrationChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -796,14 +686,6 @@ _L5:
                 else
                     mDigitalTableLayout.setVisibility(8);
                 mDigitSpeedoChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -819,14 +701,6 @@ _L5:
                         {
                             mTempSpeedoLimit = i;
                         }
-
-                        final _cls15 this$1;
-
-                    
-                    {
-                        this$1 = _cls15.this;
-                        super();
-                    }
                     }
 ).setPositiveButton(2131099857, new android.content.DialogInterface.OnClickListener() {
 
@@ -847,14 +721,6 @@ _L5:
                                 mDigitAddlDataButton.setChecked(false);
                             }
                         }
-
-                        final _cls15 this$1;
-
-                    
-                    {
-                        this$1 = _cls15.this;
-                        super();
-                    }
                     }
 ).setNegativeButton(2131099858, new android.content.DialogInterface.OnClickListener() {
 
@@ -865,13 +731,6 @@ _L5:
                             mDigitAddlDataToggled = false;
                         }
 
-                        final _cls15 this$1;
-
-                    
-                    {
-                        this$1 = _cls15.this;
-                        super();
-                    }
                     }
 ).show();
                 } else
@@ -879,15 +738,6 @@ _L5:
                     mDigitAddlDataStatus.setText(2131099849);
                     mDigitAddlDataToggled = false;
                 }
-            }
-
-            final SettingsActivity this$0;
-
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -900,14 +750,6 @@ _L5:
                 else
                     mSpeedoSeekbarRow.setVisibility(8);
                 mMaxSpeedoChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -925,14 +767,6 @@ _L5:
             public void onStopTrackingTouch(SeekBar seekbar)
             {
                 mMaxSpeedoLimit = seekbar.getProgress();
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -955,14 +789,6 @@ _L5:
                 }
                 mUseHudChecked = flag;
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mAdvancedHudCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -971,14 +797,6 @@ _L5:
             {
                 mAdvancedHudChecked = flag;
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mAdvancedZoomCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -986,14 +804,6 @@ _L5:
             public void onCheckedChanged(CompoundButton compoundbutton, boolean flag)
             {
                 mAdvancedZoomChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -1007,14 +817,6 @@ _L5:
                     mColorsTableLayout.setVisibility(8);
                 mCustomColorsChecked = flag;
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mSpeedBarColorButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -1023,14 +825,6 @@ _L5:
             {
                 mFromButton = SettingsActivity.mColors[0];
                 (new ColorPickerDialog(SettingsActivity.this, SettingsActivity.this, mSpeedBarColor)).show();
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -1041,14 +835,6 @@ _L5:
                 mFromButton = SettingsActivity.mColors[1];
                 (new ColorPickerDialog(SettingsActivity.this, SettingsActivity.this, mPrimaryTextColor)).show();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mSecondaryColorButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -1058,14 +844,6 @@ _L5:
                 mFromButton = SettingsActivity.mColors[2];
                 (new ColorPickerDialog(SettingsActivity.this, SettingsActivity.this, mSecondaryTextColor)).show();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mRunInBGCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -1073,14 +851,6 @@ _L5:
             public void onCheckedChanged(CompoundButton compoundbutton, boolean flag)
             {
                 mRunInBGChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -1094,14 +864,6 @@ _L5:
                     mFrequencyLayout.setVisibility(8);
                 mTrackLoggingChecked = flag;
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mMinTimeSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
@@ -1113,14 +875,6 @@ _L5:
 
             public void onNothingSelected(AdapterView adapterview)
             {
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -1134,14 +888,6 @@ _L5:
             public void onNothingSelected(AdapterView adapterview)
             {
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mNarrowingCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -1149,14 +895,6 @@ _L5:
             public void onCheckedChanged(CompoundButton compoundbutton, boolean flag)
             {
                 mNarrowingChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -1170,14 +908,6 @@ _L5:
             public void onNothingSelected(AdapterView adapterview)
             {
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mStreetAddrCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -1187,13 +917,6 @@ _L5:
                 mStreetAddrChecked = flag;
             }
 
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mDsblRotationCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -1226,14 +949,6 @@ _L2:
                 if(true) goto _L3; else goto _L7
 _L7:
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mFullScreenCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -1253,13 +968,6 @@ _L7:
                 mFullScreenChecked = flag;
             }
 
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 );
         mBackgroundCheckBox.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
@@ -1271,14 +979,6 @@ _L7:
                 else
                     mSettingsScreen.setBackgroundColor(-16777216);
                 mBackgroundChecked = flag;
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 );
@@ -1305,13 +1005,12 @@ _L9:
           goto _L11
     }
 
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(2131230721, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(2131230721, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    public boolean onKeyDown(int i, KeyEvent keyevent)
+	public boolean onKeyDown(int i, KeyEvent keyevent)
     {
         i;
         JVM INSTR tableswitch 4 4: default 20
@@ -1365,7 +1064,7 @@ _L2:
 _L3:
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuitem)
+	public boolean onOptionsItemSelected(MenuItem menuitem)
     {
         menuitem.getItemId();
         JVM INSTR tableswitch 2131296694 2131296695: default 28
@@ -1390,27 +1089,11 @@ _L2:
                 mSecondaryTextColor = -3355444;
                 Toast.makeText(getBaseContext(), 2131099901, 1).show();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 ).show();
@@ -1460,27 +1143,11 @@ _L3:
                 startActivity(intent);
                 Toast.makeText(getBaseContext(), 2131099902, 1).show();
             }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SettingsActivity this$0;
-
-            
-            {
-                this$0 = SettingsActivity.this;
-                super();
             }
         }
 ).show();
@@ -1488,236 +1155,135 @@ _L3:
 _L4:
     }
 
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
-        if(mSpeedBarColor != -16776961 || mPrimaryTextColor != -1 || mSecondaryTextColor != -3355444)
-            menu.findItem(2131296694).setVisible(true);
-        else
-            menu.findItem(2131296694).setVisible(false);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void reload()
-    {
-        Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(65536);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-    }
-
-    private static final int PRIMARY = 1;
-    private static final int SECONDARY = 2;
-    private static final int SPEED_BAR;
-    private static final String mColors[];
-    private final int CUSTOM_SPEED_LIMIT = 14;
-    private final int REQUEST_ALARM_SOUND = 1;
-    private Spinner mAccuracySpinner;
-    private String mAddlDataValues[];
-    private CheckBox mAdvancedHudCheckBox;
-    private boolean mAdvancedHudChecked;
-    private TextView mAdvancedHudInfo;
-    private TableRow mAdvancedHudRow;
-    private CheckBox mAdvancedZoomCheckBox;
-    private boolean mAdvancedZoomChecked;
-    private TextView mAdvancedZoomInfo;
-    private TableRow mAdvancedZoomRow;
-    private Uri mAlertSoundUri;
-    private CheckBox mBackgroundCheckBox;
-    private boolean mBackgroundChecked;
-    private TableLayout mColorsTableLayout;
-    private TextView mCurrentLimit;
-    private int mCurrentSpeedLimit;
-    private CheckBox mCustomColorsCheckBox;
-    private boolean mCustomColorsChecked;
-    private ToggleButton mDigitAddlDataButton;
-    private TextView mDigitAddlDataStatus;
-    private boolean mDigitAddlDataToggled;
-    private int mDigitDataSelected;
-    private CheckBox mDigitSpeedoCheckBox;
-    private boolean mDigitSpeedoChecked;
-    private TableLayout mDigitalTableLayout;
-    private int mDisplayUnits;
-    private CheckBox mDsblRotationCheckBox;
-    private boolean mDsblRotationChecked;
-    private TextView mDsblRotationInfo;
-    private TableRow mDsblRotationRow;
-    private Button mFreewayButton;
-    private TableLayout mFreewayLimitLayout;
-    private SeekBar mFreewayLimitSeekBar;
-    private Spinner mFreewayLimitSpinner;
-    private TextView mFreewayLimitValue;
-    private int mFreewaySpeedLimit;
-    private LinearLayout mFrequencyLayout;
-    private String mFromButton;
-    private CheckBox mFullScreenCheckBox;
-    private boolean mFullScreenChecked;
-    private TextView mFullScreenInfo;
-    private TableRow mFullScreenRow;
-    private Button mHighwayButton;
-    private TableLayout mHighwayLimitLayout;
-    private SeekBar mHighwayLimitSeekBar;
-    private Spinner mHighwayLimitSpinner;
-    private TextView mHighwayLimitValue;
-    private int mHighwaySpeedLimit;
-    private ImageView mLogo;
-    private CheckBox mMaxSpeedoCheckBox;
-    private boolean mMaxSpeedoChecked;
-    private int mMaxSpeedoLimit;
-    private int mMinDistBetweenPts;
-    private Spinner mMinDistanceSpinner;
-    private int mMinTimeBetweenPts;
-    private Spinner mMinTimeSpinner;
-    private int mMinimumAccuracy;
-    private CheckBox mNarrowingCheckBox;
-    private boolean mNarrowingChecked;
-    private Button mPrimaryColorButton;
-    private int mPrimaryTextColor;
-    private CheckBox mRunInBGCheckBox;
-    private boolean mRunInBGChecked;
-    private Button mSecondaryColorButton;
-    private int mSecondaryTextColor;
-    private RelativeLayout mSettingsScreen;
-    private ToggleButton mSoundAlertButton;
-    private TextView mSoundAlertStatus;
-    private boolean mSoundAlertToggled;
-    private int mSpeedBarColor;
-    private Button mSpeedBarColorButton;
-    private SeekBar mSpeedoLimitSeekBar;
-    private TextView mSpeedoLimitValue;
-    private TableRow mSpeedoSeekbarRow;
-    private CheckBox mStreetAddrCheckBox;
-    private boolean mStreetAddrChecked;
-    private LinearLayout mStreetAddrLayout;
-    private int mTempSpeedoLimit;
-    private TableLayout mTownLimitLayout;
-    private SeekBar mTownLimitSeekBar;
-    private Spinner mTownLimitSpinner;
-    private TextView mTownLimitValue;
-    private int mTownSpeedLimit;
-    private CheckBox mTrackLoggingCheckBox;
-    private boolean mTrackLoggingChecked;
-    private Spinner mUnitsSpinner;
-    private Button mUrbanAreaButton;
-    private CheckBox mUseHudCheckBox;
-    private boolean mUseHudChecked;
-    private CheckBox mVibrationCheckBox;
-    private boolean mVibrationChecked;
-    private CheckBox mWarningCheckBox;
-    private boolean mWarningChecked;
-    private TableLayout mWarningTableLayout;
-
-    static 
-    {
-        String as[] = new String[3];
-        as[0] = "speed bar";
-        as[1] = "primary";
-        as[2] = "secondary";
-        mColors = as;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (mSpeedBarColor != -16776961 || mPrimaryTextColor != -1
+				|| mSecondaryTextColor != -3355444)
+			menu.findItem(2131296694).setVisible(true);
+		else
+			menu.findItem(2131296694).setVisible(false);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	public void reload() {
+		Intent intent = getIntent();
+		overridePendingTransition(0, 0);
+		intent.addFlags(65536);
+		finish();
+		overridePendingTransition(0, 0);
+		startActivity(intent);
+	}
+
+	private static final int PRIMARY = 1;
+	private static final int SECONDARY = 2;
+	private static final int SPEED_BAR = 0;
+	private static final String mColors[] = { "speed bar", "primary",
+			"secondary" };
+	private final int CUSTOM_SPEED_LIMIT = 14;
+	private final int REQUEST_ALARM_SOUND = 1;
+	private Spinner mAccuracySpinner;
+	private String mAddlDataValues[];
+	private CheckBox mAdvancedHudCheckBox;
+	private boolean mAdvancedHudChecked;
+	private TextView mAdvancedHudInfo;
+	private TableRow mAdvancedHudRow;
+	private CheckBox mAdvancedZoomCheckBox;
+	private boolean mAdvancedZoomChecked;
+	private TextView mAdvancedZoomInfo;
+	private TableRow mAdvancedZoomRow;
+	private Uri mAlertSoundUri;
+	private CheckBox mBackgroundCheckBox;
+	private boolean mBackgroundChecked;
+	private TableLayout mColorsTableLayout;
+	private TextView mCurrentLimit;
+	private int mCurrentSpeedLimit;
+	private CheckBox mCustomColorsCheckBox;
+	private boolean mCustomColorsChecked;
+	private ToggleButton mDigitAddlDataButton;
+	private TextView mDigitAddlDataStatus;
+	private boolean mDigitAddlDataToggled;
+	private int mDigitDataSelected;
+	private CheckBox mDigitSpeedoCheckBox;
+	private boolean mDigitSpeedoChecked;
+	private TableLayout mDigitalTableLayout;
+	private int mDisplayUnits;
+	private CheckBox mDsblRotationCheckBox;
+	private boolean mDsblRotationChecked;
+	private TextView mDsblRotationInfo;
+	private TableRow mDsblRotationRow;
+	private Button mFreewayButton;
+	private TableLayout mFreewayLimitLayout;
+	private SeekBar mFreewayLimitSeekBar;
+	private Spinner mFreewayLimitSpinner;
+	private TextView mFreewayLimitValue;
+	private int mFreewaySpeedLimit;
+	private LinearLayout mFrequencyLayout;
+	private String mFromButton;
+	private CheckBox mFullScreenCheckBox;
+	private boolean mFullScreenChecked;
+	private TextView mFullScreenInfo;
+	private TableRow mFullScreenRow;
+	private Button mHighwayButton;
+	private TableLayout mHighwayLimitLayout;
+	private SeekBar mHighwayLimitSeekBar;
+	private Spinner mHighwayLimitSpinner;
+	private TextView mHighwayLimitValue;
+	private int mHighwaySpeedLimit;
+	private ImageView mLogo;
+	private CheckBox mMaxSpeedoCheckBox;
+	private boolean mMaxSpeedoChecked;
+	private int mMaxSpeedoLimit;
+	private int mMinDistBetweenPts;
+	private Spinner mMinDistanceSpinner;
+	private int mMinTimeBetweenPts;
+	private Spinner mMinTimeSpinner;
+	private int mMinimumAccuracy;
+	private CheckBox mNarrowingCheckBox;
+	private boolean mNarrowingChecked;
+	private Button mPrimaryColorButton;
+	private int mPrimaryTextColor;
+	private CheckBox mRunInBGCheckBox;
+	private boolean mRunInBGChecked;
+	private Button mSecondaryColorButton;
+	private int mSecondaryTextColor;
+	private RelativeLayout mSettingsScreen;
+	private ToggleButton mSoundAlertButton;
+	private TextView mSoundAlertStatus;
+	private boolean mSoundAlertToggled;
+	private int mSpeedBarColor;
+	private Button mSpeedBarColorButton;
+	private SeekBar mSpeedoLimitSeekBar;
+	private TextView mSpeedoLimitValue;
+	private TableRow mSpeedoSeekbarRow;
+	private CheckBox mStreetAddrCheckBox;
+	private boolean mStreetAddrChecked;
+	private LinearLayout mStreetAddrLayout;
+	private int mTempSpeedoLimit;
+	private TableLayout mTownLimitLayout;
+	private SeekBar mTownLimitSeekBar;
+	private Spinner mTownLimitSpinner;
+	private TextView mTownLimitValue;
+	private int mTownSpeedLimit;
+	private CheckBox mTrackLoggingCheckBox;
+	private boolean mTrackLoggingChecked;
+	private Spinner mUnitsSpinner;
+	private Button mUrbanAreaButton;
+	private CheckBox mUseHudCheckBox;
+	private boolean mUseHudChecked;
+	private CheckBox mVibrationCheckBox;
+	private boolean mVibrationChecked;
+	private CheckBox mWarningCheckBox;
+	private boolean mWarningChecked;
+	private TableLayout mWarningTableLayout;
 }
 
-
 /*
-	DECOMPILATION REPORT
-
-	Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar
-	Total time: 124 ms
-	Jad reported messages/errors:
-Couldn't fully decompile method getArrayIndex
-Couldn't fully decompile method onActivityResult
-Couldn't fully decompile method onCreate
-Couldn't fully decompile method onItemSelected
-Couldn't fully decompile method onCheckedChanged
-Couldn't fully decompile method onKeyDown
-Couldn't fully decompile method onOptionsItemSelected
-	Exit status: 0
-	Caught exceptions:
-*/
+ * DECOMPILATION REPORT
+ * 
+ * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar Total time: 124 ms
+ * Jad reported messages/errors: Couldn't fully decompile method getArrayIndex
+ * Couldn't fully decompile method onActivityResult Couldn't fully decompile
+ * method onCreate Couldn't fully decompile method onItemSelected Couldn't fully
+ * decompile method onCheckedChanged Couldn't fully decompile method onKeyDown
+ * Couldn't fully decompile method onOptionsItemSelected Exit status: 0 Caught
+ * exceptions:
+ */

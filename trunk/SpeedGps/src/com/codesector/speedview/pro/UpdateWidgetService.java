@@ -52,14 +52,6 @@ public class UpdateWidgetService extends Service
         {
             return mStoredTotalTime + mSessionTotalTime;
         }
-
-        final UpdateWidgetService this$0;
-
-        public LocalBinder()
-        {
-            this$0 = UpdateWidgetService.this;
-            super();
-        }
     }
 
     private class MyGPSListener
@@ -129,18 +121,6 @@ _L4:
 
         private GpsStatus gpsStatus;
         private boolean hasGPSFix;
-        final UpdateWidgetService this$0;
-
-        private MyGPSListener()
-        {
-            this$0 = UpdateWidgetService.this;
-            super();
-        }
-
-        MyGPSListener(MyGPSListener mygpslistener)
-        {
-            this();
-        }
     }
 
     private class MyLocationListener
@@ -176,19 +156,6 @@ _L4:
 
         public void onStatusChanged(String s, int i, Bundle bundle)
         {
-        }
-
-        final UpdateWidgetService this$0;
-
-        private MyLocationListener()
-        {
-            this$0 = UpdateWidgetService.this;
-            super();
-        }
-
-        MyLocationListener(MyLocationListener mylocationlistener)
-        {
-            this();
         }
     }
 
@@ -336,13 +303,6 @@ _L4:
         }
 
         private int mSpeed;
-        final UpdateWidgetService this$0;
-
-        public ServiceHandler(Looper looper)
-        {
-            this$0 = UpdateWidgetService.this;
-            super(looper);
-        }
     }
 
 
@@ -709,58 +669,6 @@ _L9:
     private Vibrator mVibrator;
     private boolean mWarningChecked;
     private Ringtone mWarningSound;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
 
 /*
 	DECOMPILATION REPORT

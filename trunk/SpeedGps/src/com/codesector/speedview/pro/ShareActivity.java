@@ -24,10 +24,6 @@ import java.util.List;
 public class ShareActivity extends MapActivity
 {
 
-    public ShareActivity()
-    {
-    }
-
     private void setFullScreenMode(boolean flag)
     {
         android.view.WindowManager.LayoutParams layoutparams = getWindow().getAttributes();
@@ -189,14 +185,6 @@ _L1:
                     else
                         mShareLocStatus.setText(2131099808);
                 }
-
-                final ShareActivity this$0;
-
-            
-            {
-                this$0 = ShareActivity.this;
-                super();
-            }
             }
 );
             mSelectAppButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -205,14 +193,6 @@ _L1:
                 {
                     shareLocation(0);
                 }
-
-                final ShareActivity this$0;
-
-            
-            {
-                this$0 = ShareActivity.this;
-                super();
-            }
             }
 );
             mShareByEmailButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -221,14 +201,6 @@ _L1:
                 {
                     shareLocation(1);
                 }
-
-                final ShareActivity this$0;
-
-            
-            {
-                this$0 = ShareActivity.this;
-                super();
-            }
             }
 );
         } else

@@ -14,14 +14,8 @@ import java.util.List;
 // Referenced classes of package com.codesector.speedview.pro:
 //            UpdateWidgetService
 
-public class WidgetProvider extends AppWidgetProvider
-{
-
-    public WidgetProvider()
-    {
-    }
-
-    public void onDeleted(Context context, int ai[])
+public class WidgetProvider extends AppWidgetProvider {
+	public void onDeleted(Context context, int ai[])
     {
         AppWidgetManager appwidgetmanager;
         int ai1[];
@@ -74,26 +68,24 @@ _L5:
         return;
 _L3:
         if("com.codesector.speedview.pro.UpdateWidgetService".equals(((android.app.ActivityManager.RunningServiceInfo)iterator.next()).service.getClassName()))
-            context.stopService(new Intent(context, com/codesector/speedview/pro/UpdateWidgetService));
+            context.stopService(new Intent(context, UpdateWidgetService.class));
           goto _L6
         if("com.codesector.speedview.pro.BackgroundService".equals(((android.app.ActivityManager.RunningServiceInfo)iterator1.next()).service.getClassName()))
             flag = true;
           goto _L7
     }
 
-    public void onDisabled(Context context)
-    {
-    }
+	public void onDisabled(Context context) {
+	}
 
-    public void onEnabled(Context context)
-    {
-    }
+	public void onEnabled(Context context) {
+	}
 
-    public void onUpdate(Context context, AppWidgetManager appwidgetmanager, int ai[])
+	public void onUpdate(Context context, AppWidgetManager appwidgetmanager, int ai[])
     {
         int ai1[];
         RemoteViews remoteviews;
-        ai1 = appwidgetmanager.getAppWidgetIds(new ComponentName(context, com/codesector/speedview/pro/WidgetProvider));
+        ai1 = appwidgetmanager.getAppWidgetIds(new ComponentName(context, WidgetProvider.class));
         remoteviews = new RemoteViews(context.getPackageName(), 2130903051);
         if(ai1.length <= 1) goto _L2; else goto _L1
 _L1:
@@ -112,7 +104,7 @@ _L3:
         android.content.SharedPreferences.Editor editor = context.getSharedPreferences("PrefsFile", 0).edit();
         editor.putInt("activeWidgetId", i);
         editor.commit();
-        Intent intent = new Intent(context, com/codesector/speedview/pro/UpdateWidgetService);
+        Intent intent = new Intent(context,  UpdateWidgetService.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         intent.putExtra("appWidgetId", i);
         remoteviews.setOnClickPendingIntent(2131296655, PendingIntent.getService(context, 0, intent, 134217728));
@@ -143,15 +135,10 @@ _L5:
     }
 }
 
-
 /*
-	DECOMPILATION REPORT
-
-	Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar
-	Total time: 19 ms
-	Jad reported messages/errors:
-Couldn't fully decompile method onDeleted
-Couldn't fully decompile method onUpdate
-	Exit status: 0
-	Caught exceptions:
-*/
+ * DECOMPILATION REPORT
+ * 
+ * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar Total time: 19 ms
+ * Jad reported messages/errors: Couldn't fully decompile method onDeleted
+ * Couldn't fully decompile method onUpdate Exit status: 0 Caught exceptions:
+ */
