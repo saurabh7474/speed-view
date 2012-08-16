@@ -41,14 +41,6 @@ class MapOverlay extends ItemizedOverlay
             public void onClick(DialogInterface dialoginterface, int j)
             {
             }
-
-            final MapOverlay this$0;
-
-            
-            {
-                this$0 = MapOverlay.this;
-                super();
-            }
         }
 );
         builder.show();
