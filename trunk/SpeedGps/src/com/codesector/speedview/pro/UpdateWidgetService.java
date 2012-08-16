@@ -4,8 +4,7 @@ package com.codesector.speedview.pro;
 
 import android.app.*;
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Intent;
+import android.content.*;
 import android.location.*;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -17,9 +16,9 @@ import java.text.*;
 import java.util.*;
 
 // Referenced classes of package com.codesector.speedview.pro:
-//            WidgetProvider, SpeedView
+//            SpeedView
 
-public class BackgroundService extends Service
+public class UpdateWidgetService extends Service
 {
     public class LocalBinder extends Binder
     {
@@ -29,9 +28,9 @@ public class BackgroundService extends Service
             saveCurrentTrack();
         }
 
-        BackgroundService getService()
+        UpdateWidgetService getService()
         {
-            return BackgroundService.this;
+            return UpdateWidgetService.this;
         }
 
         float getStoredDistance()
@@ -54,11 +53,11 @@ public class BackgroundService extends Service
             return mStoredTotalTime + mSessionTotalTime;
         }
 
-        final BackgroundService this$0;
+        final UpdateWidgetService this$0;
 
         public LocalBinder()
         {
-            this$0 = BackgroundService.this;
+            this$0 = UpdateWidgetService.this;
             super();
         }
     }
@@ -79,13 +78,11 @@ public class BackgroundService extends Service
 _L1:
             return;
 _L2:
-            if(!mIsRunning) goto _L1; else goto _L3
-_L3:
             Iterator iterator;
             int j;
             LocationManager locationmanager = mLocationManager;
             GpsStatus gpsstatus;
-            BackgroundService backgroundservice;
+            RemoteViews remoteviews;
             StringBuilder stringbuilder;
             if(gpsStatus != null)
                 gpsstatus = gpsStatus;
@@ -94,9 +91,9 @@ _L3:
             gpsStatus = locationmanager.getGpsStatus(gpsstatus);
             iterator = gpsStatus.getSatellites().iterator();
             j = 0;
-_L6:
-            if(iterator.hasNext()) goto _L5; else goto _L4
-_L4:
+_L5:
+            if(iterator.hasNext()) goto _L4; else goto _L3
+_L3:
             if(mLastLocation != null)
             {
                 boolean flag;
@@ -108,34 +105,35 @@ _L4:
             }
             if(!hasGPSFix)
             {
-                backgroundservice = BackgroundService.this;
                 String s;
-                String s1;
                 if(j < 4)
-                    s = getString(2131099651);
+                    mRemoteViews.setTextViewText(2131296657, getString(2131099651));
                 else
-                    s = getString(2131099653);
+                    mRemoteViews.setTextViewText(2131296657, getString(2131099653));
+                remoteviews = mRemoteViews;
                 stringbuilder = (new StringBuilder(String.valueOf(j))).append(" ");
                 if(j != 1)
-                    s1 = getString(2131099654);
+                    s = getString(2131099919).toUpperCase();
                 else
-                    s1 = getString(2131099655);
-                backgroundservice.showNotification(s, stringbuilder.append(s1).toString());
+                    s = getString(2131099918).toUpperCase();
+                remoteviews.setTextViewText(2131296658, stringbuilder.append(s).toString());
+                mRemoteViews.setViewVisibility(2131296656, 0);
+                mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
             }
               goto _L1
-_L5:
+_L4:
             iterator.next();
             j++;
-              goto _L6
+              goto _L5
         }
 
         private GpsStatus gpsStatus;
         private boolean hasGPSFix;
-        final BackgroundService this$0;
+        final UpdateWidgetService this$0;
 
         private MyGPSListener()
         {
-            this$0 = BackgroundService.this;
+            this$0 = UpdateWidgetService.this;
             super();
         }
 
@@ -162,23 +160,29 @@ _L5:
 
         public void onProviderDisabled(String s)
         {
-            showNotification(getString(2131099709), getString(2131099710));
+            mRemoteViews.setTextViewText(2131296657, getString(2131099709));
+            mRemoteViews.setTextViewText(2131296658, getString(2131099924).toUpperCase());
+            mRemoteViews.setViewVisibility(2131296658, 0);
+            mRemoteViews.setViewVisibility(2131296656, 0);
+            mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
         }
 
         public void onProviderEnabled(String s)
         {
-            showNotification(getString(2131099651), getString(2131099652));
+            mRemoteViews.setTextViewText(2131296657, getString(2131099651));
+            mRemoteViews.setTextViewText(2131296658, getString(2131099917).toUpperCase());
+            mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
         }
 
         public void onStatusChanged(String s, int i, Bundle bundle)
         {
         }
 
-        final BackgroundService this$0;
+        final UpdateWidgetService this$0;
 
         private MyLocationListener()
         {
-            this$0 = BackgroundService.this;
+            this$0 = UpdateWidgetService.this;
             super();
         }
 
@@ -196,46 +200,33 @@ _L5:
             message.arg1;
             JVM INSTR tableswitch 1 2: default 28
         //                       1 29
-        //                       2 429;
+        //                       2 292;
                goto _L1 _L2 _L3
 _L1:
             return;
 _L2:
-            Bundle bundle = (Bundle)message.obj;
-            mStoredDistance = bundle.getFloat("distance");
-            mStoredMaxSpeed = bundle.getFloat("max_speed");
-            mStoredMovingTime = bundle.getLong("moving_time");
-            mStoredTotalTime = bundle.getLong("total_time");
-            mDisplayUnits = bundle.getInt("display_units");
-            mWarningChecked = bundle.getBoolean("warning_checked");
-            mSpeedWarning = bundle.getInt("speed_warning");
-            mSoundAlertToggled = bundle.getBoolean("sould_alert_toggled");
-            String s = bundle.getString("alert_sound_uri");
-            if(s != null)
+            if(mTrackLoggingChecked)
             {
-                BackgroundService backgroundservice3 = BackgroundService.this;
-                Uri uri;
-                if(s.equals(""))
-                    uri = null;
-                else
-                    uri = Uri.parse(s);
-                backgroundservice3.mAlertSoundUri = uri;
-                mWarningSound = RingtoneManager.getRingtone(getBaseContext(), mAlertSoundUri);
-            }
-            mVibrationChecked = bundle.getBoolean("vibration_checked");
-            mTrackLoggingChecked = bundle.getBoolean("track_logging_checked");
-            mMinTimeBetweenPts = bundle.getInt("min_time_between_pts");
-            mMinDistBetweenPts = bundle.getInt("min_dist_between_pts");
-            mNarrowingChecked = bundle.getBoolean("narrowing_checked");
-            mMinimumAccuracy = bundle.getInt("minimum_accuracy");
-            showNotification(getString(2131099651), getString(2131099652));
-            if(mAllWidgetIds.length > 0)
+                mRemoteViews.setTextViewText(2131296657, getString(2131099915));
+                mRemoteViews.setTextViewText(2131296658, getString(2131099916).toUpperCase());
+            } else
             {
-                mRemoteViews.setTextViewText(2131296657, getString(2131099923));
-                mRemoteViews.setViewVisibility(2131296658, 8);
-                mRemoteViews.setViewVisibility(2131296656, 0);
-                mAppWidgetManager.updateAppWidget(mAllWidgetIds[0], mRemoteViews);
+                mRemoteViews.setTextViewText(2131296657, getString(2131099913));
+                mRemoteViews.setTextViewText(2131296658, getString(2131099914).toUpperCase());
             }
+            mRemoteViews.setViewVisibility(2131296658, 0);
+            if(mCustomColorsChecked)
+            {
+                mRemoteViews.setTextColor(2131296660, mPrimaryTextColor);
+                mRemoteViews.setTextColor(2131296661, mSecondaryTextColor);
+                mRemoteViews.setTextColor(2131296662, mSecondaryTextColor);
+            } else
+            {
+                mRemoteViews.setTextColor(2131296660, -1);
+                mRemoteViews.setTextColor(2131296661, -3355444);
+                mRemoteViews.setTextColor(2131296662, -3355444);
+            }
+            mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
             mIsRunning = true;
             continue; /* Loop/switch isn't completed */
 _L3:
@@ -265,14 +256,14 @@ _L3:
                     {
                         if(mLastLocation != null && location.getSpeed() != 0.0F)
                         {
-                            BackgroundService backgroundservice2 = BackgroundService.this;
-                            backgroundservice2.mStoredDistance = backgroundservice2.mStoredDistance + location.distanceTo(mLastLocation);
+                            UpdateWidgetService updatewidgetservice2 = UpdateWidgetService.this;
+                            updatewidgetservice2.mStoredDistance = updatewidgetservice2.mStoredDistance + location.distanceTo(mLastLocation);
                         }
                         if(f > mStoredMaxSpeed)
                             mStoredMaxSpeed = f;
                         if(mFirstFixMillis != 0L)
                         {
-                            BackgroundService backgroundservice;
+                            UpdateWidgetService updatewidgetservice;
                             if(location.getSpeed() > 0.0F)
                             {
                                 if(!mVehicleIsMoving)
@@ -285,14 +276,15 @@ _L3:
                             if(mVehicleIsMoving)
                             {
                                 mVehicleIsMoving = false;
-                                BackgroundService backgroundservice1 = BackgroundService.this;
-                                backgroundservice1.mStoredMovingTime = backgroundservice1.mStoredMovingTime + (location.getTime() - mStateChangedMillis);
+                                UpdateWidgetService updatewidgetservice1 = UpdateWidgetService.this;
+                                updatewidgetservice1.mStoredMovingTime = updatewidgetservice1.mStoredMovingTime + (location.getTime() - mStateChangedMillis);
                                 mSessionMovingTime = 0L;
                                 mStateChangedMillis = location.getTime();
                             }
                             mSessionTotalTime = location.getTime() - mFirstFixMillis;
                         }
                         if(mWarningChecked)
+                        {
                             if(mSpeed > mSpeedWarning)
                             {
                                 if(mSoundAlertToggled && mWarningSound != null && !mWarningSound.getTitle(getBaseContext()).equals("Unknown ringtone") && !mWarningSound.isPlaying())
@@ -302,39 +294,59 @@ _L3:
                             } else
                             if(mWarningSound != null && mWarningSound.isPlaying())
                                 mWarningSound.stop();
+                            if(mSpeed > mSpeedWarning)
+                            {
+                                mRemoteViews.setTextColor(2131296660, -65536);
+                                mRemoteViews.setTextColor(2131296662, -65536);
+                            } else
+                            if(mCustomColorsChecked)
+                            {
+                                mRemoteViews.setTextColor(2131296660, mPrimaryTextColor);
+                                mRemoteViews.setTextColor(2131296662, mSecondaryTextColor);
+                            } else
+                            {
+                                mRemoteViews.setTextColor(2131296660, -1);
+                                mRemoteViews.setTextColor(2131296662, -3355444);
+                            }
+                        }
                     }
                     if(mFirstFixMillis == 0L)
                     {
                         mFirstFixMillis = location.getTime();
-                        backgroundservice = BackgroundService.this;
+                        updatewidgetservice = UpdateWidgetService.this;
                         boolean flag;
                         if(location.getSpeed() > 0.0F)
                             flag = true;
                         else
                             flag = false;
-                        backgroundservice.mVehicleIsMoving = flag;
+                        updatewidgetservice.mVehicleIsMoving = flag;
                         mStateChangedMillis = mFirstFixMillis;
                     }
                     mLastLocation = location;
                 }
-                showNotification((new StringBuilder(String.valueOf(getString(2131099743)))).append(": ").append(mSpeed).append(" ").append(SpeedView.UNITS_ARRAY[mDisplayUnits]).toString(), (new StringBuilder(String.valueOf(getString(2131099750)))).append(": ").append(distanceToString()).toString());
+                mRemoteViews.setViewVisibility(2131296656, 8);
+                mRemoteViews.setTextViewText(2131296660, (new StringBuilder(String.valueOf(mSpeed))).append(" ").append(SpeedView.UNITS_ARRAY[mDisplayUnits]).toString());
+                mRemoteViews.setTextViewText(2131296661, (new StringBuilder()).append(distanceToString()).toString());
+                mRemoteViews.setTextViewText(2131296662, (new StringBuilder()).append(getDisplaySpeed(mStoredMaxSpeed)).toString());
+                mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
+                mHasBeenUpdated = true;
             }
             if(true) goto _L1; else goto _L4
 _L4:
         }
 
         private int mSpeed;
-        final BackgroundService this$0;
+        final UpdateWidgetService this$0;
 
         public ServiceHandler(Looper looper)
         {
-            this$0 = BackgroundService.this;
+            this$0 = UpdateWidgetService.this;
             super(looper);
         }
     }
 
 
-    public BackgroundService()
+    public UpdateWidgetService()
     {
         mTrackBuffer = new StringBuilder();
     }
@@ -343,9 +355,9 @@ _L4:
     {
         mDisplayUnits;
         JVM INSTR tableswitch 0 2: default 32
-    //                   0 38
-    //                   1 120
-    //                   2 202;
+    //                   0 37
+    //                   1 118
+    //                   2 200;
            goto _L1 _L2 _L3 _L4
 _L1:
         String s = "";
@@ -398,18 +410,81 @@ _L5:
 
     private void handleStart(Intent intent)
     {
-        Message message = mServiceHandler.obtainMessage();
-        message.arg1 = 1;
-        message.obj = intent.getExtras();
-        mServiceHandler.sendMessage(message);
-        mLocationManager.requestLocationUpdates("gps", 0L, 0.0F, mLocationListener);
-        mLocationManager.addGpsStatusListener(mGPSListener);
-_L1:
-        return;
-        Exception exception;
-        exception;
-        exception.printStackTrace();
-          goto _L1
+        mAppWidgetManager = AppWidgetManager.getInstance(getBaseContext());
+        mRemoteViews = new RemoteViews(getPackageName(), 2130903051);
+        if(intent != null && "android.appwidget.action.APPWIDGET_UPDATE".equals(intent.getAction()))
+        {
+            mIsGPSEnabled = mLocationManager.isProviderEnabled("gps");
+            mAppWidgetId = intent.getExtras().getInt("appWidgetId");
+            if(mIsServiceActive)
+            {
+                mRemoteViews.setTextViewText(2131296657, getString(2131099923));
+                mRemoteViews.setViewVisibility(2131296658, 8);
+                mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
+                mHasBeenHandled = true;
+                stopSelf();
+            } else
+            if(!mIsGPSEnabled)
+            {
+                mRemoteViews.setTextViewText(2131296657, getString(2131099709));
+                mRemoteViews.setTextViewText(2131296658, getString(2131099924).toUpperCase());
+                mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
+                mHasBeenHandled = true;
+                stopSelf();
+            } else
+            if(mIsRunning)
+            {
+                mRemoteViews.setTextViewText(2131296657, getString(2131099911));
+                mRemoteViews.setTextViewText(2131296658, getString(2131099912).toUpperCase());
+                mRemoteViews.setViewVisibility(2131296656, 0);
+                mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
+                if(mHasBeenUpdated)
+                {
+                    android.content.SharedPreferences.Editor editor = getSharedPreferences("PrefsFile", 0).edit();
+                    editor.putFloat("storedDistance", mStoredDistance);
+                    editor.putFloat("storedMaxSpeed", mStoredMaxSpeed);
+                    editor.putLong("storedMovingTime", mStoredMovingTime + mSessionMovingTime);
+                    editor.putLong("storedTotalTime", mStoredTotalTime + mSessionTotalTime);
+                    editor.commit();
+                    saveCurrentTrack();
+                }
+                mHasBeenHandled = true;
+                stopSelf();
+            } else
+            {
+                Message message = mServiceHandler.obtainMessage();
+                message.arg1 = 1;
+                message.obj = intent.getExtras();
+                mServiceHandler.sendMessage(message);
+                try
+                {
+                    mLocationManager.requestLocationUpdates("gps", 0L, 0.0F, mLocationListener);
+                    mLocationManager.addGpsStatusListener(mGPSListener);
+                }
+                catch(Exception exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        } else
+        {
+            mAppWidgetId = getApplicationContext().getSharedPreferences("PrefsFile", 0).getInt("activeWidgetId", 0);
+            mRemoteViews.setTextViewText(2131296657, getString(2131099726));
+            mRemoteViews.setTextViewText(2131296658, getString(2131099925).toUpperCase());
+            Intent intent1 = new Intent("android.intent.action.SEND");
+            intent1.setType("plain/text");
+            intent1.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            intent1.setData(Uri.parse("speedview@codesector.com"));
+            String as[] = new String[1];
+            as[0] = "speedview@codesector.com";
+            intent1.putExtra("android.intent.extra.EMAIL", as);
+            intent1.putExtra("android.intent.extra.SUBJECT", (new StringBuilder(String.valueOf(getString(2131099648)))).append(" ").append(getString(2131099926)).toString());
+            PendingIntent pendingintent = PendingIntent.getActivity(getBaseContext(), 0, intent1, 0);
+            mRemoteViews.setOnClickPendingIntent(2131296655, pendingintent);
+            mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
+            mHasBeenHandled = true;
+            stopSelf();
+        }
     }
 
     private void saveCurrentTrack()
@@ -450,36 +525,6 @@ _L6:
           goto _L7
     }
 
-    private void showNotification(String s, String s1)
-    {
-        String s2 = null;
-        if(mBuilder == null)
-        {
-            if(mNotification == null)
-            {
-                if(mTrackLoggingChecked)
-                    s2 = getString(2131099916);
-                mNotification = new Notification(2130837530, s2, System.currentTimeMillis());
-                mNotification.flags = 34;
-            }
-            mNotification.setLatestEventInfo(this, s, s1, mPendingIntent);
-        } else
-        {
-            if(mNotification == null)
-            {
-                android.app.Notification.Builder builder = mBuilder.setContentIntent(mPendingIntent).setSmallIcon(2130837530);
-                if(mTrackLoggingChecked)
-                    s2 = getString(2131099916);
-                builder.setTicker(s2).setWhen(System.currentTimeMillis()).setContentTitle(s).setContentText(s1).setAutoCancel(false).setOngoing(true);
-            } else
-            {
-                mBuilder.setContentTitle(s).setContentText(s1);
-            }
-            mNotification = mBuilder.getNotification();
-        }
-        mNotificationManager.notify(2131099648, mNotification);
-    }
-
     public IBinder onBind(Intent intent)
     {
         return mBinder;
@@ -487,7 +532,19 @@ _L6:
 
     public void onCreate()
     {
+        Iterator iterator = ((ActivityManager)getSystemService("activity")).getRunningServices(2147483647).iterator();
+_L11:
+        if(iterator.hasNext()) goto _L2; else goto _L1
+_L1:
         mLocationManager = (LocationManager)getSystemService("location");
+        mIsGPSEnabled = mLocationManager.isProviderEnabled("gps");
+        if(mIsServiceActive || mIsRunning || !mIsGPSEnabled) goto _L4; else goto _L3
+_L3:
+        SharedPreferences sharedpreferences;
+        int i;
+        int j;
+        int k;
+        int l;
         mLocationListener = new MyLocationListener(null);
         mGPSListener = new MyGPSListener(null);
         mCoordFormat = new DecimalFormat("0.000000");
@@ -498,40 +555,82 @@ _L6:
         mVibrator = (Vibrator)getSystemService("vibrator");
         mLogExtensionFilter = new FilenameFilter() {
 
-            public boolean accept(File file, String s)
+            public boolean accept(File file, String s1)
             {
-                return s.toLowerCase().endsWith(".log");
+                return s1.toLowerCase().endsWith(".log");
             }
 
-            final BackgroundService this$0;
+            final UpdateWidgetService this$0;
 
             
             {
-                this$0 = BackgroundService.this;
+                this$0 = UpdateWidgetService.this;
                 super();
             }
         }
 ;
-        mNotificationManager = (NotificationManager)getSystemService("notification");
-        ComponentName componentname;
+        sharedpreferences = getApplicationContext().getSharedPreferences("PrefsFile", 0);
+        mStoredDistance = sharedpreferences.getFloat("storedDistance", 0.0F);
+        mStoredMaxSpeed = sharedpreferences.getFloat("storedMaxSpeed", 0.0F);
+        mStoredMovingTime = sharedpreferences.getLong("storedMovingTime", 0L);
+        mStoredTotalTime = sharedpreferences.getLong("storedTotalTime", 0L);
+        mDisplayUnits = sharedpreferences.getInt("displayUnits", 0);
+        mWarningChecked = sharedpreferences.getBoolean("warningChecked", false);
+        i = sharedpreferences.getInt("currentSpeedLimit", 0);
+        j = sharedpreferences.getInt("townSpeedLimit", 30);
+        k = sharedpreferences.getInt("highwaySpeedLimit", 55);
+        l = sharedpreferences.getInt("freewaySpeedLimit", 65);
+        if(!mWarningChecked) goto _L6; else goto _L5
+_L5:
+        i;
+        JVM INSTR tableswitch 0 2: default 364
+    //                   0 636
+    //                   1 645
+    //                   2 654;
+           goto _L7 _L8 _L9 _L10
+_L7:
+        break; /* Loop/switch isn't completed */
+_L10:
+        break MISSING_BLOCK_LABEL_654;
+_L6:
+        mSoundAlertToggled = sharedpreferences.getBoolean("soundAlertToggled", false);
+        String s = sharedpreferences.getString("alertSoundUri", "");
+        Uri uri;
         HandlerThread handlerthread;
-        try
-        {
-            mBuilder = new android.app.Notification.Builder(getBaseContext());
-        }
-        catch(NoClassDefFoundError noclassdeffounderror)
-        {
-            noclassdeffounderror.printStackTrace();
-        }
-        mAppWidgetManager = AppWidgetManager.getInstance(this);
-        componentname = new ComponentName(this, com/codesector/speedview/pro/WidgetProvider);
-        mAllWidgetIds = mAppWidgetManager.getAppWidgetIds(componentname);
-        mRemoteViews = new RemoteViews(getPackageName(), 2130903051);
-        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, com/codesector/speedview/pro/SpeedView), 0);
-        handlerthread = new HandlerThread("BackgroundService");
+        if(s.equals(""))
+            uri = null;
+        else
+            uri = Uri.parse(s);
+        mAlertSoundUri = uri;
+        if(mAlertSoundUri != null)
+            mWarningSound = RingtoneManager.getRingtone(getBaseContext(), mAlertSoundUri);
+        mVibrationChecked = sharedpreferences.getBoolean("vibrationChecked", false);
+        mCustomColorsChecked = sharedpreferences.getBoolean("customColorsChecked", false);
+        mPrimaryTextColor = sharedpreferences.getInt("primaryTextColor", -1);
+        mSecondaryTextColor = sharedpreferences.getInt("secondaryTextColor", -3355444);
+        mTrackLoggingChecked = sharedpreferences.getBoolean("trackLoggingChecked", false);
+        mMinTimeBetweenPts = sharedpreferences.getInt("minTimeBetweenPts", 0);
+        mMinDistBetweenPts = sharedpreferences.getInt("minDistBetweenPts", 4);
+        mNarrowingChecked = sharedpreferences.getBoolean("narrowingChecked", true);
+        mMinimumAccuracy = sharedpreferences.getInt("minimumAccuracy", 4);
+        handlerthread = new HandlerThread("UpdateWidgetService");
         handlerthread.start();
         mLooper = handlerthread.getLooper();
         mServiceHandler = new ServiceHandler(mLooper);
+_L4:
+        return;
+_L2:
+        if("com.codesector.speedview.pro.BackgroundService".equals(((android.app.ActivityManager.RunningServiceInfo)iterator.next()).service.getClassName()))
+            mIsServiceActive = true;
+          goto _L11
+_L8:
+        mSpeedWarning = j;
+          goto _L6
+_L9:
+        mSpeedWarning = k;
+          goto _L6
+        mSpeedWarning = l;
+          goto _L6
     }
 
     public void onDestroy()
@@ -541,18 +640,15 @@ _L6:
             mLocationManager.removeUpdates(mLocationListener);
             mLocationManager.removeGpsStatusListener(mGPSListener);
             mLooper.quit();
-            mNotificationManager.cancel(2131099648);
-            mAllWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(this, com/codesector/speedview/pro/WidgetProvider));
-            if(mAllWidgetIds.length > 0)
-            {
-                mRemoteViews.setTextViewText(2131296657, getString(2131099911));
-                mRemoteViews.setTextViewText(2131296658, getString(2131099912).toUpperCase());
-                mRemoteViews.setViewVisibility(2131296658, 0);
-                mRemoteViews.setViewVisibility(2131296656, 0);
-                mAppWidgetManager.updateAppWidget(mAllWidgetIds[0], mRemoteViews);
-            }
         }
-        mIsRunning = false;
+        if(!mHasBeenHandled)
+        {
+            mRemoteViews.setTextViewText(2131296657, getString(2131099911));
+            mRemoteViews.setTextViewText(2131296658, getString(2131099912).toUpperCase());
+            mRemoteViews.setViewVisibility(2131296658, 0);
+            mRemoteViews.setViewVisibility(2131296656, 0);
+            mAppWidgetManager.updateAppWidget(mAppWidgetId, mRemoteViews);
+        }
     }
 
     public void onStart(Intent intent, int i)
@@ -567,16 +663,20 @@ _L6:
     }
 
     private Uri mAlertSoundUri;
-    private int mAllWidgetIds[];
+    private int mAppWidgetId;
     private AppWidgetManager mAppWidgetManager;
     private final IBinder mBinder = new LocalBinder();
-    private android.app.Notification.Builder mBuilder;
     private DecimalFormat mCoordFormat;
+    private boolean mCustomColorsChecked;
     private SimpleDateFormat mDateFormat;
     private int mDisplayUnits;
     private long mFirstFixMillis;
     private MyGPSListener mGPSListener;
+    private boolean mHasBeenHandled;
+    private boolean mHasBeenUpdated;
+    private boolean mIsGPSEnabled;
     private boolean mIsRunning;
+    private boolean mIsServiceActive;
     private Location mLastLocation;
     private long mLastLocationTime;
     private Location mLastTrackLocation;
@@ -588,10 +688,9 @@ _L6:
     private int mMinTimeBetweenPts;
     private int mMinimumAccuracy;
     private boolean mNarrowingChecked;
-    private Notification mNotification;
-    private NotificationManager mNotificationManager;
-    private PendingIntent mPendingIntent;
+    private int mPrimaryTextColor;
     private RemoteViews mRemoteViews;
+    private int mSecondaryTextColor;
     private volatile ServiceHandler mServiceHandler;
     private long mSessionMovingTime;
     private long mSessionTotalTime;
@@ -660,18 +759,6 @@ _L6:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
@@ -679,16 +766,15 @@ _L6:
 	DECOMPILATION REPORT
 
 	Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar
-	Total time: 71 ms
+	Total time: 59 ms
 	Jad reported messages/errors:
 Couldn't fully decompile method onGpsStatusChanged
 Couldn't fully decompile method handleMessage
 Couldn't fully decompile method distanceToString
 Couldn't fully decompile method getDisplaySpeed
-Couldn't fully decompile method handleStart
-Couldn't resolve all exception handlers in method handleStart
 Couldn't fully decompile method saveCurrentTrack
 Couldn't resolve all exception handlers in method saveCurrentTrack
+Couldn't fully decompile method onCreate
 	Exit status: 0
 	Caught exceptions:
 */
