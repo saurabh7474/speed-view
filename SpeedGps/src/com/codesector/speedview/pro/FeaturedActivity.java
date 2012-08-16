@@ -113,14 +113,6 @@ _L1:
                     startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.codesector.maverick.lite")));
                 }
             }
-
-            final FeaturedActivity this$0;
-
-            
-            {
-                this$0 = FeaturedActivity.this;
-                super();
-            }
         }
 );
         mMaverickMore.setOnClickListener(new android.view.View.OnClickListener() {
@@ -129,14 +121,6 @@ _L1:
             {
                 Uri uri = Uri.parse("http://www.codesector.com/maverick.php");
                 startActivity(new Intent("android.intent.action.VIEW", uri));
-            }
-
-            final FeaturedActivity this$0;
-
-            
-            {
-                this$0 = FeaturedActivity.this;
-                super();
             }
         }
 );
@@ -155,14 +139,6 @@ _L1:
                     startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.lookout")));
                 }
             }
-
-            final FeaturedActivity this$0;
-
-            
-            {
-                this$0 = FeaturedActivity.this;
-                super();
-            }
         }
 );
         mLookoutMore.setOnClickListener(new android.view.View.OnClickListener() {
@@ -171,14 +147,6 @@ _L1:
             {
                 Uri uri = Uri.parse("https://www.mylookout.com/");
                 startActivity(new Intent("android.intent.action.VIEW", uri));
-            }
-
-            final FeaturedActivity this$0;
-
-            
-            {
-                this$0 = FeaturedActivity.this;
-                super();
             }
         }
 );

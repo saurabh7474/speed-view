@@ -2,6 +2,7 @@
 
 package com.codesector.speedview.pro;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.*;
@@ -10,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+@SuppressLint("ParserError")
 public class ColorPickerDialog extends Dialog {
 	private static class ColorPickerView extends View {
 
@@ -60,61 +62,50 @@ public class ColorPickerDialog extends Dialog {
 			setMeasuredDimension(200, 200);
 		}
 
-		public boolean onTouchEvent(MotionEvent motionevent)
-        {
-            float f;
-            float f1;
-            boolean flag;
-            f = motionevent.getX() - 100F;
-            f1 = motionevent.getY() - 100F;
-            if(Math.sqrt(f * f + f1 * f1) <= 32D)
-                flag = true;
-            else
-                flag = false;
-            motionevent.getAction();
-            JVM INSTR tableswitch 0 2: default 68
-        //                       0 76
-        //                       1 178
-        //                       2 99;
-               goto _L1 _L2 _L3 _L4
-_L1:
-            return true;
-_L2:
-            mTrackingCenter = flag;
-            if(flag)
-            {
-                mHighlightCenter = true;
-                invalidate();
-                continue; /* Loop/switch isn't completed */
-            }
-_L4:
-            if(mTrackingCenter)
-            {
-                if(mHighlightCenter != flag)
-                {
-                    mHighlightCenter = flag;
-                    invalidate();
-                }
-            } else
-            {
-                float f2 = (float)Math.atan2(f1, f) / 6.283185F;
-                if(f2 < 0.0F)
-                    f2++;
-                mCenterPaint.setColor(interpColor(mColors, f2));
-                invalidate();
-            }
-            continue; /* Loop/switch isn't completed */
-_L3:
-            if(mTrackingCenter)
-            {
-                if(flag)
-                    mListener.colorChanged(mCenterPaint.getColor());
-                mTrackingCenter = false;
-                invalidate();
-            }
-            if(true) goto _L1; else goto _L5
-_L5:
-        }
+		public boolean onTouchEvent(MotionEvent motionevent) {
+			float f = motionevent.getX() - 100F;
+			float f1 = motionevent.getY() - 100F;
+			boolean inCenter = java.lang.Math.sqrt(f * f + f1 * f1) <= CENTER_RADIUS;
+
+			switch (motionevent.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				// 0
+				mTrackingCenter = inCenter;
+				if (inCenter) {
+					mHighlightCenter = true;
+					invalidate();
+				}
+				break;
+			case MotionEvent.ACTION_MOVE:
+				// 1
+				if (mTrackingCenter) {
+					if (mHighlightCenter != inCenter) {
+						mHighlightCenter = inCenter;
+						invalidate();
+					}
+				} else {
+					float angle = (float) java.lang.Math.atan2(f1, f);
+					// need to turn angle [-PI ... PI] into unit [0....1]
+					float unit = angle / (2 * PI);
+					if (unit < 0) {
+						unit += 1;
+					}
+					mCenterPaint.setColor(interpColor(mColors, unit));
+					invalidate();
+				}
+				break;
+			case MotionEvent.ACTION_UP:
+				// 2
+				if (mTrackingCenter) {
+					if (inCenter)
+						mListener.colorChanged(mCenterPaint.getColor());
+					mTrackingCenter = false;
+					invalidate();
+				}
+				break;
+			}
+			return true;
+		}
 
 		private static final int CENTER_RADIUS = 32;
 		private static final int CENTER_X = 100;

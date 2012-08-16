@@ -219,18 +219,6 @@ _L11:
 
         private GpsStatus gpsStatus;
         private int mSecondsElapsed;
-        final SpeedView this$0;
-
-        private MyGPSListener()
-        {
-            this$0 = SpeedView.this;
-            super();
-        }
-
-        MyGPSListener(MyGPSListener mygpslistener)
-        {
-            this();
-        }
     }
 
     private class MyLocationListener
@@ -657,19 +645,12 @@ _L8:
         private String mHeadingString;
         private boolean mLimitFlag;
         private int mSpeed;
-        final SpeedView this$0;
-
         private MyLocationListener()
         {
-            this$0 = SpeedView.this;
             super();
             mLimitFlag = false;
         }
 
-        MyLocationListener(MyLocationListener mylocationlistener)
-        {
-            this();
-        }
     }
 
 
@@ -700,14 +681,6 @@ _L8:
             public void onServiceDisconnected(ComponentName componentname)
             {
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ;
         mUpdateWidgetConn = new ServiceConnection() {
@@ -734,14 +707,6 @@ _L8:
             public void onServiceDisconnected(ComponentName componentname)
             {
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ;
         mOrientationListener = new SensorEventListener() {
@@ -767,14 +732,6 @@ _L4:
                 if(true) goto _L2; else goto _L5
 _L5:
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ;
     }
@@ -791,28 +748,12 @@ _L5:
                     {
                         startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
                     }
-
-                    final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
                 }
 ).setNeutralButton(2131099711, new android.content.DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialoginterface, int i)
                     {
                     }
-
-                    final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
                 }
 ).setNegativeButton(2131099691, new android.content.DialogInterface.OnClickListener() {
 
@@ -821,14 +762,6 @@ _L5:
                         mExitButtonPressed = true;
                         finish();
                     }
-
-                    final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
                 }
 ).show();
                 mNotifiedAboutGPS = true;
@@ -870,16 +803,6 @@ _L5:
                 {
                     mHandler.post(mNetworkFailure);
                 }
-            }
-
-            final SpeedView this$0;
-            private final Location val$location;
-
-            
-            {
-                this$0 = SpeedView.this;
-                location = location1;
-                super();
             }
         }
 ).start();
@@ -1053,16 +976,6 @@ _L5:
                     progressHandler.sendEmptyMessage(2);
                 }
             }
-
-            final SpeedView this$0;
-            private final String val$file;
-
-            
-            {
-                this$0 = SpeedView.this;
-                file = s;
-                super();
-            }
         }
 ).start();
     }
@@ -1138,28 +1051,12 @@ _L5:
                     {
                         startActivity(new Intent("android.settings.WIRELESS_SETTINGS"));
                     }
-
-                    final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
                 }
 ).setNeutralButton(2131099711, new android.content.DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialoginterface, int i)
                     {
                     }
-
-                    final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
                 }
 ).setNegativeButton(2131099691, new android.content.DialogInterface.OnClickListener() {
 
@@ -1168,14 +1065,6 @@ _L5:
                         mExitButtonPressed = true;
                         finish();
                     }
-
-                    final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
                 }
 ).show();
                 mNotifiedAboutNetwork = flag;
@@ -1465,14 +1354,6 @@ _L7:
                     displayAddress(getLastLocation());
                 }
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mStartupScreen = (RelativeLayout)findViewById(2131296292);
@@ -1506,14 +1387,6 @@ _L7:
             public boolean accept(File file, String s)
             {
                 return s.toLowerCase().endsWith(".log");
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 ;
@@ -1637,14 +1510,6 @@ _L7:
                 if(SpeedView.mIsTablet && mActionBar != null)
                     mTabletHelper.setSelectedNavItem(mActionBar, 1);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mStartupScreen.setOnLongClickListener(new android.view.View.OnLongClickListener() {
@@ -1658,14 +1523,6 @@ _L7:
                     flag = true;
                 }
                 return flag;
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1681,14 +1538,6 @@ _L7:
                 }
                 return flag;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mCompassView.setOnClickListener(new android.view.View.OnClickListener() {
@@ -1698,14 +1547,6 @@ _L7:
                 switchToScreen(2);
                 if(SpeedView.mIsTablet && mActionBar != null)
                     mTabletHelper.setSelectedNavItem(mActionBar, 2);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1721,14 +1562,6 @@ _L7:
                 }
                 return flag;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mSpeedometerView.setOnClickListener(new android.view.View.OnClickListener() {
@@ -1738,14 +1571,6 @@ _L7:
                 switchToScreen(3);
                 if(SpeedView.mIsTablet && mActionBar != null)
                     mTabletHelper.setSelectedNavItem(mActionBar, 3);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1761,14 +1586,6 @@ _L7:
                 }
                 return flag;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mOdometerField.setOnClickListener(new android.view.View.OnClickListener() {
@@ -1783,39 +1600,14 @@ _L7:
                         displayStoredData();
                         Toast.makeText(getBaseContext(), 2131099700, 1).show();
                     }
-
-                    final _cls18 this$1;
-
-                    
-                    {
-                        this$1 = _cls18.this;
-                        super();
-                    }
                 }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialoginterface, int j)
                     {
                     }
-
-                    final _cls18 this$1;
-
-                    
-                    {
-                        this$1 = _cls18.this;
-                        super();
-                    }
                 }
 ).show();
-            }
-
-            final SpeedView this$0;
-
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1831,39 +1623,14 @@ _L7:
                         displayStoredData();
                         Toast.makeText(getBaseContext(), 2131099700, 1).show();
                     }
-
-                    final _cls19 this$1;
-
-                    
-                    {
-                        this$1 = _cls19.this;
-                        super();
-                    }
                 }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialoginterface, int j)
                     {
                     }
-
-                    final _cls19 this$1;
-
-                    
-                    {
-                        this$1 = _cls19.this;
-                        super();
-                    }
                 }
 ).show();
-            }
-
-            final SpeedView this$0;
-
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1878,39 +1645,14 @@ _L7:
                         resetMaxSpeed();
                         Toast.makeText(getBaseContext(), 2131099701, 1).show();
                     }
-
-                    final _cls20 this$1;
-
-                    
-                    {
-                        this$1 = _cls20.this;
-                        super();
-                    }
                 }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialoginterface, int j)
                     {
                     }
-
-                    final _cls20 this$1;
-
-                    
-                    {
-                        this$1 = _cls20.this;
-                        super();
-                    }
                 }
 ).show();
-            }
-
-            final SpeedView this$0;
-
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1925,39 +1667,14 @@ _L7:
                         resetMaxSpeed();
                         Toast.makeText(getBaseContext(), 2131099701, 1).show();
                     }
-
-                    final _cls21 this$1;
-
-                    
-                    {
-                        this$1 = _cls21.this;
-                        super();
-                    }
                 }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialoginterface, int j)
                     {
                     }
-
-                    final _cls21 this$1;
-
-                    
-                    {
-                        this$1 = _cls21.this;
-                        super();
-                    }
                 }
 ).show();
-            }
-
-            final SpeedView this$0;
-
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -1996,14 +1713,6 @@ _L4:
                 if(true) goto _L1; else goto _L5
 _L5:
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mGraphView.setOnLongClickListener(new android.view.View.OnLongClickListener() {
@@ -2018,14 +1727,6 @@ _L5:
                 }
                 return flag;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mCompassScreen.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2035,14 +1736,6 @@ _L5:
                 switchToScreen(1);
                 if(SpeedView.mIsTablet && mActionBar != null)
                     mTabletHelper.setSelectedNavItem(mActionBar, 1);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2058,14 +1751,6 @@ _L5:
                 }
                 return flag;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mHudScreen.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2075,14 +1760,6 @@ _L5:
                 switchToScreen(1);
                 if(SpeedView.mIsTablet && mActionBar != null)
                     mTabletHelper.setSelectedNavItem(mActionBar, 1);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2097,14 +1774,6 @@ _L5:
                     flag = true;
                 }
                 return flag;
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2123,14 +1792,6 @@ _L5:
                 mDiscard0To60Button.setEnabled(false);
                 mFrom0To60Screen.setVisibility(0);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mFrom0To100Button.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2147,14 +1808,6 @@ _L5:
                 mConfirm0To100Button.setEnabled(false);
                 mDiscard0To100Button.setEnabled(false);
                 mFrom0To100Screen.setVisibility(0);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2180,14 +1833,6 @@ _L5:
                 mDiscardQtrButton.setEnabled(false);
                 mQuarterMileScreen.setVisibility(0);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mFrom0To60Screen.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2196,14 +1841,6 @@ _L5:
             {
                 m60MphReached = false;
                 mFrom0To60Screen.setVisibility(4);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2215,14 +1852,6 @@ _L5:
                 mAccelerationInfo.setText(2131099759);
                 mFrom0To60Screen.setVisibility(4);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mDiscard0To60Button.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2232,14 +1861,6 @@ _L5:
                 m60MphReached = false;
                 mFrom0To60Screen.setVisibility(4);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mFrom0To100Screen.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2248,14 +1869,6 @@ _L5:
             {
                 m100KphReached = false;
                 mFrom0To100Screen.setVisibility(4);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2267,14 +1880,6 @@ _L5:
                 mAccelerationInfo.setText(2131099759);
                 mFrom0To100Screen.setVisibility(4);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mDiscard0To100Button.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2284,14 +1889,6 @@ _L5:
                 m100KphReached = false;
                 mFrom0To100Screen.setVisibility(4);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mQuarterMileScreen.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2300,14 +1897,6 @@ _L5:
             {
                 mQtrMileReached = false;
                 mQuarterMileScreen.setVisibility(4);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2319,14 +1908,6 @@ _L5:
                 mAccelerationInfo.setText(2131099759);
                 mQuarterMileScreen.setVisibility(4);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mDiscardQtrButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2335,14 +1916,6 @@ _L5:
             {
                 mQtrMileReached = false;
                 mQuarterMileScreen.setVisibility(4);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2396,14 +1969,6 @@ _L5:
                     SpeedView.mIsRecording = true;
                 }
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mExportGPXButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2415,14 +1980,6 @@ _L5:
                 else
                     exportTrackFile(false);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mSendGPXButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2433,14 +1990,6 @@ _L5:
                     Toast.makeText(getBaseContext(), 2131099812, 1).show();
                 else
                     exportTrackFile(true);
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2458,14 +2007,6 @@ _L1:
                 activitynotfoundexception.printStackTrace();
                   goto _L1
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mOpenSpotButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2481,14 +2022,6 @@ _L1:
                 {
                     startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.googlelabs.openspot")));
                 }
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2509,14 +2042,6 @@ _L1:
                     startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.codesector.maverick.lite")));
                 }
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mSwitchboard.setOnLongClickListener(new android.view.View.OnLongClickListener() {
@@ -2526,14 +2051,6 @@ _L1:
                 mSwitchboard.setVisibility(4);
                 Toast.makeText(getBaseContext(), (new StringBuilder(String.valueOf(getString(2131099830)))).append(" ").append(mSpeedWarning).append(" ").append(SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits]).toString(), 1).show();
                 return true;
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2545,14 +2062,6 @@ _L1:
                 mSwitchboard.setVisibility(4);
                 Toast.makeText(getBaseContext(), (new StringBuilder(String.valueOf(getString(2131099830)))).append(" ").append(mSpeedWarning).append(" ").append(SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits]).toString(), 1).show();
                 return true;
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2572,14 +2081,6 @@ _L1:
                 mCurrentSpeedLimit = 0;
                 mSpeedWarning = mTownSpeedLimit;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mTownLimitDec.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2590,14 +2091,6 @@ _L1:
                 speedview.mTownSpeedLimit = -1 + speedview.mTownSpeedLimit;
                 mTownLimitNumbers.setText((new StringBuilder()).append(mTownSpeedLimit).toString());
                 mTownLimitToggle.performClick();
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2610,14 +2103,6 @@ _L1:
                 mTownLimitNumbers.setText((new StringBuilder()).append(mTownSpeedLimit).toString());
                 mTownLimitToggle.performClick();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mHighwayLimitToggle.setOnLongClickListener(new android.view.View.OnLongClickListener() {
@@ -2628,14 +2113,6 @@ _L1:
                 mSwitchboard.setVisibility(4);
                 Toast.makeText(getBaseContext(), (new StringBuilder(String.valueOf(getString(2131099830)))).append(" ").append(mSpeedWarning).append(" ").append(SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits]).toString(), 1).show();
                 return true;
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2655,14 +2132,6 @@ _L1:
                 mCurrentSpeedLimit = 1;
                 mSpeedWarning = mHighwaySpeedLimit;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mHighwayLimitDec.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2673,14 +2142,6 @@ _L1:
                 speedview.mHighwaySpeedLimit = -1 + speedview.mHighwaySpeedLimit;
                 mHighwayLimitNumbers.setText((new StringBuilder()).append(mHighwaySpeedLimit).toString());
                 mHighwayLimitToggle.performClick();
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2693,14 +2154,6 @@ _L1:
                 mHighwayLimitNumbers.setText((new StringBuilder()).append(mHighwaySpeedLimit).toString());
                 mHighwayLimitToggle.performClick();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mFreewayLimitToggle.setOnLongClickListener(new android.view.View.OnLongClickListener() {
@@ -2711,14 +2164,6 @@ _L1:
                 mSwitchboard.setVisibility(4);
                 Toast.makeText(getBaseContext(), (new StringBuilder(String.valueOf(getString(2131099830)))).append(" ").append(mSpeedWarning).append(" ").append(SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits]).toString(), 1).show();
                 return true;
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2738,14 +2183,6 @@ _L1:
                 mCurrentSpeedLimit = 2;
                 mSpeedWarning = mFreewaySpeedLimit;
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mFreewayLimitDec.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2757,14 +2194,6 @@ _L1:
                 mFreewayLimitNumbers.setText((new StringBuilder()).append(mFreewaySpeedLimit).toString());
                 mFreewayLimitToggle.performClick();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         mFreewayLimitInc.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2775,14 +2204,6 @@ _L1:
                 speedview.mFreewaySpeedLimit = 1 + speedview.mFreewaySpeedLimit;
                 mFreewayLimitNumbers.setText((new StringBuilder()).append(mFreewaySpeedLimit).toString());
                 mFreewayLimitToggle.performClick();
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -2802,14 +2223,6 @@ _L1:
                     activitynotfoundexception.printStackTrace();
                       goto _L1
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 );
             mOpenSpotButtonT.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2826,14 +2239,6 @@ _L1:
                         startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.googlelabs.openspot")));
                     }
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 );
             mMaverickButtonT.setOnClickListener(new android.view.View.OnClickListener() {
@@ -2853,14 +2258,6 @@ _L1:
                         startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.codesector.maverick.lite")));
                     }
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 );
         }
@@ -3022,14 +2419,6 @@ _L3:
                 intent.putExtra("android.intent.extra.SUBJECT", (new StringBuilder(String.valueOf(getString(2131099648)))).append(" ").append(SpeedView.mVersionName).append(" ").append(getString(2131099930)).toString());
                 startActivity(intent);
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 );
         continue; /* Loop/switch isn't completed */
@@ -3048,16 +2437,6 @@ _L4:
             {
                 dialog.dismiss();
             }
-
-            final SpeedView this$0;
-            private final Dialog val$dialog;
-
-            
-            {
-                this$0 = SpeedView.this;
-                dialog = dialog1;
-                super();
-            }
         }
 );
         button1.setOnClickListener(new android.view.View.OnClickListener() {
@@ -3066,14 +2445,6 @@ _L4:
             {
                 Uri uri = Uri.parse("http://blog.codesector.com/category/code-sector-software/speedview/");
                 startActivity(new Intent("android.intent.action.VIEW", uri));
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 );
@@ -3270,27 +2641,11 @@ _L14:
                 displayStoredData();
                 Toast.makeText(getBaseContext(), 2131099700, 1).show();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 ).show();
@@ -3303,27 +2658,11 @@ _L15:
                 resetMaxSpeed();
                 Toast.makeText(getBaseContext(), 2131099701, 1).show();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 ).show();
@@ -3337,27 +2676,11 @@ _L16:
                 displayStoredData();
                 Toast.makeText(getBaseContext(), 2131099702, 1).show();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 ).show();
@@ -3370,27 +2693,11 @@ _L17:
                 mGraphView.resetHexArray();
                 Toast.makeText(getBaseContext(), 2131099703, 1).show();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 ).show();
@@ -3407,27 +2714,11 @@ _L18:
                 displayStoredData();
                 Toast.makeText(getBaseContext(), 2131099704, 1).show();
             }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
         }
 ).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialoginterface, int i)
             {
-            }
-
-            final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
             }
         }
 ).show();
@@ -3750,14 +3041,6 @@ _L19:
                 public void onClick(DialogInterface dialoginterface, int i)
                 {
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 ).setNegativeButton(2131099691, new android.content.DialogInterface.OnClickListener() {
 
@@ -3765,14 +3048,6 @@ _L19:
                 {
                     finish();
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 ).show();
             mNotifiedAboutScreen = true;
@@ -3788,14 +3063,6 @@ _L19:
                 public void onClick(DialogInterface dialoginterface, int i)
                 {
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 ).show();
         if(mCurrentVersion == 0)
@@ -3815,16 +3082,6 @@ _L19:
                 {
                     dialog.dismiss();
                 }
-
-                final SpeedView this$0;
-                private final Dialog val$dialog;
-
-            
-            {
-                this$0 = SpeedView.this;
-                dialog = dialog1;
-                super();
-            }
             }
 );
             button1.setOnClickListener(new android.view.View.OnClickListener() {
@@ -3834,14 +3091,6 @@ _L19:
                     Uri uri1 = Uri.parse("http://www.codesector.com/speedview");
                     startActivity(new Intent("android.intent.action.VIEW", uri1));
                 }
-
-                final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
             }
 );
             dialog.show();
@@ -4181,16 +3430,6 @@ _L19:
           goto _L16
     }
 
-    protected void onStart()
-    {
-        super.onStart();
-    }
-
-    protected void onStop()
-    {
-        super.onStop();
-    }
-
     public void refreshMainScreen()
     {
         if((!mDsblRotationChecked || mStoredOrientation != 1 && mStoredOrientation != 3) && (mDsblRotationChecked || getResources().getConfiguration().orientation != 2)) goto _L2; else goto _L1
@@ -4403,14 +3642,6 @@ _L9:
                 mAddressLine1.setText(s1);
             }
         }
-
-        final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
     }
 ;
     private TextView mAddressLine0;
@@ -4477,14 +3708,6 @@ _L9:
             mAddressLine0.setText(2131099734);
             mAddressLine1.setText(2131099736);
         }
-
-        final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
     }
 ;
     private MyGPSListener mGPSListener;
@@ -4531,14 +3754,6 @@ _L9:
             mAddressLine0.setText(2131099732);
             mAddressLine1.setText(2131099733);
         }
-
-        final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
     }
 ;
     private boolean mNotifiedAboutGPS;
@@ -4627,14 +3842,6 @@ _L9:
             mAddressLine0.setText(2131099730);
             mAddressLine1.setText(2131099731);
         }
-
-        final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
     }
 ;
     private ServiceConnection mUpdateWidgetConn;
@@ -4663,14 +3870,6 @@ _L2:
                 public void onClick(DialogInterface dialoginterface, int i)
                 {
                 }
-
-                final _cls4 this$1;
-
-                    
-                    {
-                        this$1 = _cls4.this;
-                        super();
-                    }
             }
 ).show();
             continue; /* Loop/switch isn't completed */
@@ -4695,27 +3894,11 @@ _L4:
                 public void onClick(DialogInterface dialoginterface, int i)
                 {
                 }
-
-                final _cls4 this$1;
-
-                    
-                    {
-                        this$1 = _cls4.this;
-                        super();
-                    }
             }
 ).show();
             if(true) goto _L1; else goto _L5
 _L5:
         }
-
-        final SpeedView this$0;
-
-            
-            {
-                this$0 = SpeedView.this;
-                super();
-            }
     }
 ;
 
