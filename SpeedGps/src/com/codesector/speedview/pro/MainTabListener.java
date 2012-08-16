@@ -1,9 +1,11 @@
+/*jadclipse*/// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 
 package com.codesector.speedview.pro;
 
 import android.app.FragmentTransaction;
-import com.codesector.speedview.pro.R;
 
+// Referenced classes of package com.codesector.speedview.pro:
+//            SpeedView
 
 class MainTabListener
     implements android.app.ActionBar.TabListener
@@ -31,3 +33,13 @@ class MainTabListener
     private SpeedView mBaseClass;
 }
 
+
+/*
+	DECOMPILATION REPORT
+
+	Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar
+	Total time: 14 ms
+	Jad reported messages/errors:
+	Exit status: 0
+	Caught exceptions:
+*/

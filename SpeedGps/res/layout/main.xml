@@ -245,7 +245,7 @@
         android:layout_height="fill_parent"
         android:visibility="invisible" >
 
-        <com.codesector.speedview.pro.CompassMode
+        <com.my.compass.CompassMode
             android:id="@id/CompassMode"
             android:layout_width="320.0dip"
             android:layout_height="320.0dip"

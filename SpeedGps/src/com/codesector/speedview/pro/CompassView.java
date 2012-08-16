@@ -1,57 +1,72 @@
+/*jadclipse*/// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+
 package com.codesector.speedview.pro;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.widget.Button;
-import com.codesector.speedview.pro.R;
 
-class CompassView extends Button {
-	private Bitmap mBackground = ((BitmapDrawable) getResources().getDrawable(
-			R.drawable.compass_view)).getBitmap();
-	private float mBearing = 0.0F;
-	private Paint mPaint;
-	private Path mPointerPath;
-	private float mScreenRatio = SpeedView.mScreenRatio;
+// Referenced classes of package com.codesector.speedview.pro:
+//            SpeedView
 
-	public CompassView(Context paramContext) {
-		this(paramContext, null);
-	}
+class CompassView extends Button
+{
 
-	public CompassView(Context paramContext, AttributeSet paramAttributeSet) {
-		this(paramContext, paramAttributeSet, 0);
-	}
+    public CompassView(Context context)
+    {
+        this(context, null);
+    }
 
-	public CompassView(Context paramContext, AttributeSet paramAttributeSet,
-			int paramInt) {
-		super(paramContext, paramAttributeSet, paramInt);
-		setHeight(this.mBackground.getHeight());
-		this.mPaint = new Paint();
-		this.mPaint.setARGB(255, 235, 235, 235);
-		this.mPointerPath = new Path();
-		this.mPointerPath.moveTo(142.0F * this.mScreenRatio,
-				39.0F * this.mScreenRatio);
-		this.mPointerPath.lineTo(152.0F * this.mScreenRatio,
-				39.0F * this.mScreenRatio);
-		this.mPointerPath.lineTo(147.0F * this.mScreenRatio,
-				27.0F * this.mScreenRatio);
-	}
+    public CompassView(Context context, AttributeSet attributeset)
+    {
+        this(context, attributeset, 0);
+    }
 
-	protected void onDraw(Canvas paramCanvas) {
-		super.onDraw(paramCanvas);
-		paramCanvas.drawBitmap(this.mBackground,
-				(float) (-(1.78D * this.mBearing * this.mScreenRatio)), 0.0F,
-				this.mPaint);
-		paramCanvas.drawPath(this.mPointerPath, this.mPaint);
-	}
+    public CompassView(Context context, AttributeSet attributeset, int i)
+    {
+        super(context, attributeset, i);
+        mBearing = 0.0F;
+        mScreenRatio = SpeedView.mScreenRatio;
+        mBackground = ((BitmapDrawable)getResources().getDrawable(2130837514)).getBitmap();
+        setHeight(mBackground.getHeight());
+        mPaint = new Paint();
+        mPaint.setARGB(255, 235, 235, 235);
+        mPointerPath = new Path();
+        mPointerPath.moveTo(142F * mScreenRatio, 39F * mScreenRatio);
+        mPointerPath.lineTo(152F * mScreenRatio, 39F * mScreenRatio);
+        mPointerPath.lineTo(147F * mScreenRatio, 27F * mScreenRatio);
+    }
 
-	void onSpeedChanged(float paramFloat) {
-		this.mBearing = paramFloat;
-		invalidate();
-	}
+    protected void onDraw(Canvas canvas)
+    {
+        super.onDraw(canvas);
+        canvas.drawBitmap(mBackground, (float)(-(1.78D * (double)mBearing * (double)mScreenRatio)), 0.0F, mPaint);
+        canvas.drawPath(mPointerPath, mPaint);
+    }
+
+    void onSpeedChanged(float f)
+    {
+        mBearing = f;
+        invalidate();
+    }
+
+    private Bitmap mBackground;
+    private float mBearing;
+    private Paint mPaint;
+    private Path mPointerPath;
+    private float mScreenRatio;
 }
+
+
+/*
+	DECOMPILATION REPORT
+
+	Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar
+	Total time: 16 ms
+	Jad reported messages/errors:
+	Exit status: 0
+	Caught exceptions:
+*/
