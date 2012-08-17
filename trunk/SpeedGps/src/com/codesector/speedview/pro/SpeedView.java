@@ -19,26 +19,20 @@ import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import java.io.*;
 import java.text.*;
 import java.util.*;
 
 // Referenced classes of package com.codesector.speedview.pro:
-//            GraphView, SatelliteView, CompassView, SpeedometerView, 
-//            CompassMode, HudMode, TabletHelper, ShareActivity, 
-//            SettingsActivity, FeaturedActivity, BackgroundService, UpdateWidgetService, 
+//            GraphView, SatelliteView, CompassView, SpeedometerView,
+//            CompassMode, HudMode, TabletHelper, ShareActivity,
+//            SettingsActivity, FeaturedActivity, BackgroundService, UpdateWidgetService,
 //            DisplayHelper
 
-public class SpeedView extends Activity
-{
-    private class MyGPSListener
-        implements android.location.GpsStatus.Listener
-    {
+public class SpeedView extends Activity {
+	private class MyGPSListener implements android.location.GpsStatus.Listener {
 
-        public void onGpsStatusChanged(int i)
+		public void onGpsStatusChanged(int i)
         {
             mSecondsElapsed = (int)((System.nanoTime() - mSessionStartTime) / 1000000000L);
             i;
@@ -217,15 +211,13 @@ _L2:
 _L11:
         }
 
-        private GpsStatus gpsStatus;
-        private int mSecondsElapsed;
-    }
+		private GpsStatus gpsStatus;
+		private int mSecondsElapsed;
+	}
 
-    private class MyLocationListener
-        implements LocationListener
-    {
+	private class MyLocationListener implements LocationListener {
 
-        public void onLocationChanged(Location location)
+		public void onLocationChanged(Location location)
         {
             if(location != null) goto _L2; else goto _L1
 _L1:
@@ -628,33 +620,29 @@ _L8:
               goto _L16
         }
 
-        public void onProviderDisabled(String s)
-        {
-        }
+		public void onProviderDisabled(String s) {
+		}
 
-        public void onProviderEnabled(String s)
-        {
-        }
+		public void onProviderEnabled(String s) {
+		}
 
-        public void onStatusChanged(String s, int i, Bundle bundle)
-        {
-        }
+		public void onStatusChanged(String s, int i, Bundle bundle) {
+		}
 
-        private int mAccuracy;
-        private String mAltitudeString;
-        private String mHeadingString;
-        private boolean mLimitFlag;
-        private int mSpeed;
-        private MyLocationListener()
-        {
-            super();
-            mLimitFlag = false;
-        }
+		private int mAccuracy;
+		private String mAltitudeString;
+		private String mHeadingString;
+		private boolean mLimitFlag;
+		private int mSpeed;
 
-    }
+		private MyLocationListener() {
+			super();
+			mLimitFlag = false;
+		}
 
+	}
 
-    public SpeedView()
+	public SpeedView()
     {
         mTrackBuffer = new StringBuilder();
         mBackgroundConn = new ServiceConnection() {
@@ -675,33 +663,7 @@ _L8:
                 {
                     illegalargumentexception.printStackTrace();
                 }
-                stopService(new Intent(SpeedView.this, com/codesector/speedview/pro/BackgroundService));
-            }
-
-            public void onServiceDisconnected(ComponentName componentname)
-            {
-            }
-        }
-;
-        mUpdateWidgetConn = new ServiceConnection() {
-
-            public void onServiceConnected(ComponentName componentname, IBinder ibinder)
-            {
-                mStoredDistance = ((UpdateWidgetService.LocalBinder)ibinder).getStoredDistance();
-                mStoredMaxSpeed = ((UpdateWidgetService.LocalBinder)ibinder).getStoredMaxSpeed();
-                mStoredMovingTime = ((UpdateWidgetService.LocalBinder)ibinder).getStoredMovingTime();
-                mStoredTotalTime = ((UpdateWidgetService.LocalBinder)ibinder).getStoredTotalTime();
-                displayStoredData();
-                ((UpdateWidgetService.LocalBinder)ibinder).dumpCurrentTrack();
-                try
-                {
-                    unbindService(mUpdateWidgetConn);
-                }
-                catch(IllegalArgumentException illegalargumentexception)
-                {
-                    illegalargumentexception.printStackTrace();
-                }
-                stopService(new Intent(SpeedView.this, com/codesector/speedview/pro/UpdateWidgetService));
+                stopService(new Intent(SpeedView.this, BackgroundService.class));
             }
 
             public void onServiceDisconnected(ComponentName componentname)
@@ -736,116 +698,132 @@ _L5:
 ;
     }
 
-    private void checkGPSEnabled()
-    {
-        if(!mLocationManager.isProviderEnabled("gps"))
-        {
-            if(!mNotifiedAboutGPS)
-            {
-                (new android.app.AlertDialog.Builder(this)).setTitle(2131099709).setMessage(2131099710).setPositiveButton(2131099693, new android.content.DialogInterface.OnClickListener() {
+	private void checkGPSEnabled() {
+		if (!mLocationManager.isProviderEnabled("gps")) {
+			if (!mNotifiedAboutGPS) {
+				(new android.app.AlertDialog.Builder(this))
+						.setTitle(2131099709)
+						.setMessage(2131099710)
+						.setPositiveButton(
+								2131099693,
+								new android.content.DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialoginterface, int i)
-                    {
-                        startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
-                    }
-                }
-).setNeutralButton(2131099711, new android.content.DialogInterface.OnClickListener() {
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+										startActivity(new Intent(
+												"android.settings.LOCATION_SOURCE_SETTINGS"));
+									}
+								})
+						.setNeutralButton(
+								2131099711,
+								new android.content.DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialoginterface, int i)
-                    {
-                    }
-                }
-).setNegativeButton(2131099691, new android.content.DialogInterface.OnClickListener() {
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+									}
+								})
+						.setNegativeButton(
+								2131099691,
+								new android.content.DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialoginterface, int i)
-                    {
-                        mExitButtonPressed = true;
-                        finish();
-                    }
-                }
-).show();
-                mNotifiedAboutGPS = true;
-            }
-            mStatusMessage.setText(2131099734);
-            mNumOfSatellites.setText(2131099735);
-            mHandler.post(mGPSIsDisabled);
-            mTipMessage.setText(2131099667);
-            mRecordingStatus.setTextColor(-7829368);
-            mRecordingButton.setEnabled(false);
-            mIsGPSEnabled = false;
-        } else
-        {
-            mRecordingStatus.setTextColor(-3355444);
-            mRecordingButton.setEnabled(true);
-            mIsGPSEnabled = true;
-        }
-    }
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+										mExitButtonPressed = true;
+										finish();
+									}
+								}).show();
+				mNotifiedAboutGPS = true;
+			}
+			mStatusMessage.setText(2131099734);
+			mNumOfSatellites.setText(2131099735);
+			mHandler.post(mGPSIsDisabled);
+			mTipMessage.setText(2131099667);
+			mRecordingStatus.setTextColor(-7829368);
+			mRecordingButton.setEnabled(false);
+			mIsGPSEnabled = false;
+		} else {
+			mRecordingStatus.setTextColor(-3355444);
+			mRecordingButton.setEnabled(true);
+			mIsGPSEnabled = true;
+		}
+	}
 
-    private void displayAddress(final Location location)
-    {
-        (new Thread() {
+	private void displayAddress(final Location location) {
+		(new Thread() {
 
-            public void run()
-            {
-                try
-                {
-                    List list = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                    if(list.size() > 0)
-                    {
-                        mAddress = (Address)list.get(0);
-                        mHandler.post(mAddressFound);
-                    } else
-                    {
-                        mHandler.post(mUnableToGetAddress);
-                    }
-                }
-                catch(Exception exception)
-                {
-                    mHandler.post(mNetworkFailure);
-                }
-            }
-        }
-).start();
-    }
+			public void run() {
+				try {
+					List list = mGeocoder.getFromLocation(
+							location.getLatitude(), location.getLongitude(), 1);
+					if (list.size() > 0) {
+						mAddress = (Address) list.get(0);
+						mHandler.post(mAddressFound);
+					} else {
+						mHandler.post(mUnableToGetAddress);
+					}
+				} catch (Exception exception) {
+					mHandler.post(mNetworkFailure);
+				}
+			}
+		}).start();
+	}
 
-    private void displayStoredData()
-    {
-        float f = 0.0F;
-        float f1 = 0.0F;
-        if(mStoredMovingTime + mSessionMovingTime != 0L)
-            f = mStoredDistance / ((float)(mStoredMovingTime + mSessionMovingTime) / 1000F);
-        if(mStoredTotalTime + mSessionTotalTime != 0L)
-            f1 = mStoredDistance / ((float)(mStoredTotalTime + mSessionTotalTime) / 1000F);
-        if(mSelectedDashboard == 4)
-        {
-            mTripDistance.setText(distanceToString());
-            mTripTimeMoving.setText(getElapsedTimeString(mStoredMovingTime + mSessionMovingTime));
-            mTripTimeStopped.setText(getElapsedTimeString((mStoredTotalTime + mSessionTotalTime) - (mStoredMovingTime + mSessionMovingTime)));
-            mTripTimeTotal.setText(getElapsedTimeString(mStoredTotalTime + mSessionTotalTime));
-            mSpeedMovingAvg.setText((new StringBuilder(String.valueOf(getDisplaySpeed(f)))).append(" ").append(UNITS_ARRAY[mDisplayUnits]).toString());
-            mSpeedOverallAvg.setText((new StringBuilder(String.valueOf(getDisplaySpeed(f1)))).append(" ").append(UNITS_ARRAY[mDisplayUnits]).toString());
-            mFrom0To60Result.setText(mStored0To60Time);
-            mFrom0To100Result.setText(mStored0To100Time);
-            mQuarterMileResult.setText(mStoredQtrMileTime);
-        } else
-        {
-            mOdometer.setText(distanceToString());
-            mMaxSpeed.setText((new StringBuilder()).append(getDisplaySpeed(mStoredMaxSpeed)).toString());
-        }
-        if(mIsTablet)
-        {
-            mTripTimeMovingT.setText(getElapsedTimeString(mStoredMovingTime + mSessionMovingTime));
-            mTripTimeStoppedT.setText(getElapsedTimeString((mStoredTotalTime + mSessionTotalTime) - (mStoredMovingTime + mSessionMovingTime)));
-            mTripTimeTotalT.setText(getElapsedTimeString(mStoredTotalTime + mSessionTotalTime));
-            mSpeedMovingAvgT.setText((new StringBuilder(String.valueOf(getDisplaySpeed(f)))).append(" ").append(UNITS_ARRAY[mDisplayUnits]).toString());
-            mSpeedOverallAvgT.setText((new StringBuilder(String.valueOf(getDisplaySpeed(f1)))).append(" ").append(UNITS_ARRAY[mDisplayUnits]).toString());
-            mFrom0To60ResultT.setText(mStored0To60Time);
-            mFrom0To100ResultT.setText(mStored0To100Time);
-            mQuarterMileResultT.setText(mStoredQtrMileTime);
-        }
-    }
+	private void displayStoredData() {
+		float f = 0.0F;
+		float f1 = 0.0F;
+		if (mStoredMovingTime + mSessionMovingTime != 0L)
+			f = mStoredDistance
+					/ ((float) (mStoredMovingTime + mSessionMovingTime) / 1000F);
+		if (mStoredTotalTime + mSessionTotalTime != 0L)
+			f1 = mStoredDistance
+					/ ((float) (mStoredTotalTime + mSessionTotalTime) / 1000F);
+		if (mSelectedDashboard == 4) {
+			mTripDistance.setText(distanceToString());
+			mTripTimeMoving.setText(getElapsedTimeString(mStoredMovingTime
+					+ mSessionMovingTime));
+			mTripTimeStopped
+					.setText(getElapsedTimeString((mStoredTotalTime + mSessionTotalTime)
+							- (mStoredMovingTime + mSessionMovingTime)));
+			mTripTimeTotal.setText(getElapsedTimeString(mStoredTotalTime
+					+ mSessionTotalTime));
+			mSpeedMovingAvg.setText((new StringBuilder(String
+					.valueOf(getDisplaySpeed(f)))).append(" ")
+					.append(UNITS_ARRAY[mDisplayUnits]).toString());
+			mSpeedOverallAvg.setText((new StringBuilder(String
+					.valueOf(getDisplaySpeed(f1)))).append(" ")
+					.append(UNITS_ARRAY[mDisplayUnits]).toString());
+			mFrom0To60Result.setText(mStored0To60Time);
+			mFrom0To100Result.setText(mStored0To100Time);
+			mQuarterMileResult.setText(mStoredQtrMileTime);
+		} else {
+			mOdometer.setText(distanceToString());
+			mMaxSpeed.setText((new StringBuilder()).append(
+					getDisplaySpeed(mStoredMaxSpeed)).toString());
+		}
+		if (mIsTablet) {
+			mTripTimeMovingT.setText(getElapsedTimeString(mStoredMovingTime
+					+ mSessionMovingTime));
+			mTripTimeStoppedT
+					.setText(getElapsedTimeString((mStoredTotalTime + mSessionTotalTime)
+							- (mStoredMovingTime + mSessionMovingTime)));
+			mTripTimeTotalT.setText(getElapsedTimeString(mStoredTotalTime
+					+ mSessionTotalTime));
+			mSpeedMovingAvgT.setText((new StringBuilder(String
+					.valueOf(getDisplaySpeed(f)))).append(" ")
+					.append(UNITS_ARRAY[mDisplayUnits]).toString());
+			mSpeedOverallAvgT.setText((new StringBuilder(String
+					.valueOf(getDisplaySpeed(f1)))).append(" ")
+					.append(UNITS_ARRAY[mDisplayUnits]).toString());
+			mFrom0To60ResultT.setText(mStored0To60Time);
+			mFrom0To100ResultT.setText(mStored0To100Time);
+			mQuarterMileResultT.setText(mStoredQtrMileTime);
+		}
+	}
 
-    private String distanceToString()
+	private String distanceToString()
     {
         mDisplayUnits;
         JVM INSTR tableswitch 0 2: default 28
@@ -878,259 +856,249 @@ _L4:
 _L5:
     }
 
-    private void exportTrackFile(boolean flag)
-    {
-        saveCurrentTrack();
-        mSendTrackInit = flag;
-        File file = new File((new StringBuilder()).append(Environment.getExternalStorageDirectory()).append("/speedview/logs").toString());
-        if(!file.exists())
-        {
-            progressHandler.sendEmptyMessage(0);
-        } else
-        {
-            mLogFilesList = file.list(mLogExtensionFilter);
-            if(mLogFilesList != null)
-            {
-                if(mLogFilesList.length > 1)
-                {
-                    Arrays.sort(mLogFilesList);
-                    mExportGPXButton.showContextMenu();
-                } else
-                {
-                    exportTrackFileEx(mLogFilesList[0]);
-                }
-            } else
-            {
-                progressHandler.sendEmptyMessage(0);
-            }
-        }
-    }
+	private void exportTrackFile(boolean flag) {
+		saveCurrentTrack();
+		mSendTrackInit = flag;
+		File file = new File((new StringBuilder())
+				.append(Environment.getExternalStorageDirectory())
+				.append("/speedview/logs").toString());
+		if (!file.exists()) {
+			progressHandler.sendEmptyMessage(0);
+		} else {
+			mLogFilesList = file.list(mLogExtensionFilter);
+			if (mLogFilesList != null) {
+				if (mLogFilesList.length > 1) {
+					Arrays.sort(mLogFilesList);
+					mExportGPXButton.showContextMenu();
+				} else {
+					exportTrackFileEx(mLogFilesList[0]);
+				}
+			} else {
+				progressHandler.sendEmptyMessage(0);
+			}
+		}
+	}
 
-    private void exportTrackFileEx(final String file)
-    {
-        mProgressDialog.show();
-        (new Thread() {
+	private void exportTrackFileEx(final String file) {
+		mProgressDialog.show();
+		(new Thread() {
 
-            public void run()
-            {
-                try
-                {
-                    mTrackLogFile = new File((new StringBuilder()).append(Environment.getExternalStorageDirectory()).append("/speedview/logs").toString(), file);
-                    File file1;
-                    File file2;
-                    BufferedReader bufferedreader;
-                    BufferedWriter bufferedwriter;
-                    if(SpeedView.mMaverickInst)
-                        file1 = new File((new StringBuilder()).append(Environment.getExternalStorageDirectory()).append("/maverick/tracks").toString());
-                    else
-                        file1 = new File((new StringBuilder()).append(Environment.getExternalStorageDirectory()).append("/speedview/tracks").toString());
-                    if(!file1.exists())
-                        file1.mkdirs();
-                    file2 = new File(file1, (new StringBuilder("SpeedView [")).append(file.substring(0, 10)).append("].gpx").toString());
-                    bufferedreader = new BufferedReader(new FileReader(mTrackLogFile), 8192);
-                    bufferedwriter = new BufferedWriter(new FileWriter(file2), 8192);
-                    bufferedwriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-                    bufferedwriter.write("<gpx\n");
-                    bufferedwriter.write(" version=\"1.0\"\n");
-                    bufferedwriter.write(" creator=\"SpeedView - http://www.codesector.com\"\n");
-                    bufferedwriter.write(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n");
-                    bufferedwriter.write(" xmlns=\"http://www.topografix.com/GPX/1/0\"\n");
-                    bufferedwriter.write(" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">\n");
-                    bufferedwriter.write((new StringBuilder("<time>")).append(mDateFormat.format(new Date())).append("T").append(mTimeFormat.format(new Date())).append("Z").append("</time>\n").toString());
-                    bufferedwriter.write("<trk>\n");
-                    bufferedwriter.write(" <name>SpeedView</name>\n");
-                    bufferedwriter.write(" <trkseg>\n");
-                    String[] _tmp = (String[])null;
-                    do
-                    {
-                        String s = bufferedreader.readLine();
-                        if(s == null)
-                        {
-                            bufferedwriter.write(" </trkseg>\n");
-                            bufferedwriter.write("</trk>\n");
-                            bufferedwriter.write("</gpx>\n");
-                            bufferedwriter.flush();
-                            bufferedwriter.close();
-                            bufferedreader.close();
-                            Message message = progressHandler.obtainMessage();
-                            message.what = 1;
-                            Bundle bundle = new Bundle();
-                            bundle.putString("file_path", file2.getAbsolutePath());
-                            message.setData(bundle);
-                            progressHandler.sendMessage(message);
-                            break;
-                        }
-                        String as[] = s.split("\\|");
-                        long l = 1000L * (1280000000L + Long.parseLong(as[2]));
-                        float f = Float.parseFloat(as[3]);
-                        bufferedwriter.write((new StringBuilder("  <trkpt lat=\"")).append(as[0]).append("\" lon=\"").append(as[1]).append("\">\n").toString());
-                        bufferedwriter.write((new StringBuilder("    <time>")).append(mDateFormat.format(new Date(l))).append("T").append(mTimeFormat.format(new Date(l))).append("Z").append("</time>\n").toString());
-                        bufferedwriter.write((new StringBuilder("    <desc>")).append(getDisplaySpeed(f)).append(" ").append(SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits]).append("</desc>\n").toString());
-                        bufferedwriter.write((new StringBuilder("    <ele>")).append(as[4]).append("</ele>\n").toString());
-                        bufferedwriter.write("  </trkpt>\n");
-                    } while(true);
-                }
-                catch(Exception exception)
-                {
-                    exception.printStackTrace();
-                    progressHandler.sendEmptyMessage(2);
-                }
-            }
-        }
-).start();
-    }
+			public void run() {
+				try {
+					mTrackLogFile = new File((new StringBuilder())
+							.append(Environment.getExternalStorageDirectory())
+							.append("/speedview/logs").toString(), file);
+					File file1;
+					File file2;
+					BufferedReader bufferedreader;
+					BufferedWriter bufferedwriter;
+					if (SpeedView.mMaverickInst)
+						file1 = new File((new StringBuilder())
+								.append(Environment
+										.getExternalStorageDirectory())
+								.append("/maverick/tracks").toString());
+					else
+						file1 = new File((new StringBuilder())
+								.append(Environment
+										.getExternalStorageDirectory())
+								.append("/speedview/tracks").toString());
+					if (!file1.exists())
+						file1.mkdirs();
+					file2 = new File(file1, (new StringBuilder("SpeedView ["))
+							.append(file.substring(0, 10)).append("].gpx")
+							.toString());
+					bufferedreader = new BufferedReader(new FileReader(
+							mTrackLogFile), 8192);
+					bufferedwriter = new BufferedWriter(new FileWriter(file2),
+							8192);
+					bufferedwriter
+							.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+					bufferedwriter.write("<gpx\n");
+					bufferedwriter.write(" version=\"1.0\"\n");
+					bufferedwriter
+							.write(" creator=\"SpeedView - http://www.codesector.com\"\n");
+					bufferedwriter
+							.write(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n");
+					bufferedwriter
+							.write(" xmlns=\"http://www.topografix.com/GPX/1/0\"\n");
+					bufferedwriter
+							.write(" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">\n");
+					bufferedwriter.write((new StringBuilder("<time>"))
+							.append(mDateFormat.format(new Date())).append("T")
+							.append(mTimeFormat.format(new Date())).append("Z")
+							.append("</time>\n").toString());
+					bufferedwriter.write("<trk>\n");
+					bufferedwriter.write(" <name>SpeedView</name>\n");
+					bufferedwriter.write(" <trkseg>\n");
+					String[] _tmp = (String[]) null;
+					do {
+						String s = bufferedreader.readLine();
+						if (s == null) {
+							bufferedwriter.write(" </trkseg>\n");
+							bufferedwriter.write("</trk>\n");
+							bufferedwriter.write("</gpx>\n");
+							bufferedwriter.flush();
+							bufferedwriter.close();
+							bufferedreader.close();
+							Message message = progressHandler.obtainMessage();
+							message.what = 1;
+							Bundle bundle = new Bundle();
+							bundle.putString("file_path",
+									file2.getAbsolutePath());
+							message.setData(bundle);
+							progressHandler.sendMessage(message);
+							break;
+						}
+						String as[] = s.split("\\|");
+						long l = 1000L * (1280000000L + Long.parseLong(as[2]));
+						float f = Float.parseFloat(as[3]);
+						bufferedwriter.write((new StringBuilder(
+								"  <trkpt lat=\"")).append(as[0])
+								.append("\" lon=\"").append(as[1])
+								.append("\">\n").toString());
+						bufferedwriter.write((new StringBuilder("    <time>"))
+								.append(mDateFormat.format(new Date(l)))
+								.append("T")
+								.append(mTimeFormat.format(new Date(l)))
+								.append("Z").append("</time>\n").toString());
+						bufferedwriter
+								.write((new StringBuilder("    <desc>"))
+										.append(getDisplaySpeed(f))
+										.append(" ")
+										.append(SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits])
+										.append("</desc>\n").toString());
+						bufferedwriter.write((new StringBuilder("    <ele>"))
+								.append(as[4]).append("</ele>\n").toString());
+						bufferedwriter.write("  </trkpt>\n");
+					} while (true);
+				} catch (Exception exception) {
+					exception.printStackTrace();
+					progressHandler.sendEmptyMessage(2);
+				}
+			}
+		}).start();
+	}
 
-    private int getDisplaySpeed(float f)
-    {
-        mDisplayUnits;
-        JVM INSTR tableswitch 0 2: default 28
-    //                   0 32
-    //                   1 43
-    //                   2 54;
-           goto _L1 _L2 _L3 _L4
-_L1:
-        int i = 0;
-_L6:
-        return i;
-_L2:
-        i = (int)(2.2400000000000002D * (double)f);
-        continue; /* Loop/switch isn't completed */
-_L3:
-        i = (int)(3.6000000000000001D * (double)f);
-        continue; /* Loop/switch isn't completed */
-_L4:
-        i = (int)(1.9438445D * (double)f);
-        if(true) goto _L6; else goto _L5
-_L5:
-    }
+	private int getDisplaySpeed(float f) {
+		int i = 0;
+		switch (mDisplayUnits) {
+		case 0:
+			i = (int) (2.2400000000000002D * (double) f);
+			break;
+		case 1:
+			i = (int) (3.6000000000000001D * (double) f);
+			break;
+		case 2:
+			i = (int) (1.9438445D * (double) f);
+			break;
+		}
 
-    private String getElapsedTimeString(long l)
-    {
-        Object aobj[] = new Object[1];
-        aobj[0] = Integer.valueOf(2);
-        String s = String.format("%%0%dd", aobj);
-        long l1 = l / 1000L;
-        Object aobj1[] = new Object[1];
-        aobj1[0] = Long.valueOf(l1 % 60L);
-        String s1 = String.format(s, aobj1);
-        Object aobj2[] = new Object[1];
-        aobj2[0] = Long.valueOf((l1 % 3600L) / 60L);
-        String s2 = String.format(s, aobj2);
-        Object aobj3[] = new Object[1];
-        aobj3[0] = Long.valueOf(l1 / 3600L);
-        return (new StringBuilder(String.valueOf(String.format(s, aobj3)))).append(":").append(s2).append(":").append(s1).toString();
-    }
+		return i;
+	}
 
-    private Location getLastLocation()
-    {
-        return mLastLocation;
-    }
+	private String getElapsedTimeString(long l) {
+		Object aobj[] = new Object[1];
+		aobj[0] = Integer.valueOf(2);
+		String s = String.format("%%0%dd", aobj);
+		long l1 = l / 1000L;
+		Object aobj1[] = new Object[1];
+		aobj1[0] = Long.valueOf(l1 % 60L);
+		String s1 = String.format(s, aobj1);
+		Object aobj2[] = new Object[1];
+		aobj2[0] = Long.valueOf((l1 % 3600L) / 60L);
+		String s2 = String.format(s, aobj2);
+		Object aobj3[] = new Object[1];
+		aobj3[0] = Long.valueOf(l1 / 3600L);
+		return (new StringBuilder(String.valueOf(String.format(s, aobj3))))
+				.append(":").append(s2).append(":").append(s1).toString();
+	}
 
-    private boolean hasMatchingActivity(String s, String s1)
-    {
-        Intent intent = new Intent();
-        intent.setClassName(s, s1);
-        boolean flag;
-        if(getPackageManager().queryIntentActivities(intent, 65536).size() > 0)
-            flag = true;
-        else
-            flag = false;
-        return flag;
-    }
+	private Location getLastLocation() {
+		return mLastLocation;
+	}
 
-    private boolean isNetworkAvailable()
-    {
-        boolean flag = true;
-        if(((ConnectivityManager)getSystemService("connectivity")).getActiveNetworkInfo() == null)
-        {
-            if(!mNotifiedAboutNetwork)
-            {
-                (new android.app.AlertDialog.Builder(this)).setTitle(2131099712).setMessage(2131099713).setPositiveButton(2131099693, new android.content.DialogInterface.OnClickListener() {
+	private boolean hasMatchingActivity(String s, String s1) {
+		Intent intent = new Intent();
+		intent.setClassName(s, s1);
+		boolean flag;
+		if (getPackageManager().queryIntentActivities(intent, 65536).size() > 0)
+			flag = true;
+		else
+			flag = false;
+		return flag;
+	}
 
-                    public void onClick(DialogInterface dialoginterface, int i)
-                    {
-                        startActivity(new Intent("android.settings.WIRELESS_SETTINGS"));
-                    }
-                }
-).setNeutralButton(2131099711, new android.content.DialogInterface.OnClickListener() {
+	private boolean isNetworkAvailable() {
+		boolean flag = true;
+		if (((ConnectivityManager) getSystemService("connectivity"))
+				.getActiveNetworkInfo() == null) {
+			if (!mNotifiedAboutNetwork) {
+				(new android.app.AlertDialog.Builder(this))
+						.setTitle(2131099712)
+						.setMessage(2131099713)
+						.setPositiveButton(
+								2131099693,
+								new android.content.DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialoginterface, int i)
-                    {
-                    }
-                }
-).setNegativeButton(2131099691, new android.content.DialogInterface.OnClickListener() {
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+										startActivity(new Intent(
+												"android.settings.WIRELESS_SETTINGS"));
+									}
+								})
+						.setNeutralButton(
+								2131099711,
+								new android.content.DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialoginterface, int i)
-                    {
-                        mExitButtonPressed = true;
-                        finish();
-                    }
-                }
-).show();
-                mNotifiedAboutNetwork = flag;
-            }
-            flag = false;
-        }
-        return flag;
-    }
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+									}
+								})
+						.setNegativeButton(
+								2131099691,
+								new android.content.DialogInterface.OnClickListener() {
 
-    private void refreshAdView()
-    {
-        try
-        {
-            if(mSelectedDashboard == 0)
-            {
-                mAdViewStartup.loadAd(new AdRequest());
-                if(mAdViewMain != null)
-                    mAdViewMain.stopLoading();
-                break MISSING_BLOCK_LABEL_104;
-            }
-            if(mSelectedDashboard == 1)
-            {
-                if(mAdViewMain != null)
-                    mAdViewMain.loadAd(new AdRequest());
-                mAdViewStartup.stopLoading();
-                break MISSING_BLOCK_LABEL_104;
-            }
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
-            break MISSING_BLOCK_LABEL_104;
-        }
-        mAdViewStartup.stopLoading();
-        if(mAdViewMain != null)
-            mAdViewMain.stopLoading();
-    }
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+										mExitButtonPressed = true;
+										finish();
+									}
+								}).show();
+				mNotifiedAboutNetwork = flag;
+			}
+			flag = false;
+		}
+		return flag;
+	}
 
-    private void resetAcclTimes()
-    {
-        mStored0To60Time = getString(2131099663);
-        mStored0To100Time = getString(2131099663);
-        mStoredQtrMileTime = getString(2131099663);
-    }
+	private void resetAcclTimes() {
+		mStored0To60Time = getString(2131099663);
+		mStored0To100Time = getString(2131099663);
+		mStoredQtrMileTime = getString(2131099663);
+	}
 
-    private void resetMaxSpeed()
-    {
-        mStoredMaxSpeed = 0.0F;
-        if(mSelectedDashboard != 4)
-        {
-            mOdometer.setText(distanceToString());
-            mMaxSpeed.setText((new StringBuilder()).append(getDisplaySpeed(mStoredMaxSpeed)).toString());
-        }
-    }
+	private void resetMaxSpeed() {
+		mStoredMaxSpeed = 0.0F;
+		if (mSelectedDashboard != 4) {
+			mOdometer.setText(distanceToString());
+			mMaxSpeed.setText((new StringBuilder()).append(
+					getDisplaySpeed(mStoredMaxSpeed)).toString());
+		}
+	}
 
-    private void resetOdometer()
-    {
-        mStoredDistance = 0.0F;
-        mStoredMovingTime = 0L;
-        mStoredTotalTime = 0L;
-        mFirstFixTime = 0L;
-        mSessionMovingTime = 0L;
-        mSessionTotalTime = 0L;
-    }
+	private void resetOdometer() {
+		mStoredDistance = 0.0F;
+		mStoredMovingTime = 0L;
+		mStoredTotalTime = 0L;
+		mFirstFixTime = 0L;
+		mSessionMovingTime = 0L;
+		mSessionTotalTime = 0L;
+	}
 
-    private void saveCurrentTrack()
+	private void saveCurrentTrack()
     {
         if(mTrackBuffer.length() != 0) goto _L2; else goto _L1
 _L1:
@@ -1168,46 +1136,47 @@ _L6:
           goto _L7
     }
 
-    private void saveUserPreferences()
-    {
-        android.content.SharedPreferences.Editor editor = getSharedPreferences("PrefsFile", 0).edit();
-        editor.putInt("currentVersion", mVersionCode);
-        editor.putInt("storedOrientation", mStoredOrientation);
-        editor.putBoolean("isRecording", mIsRecording);
-        editor.putFloat("storedDistance", mStoredDistance);
-        editor.putFloat("storedMaxSpeed", mStoredMaxSpeed);
-        editor.putString("stored0To60Time", mStored0To60Time);
-        editor.putString("stored0To100Time", mStored0To100Time);
-        editor.putString("storedQtrMileTime", mStoredQtrMileTime);
-        editor.putLong("storedMovingTime", mStoredMovingTime + mSessionMovingTime);
-        editor.putLong("storedTotalTime", mStoredTotalTime + mSessionTotalTime);
-        editor.putBoolean("warningChecked", mWarningChecked);
-        editor.putInt("currentSpeedLimit", mCurrentSpeedLimit);
-        editor.putInt("townSpeedLimit", mTownSpeedLimit);
-        editor.putInt("highwaySpeedLimit", mHighwaySpeedLimit);
-        editor.putInt("freewaySpeedLimit", mFreewaySpeedLimit);
-        editor.putInt("speedBarColor", mSpeedBarColor);
-        editor.putInt("primaryTextColor", mPrimaryTextColor);
-        editor.putInt("secondaryTextColor", mSecondaryTextColor);
-        editor.putInt("graphArrayPointer", mGraphView.mArrayPointer);
-        editor.putString("graphHexString", mGraphView.getHexArray());
-        editor.putBoolean("notifiedAboutScreen", mNotifiedAboutScreen);
-        editor.putBoolean("notifiedAboutGPS", mNotifiedAboutGPS);
-        editor.putBoolean("notifiedAboutNetwork", mNotifiedAboutNetwork);
-        editor.commit();
-    }
+	private void saveUserPreferences() {
+		android.content.SharedPreferences.Editor editor = getSharedPreferences(
+				"PrefsFile", 0).edit();
+		editor.putInt("currentVersion", mVersionCode);
+		editor.putInt("storedOrientation", mStoredOrientation);
+		editor.putBoolean("isRecording", mIsRecording);
+		editor.putFloat("storedDistance", mStoredDistance);
+		editor.putFloat("storedMaxSpeed", mStoredMaxSpeed);
+		editor.putString("stored0To60Time", mStored0To60Time);
+		editor.putString("stored0To100Time", mStored0To100Time);
+		editor.putString("storedQtrMileTime", mStoredQtrMileTime);
+		editor.putLong("storedMovingTime", mStoredMovingTime
+				+ mSessionMovingTime);
+		editor.putLong("storedTotalTime", mStoredTotalTime + mSessionTotalTime);
+		editor.putBoolean("warningChecked", mWarningChecked);
+		editor.putInt("currentSpeedLimit", mCurrentSpeedLimit);
+		editor.putInt("townSpeedLimit", mTownSpeedLimit);
+		editor.putInt("highwaySpeedLimit", mHighwaySpeedLimit);
+		editor.putInt("freewaySpeedLimit", mFreewaySpeedLimit);
+		editor.putInt("speedBarColor", mSpeedBarColor);
+		editor.putInt("primaryTextColor", mPrimaryTextColor);
+		editor.putInt("secondaryTextColor", mSecondaryTextColor);
+		editor.putInt("graphArrayPointer", mGraphView.mArrayPointer);
+		editor.putString("graphHexString", mGraphView.getHexArray());
+		editor.putBoolean("notifiedAboutScreen", mNotifiedAboutScreen);
+		editor.putBoolean("notifiedAboutGPS", mNotifiedAboutGPS);
+		editor.putBoolean("notifiedAboutNetwork", mNotifiedAboutNetwork);
+		editor.commit();
+	}
 
-    private void setFullScreenMode(boolean flag)
-    {
-        android.view.WindowManager.LayoutParams layoutparams = getWindow().getAttributes();
-        if(flag)
-            layoutparams.flags = 1024 | layoutparams.flags;
-        else
-            layoutparams.flags = -1025 & layoutparams.flags;
-        getWindow().setAttributes(layoutparams);
-    }
+	private void setFullScreenMode(boolean flag) {
+		android.view.WindowManager.LayoutParams layoutparams = getWindow()
+				.getAttributes();
+		if (flag)
+			layoutparams.flags = 1024 | layoutparams.flags;
+		else
+			layoutparams.flags = -1025 & layoutparams.flags;
+		getWindow().setAttributes(layoutparams);
+	}
 
-    private void switchToScreen(int i)
+	private void switchToScreen(int i)
     {
         i;
         JVM INSTR tableswitch 0 4: default 36
@@ -1272,18 +1241,16 @@ _L6:
 _L7:
     }
 
-    public boolean onContextItemSelected(MenuItem menuitem)
-    {
-        exportTrackFileEx(mLogFilesList[menuitem.getItemId()]);
-        return super.onContextItemSelected(menuitem);
-    }
+	public boolean onContextItemSelected(MenuItem menuitem) {
+		exportTrackFileEx(mLogFilesList[menuitem.getItemId()]);
+		return super.onContextItemSelected(menuitem);
+	}
 
-    public void onContextMenuClosed(Menu menu)
-    {
-        super.onContextMenuClosed(menu);
-    }
+	public void onContextMenuClosed(Menu menu) {
+		super.onContextMenuClosed(menu);
+	}
 
-    public void onCreate(Bundle bundle)
+	public void onCreate(Bundle bundle)
     {
         super.onCreate(bundle);
         int i;
@@ -1507,8 +1474,6 @@ _L7:
             public void onClick(View view)
             {
                 switchToScreen(1);
-                if(SpeedView.mIsTablet && mActionBar != null)
-                    mTabletHelper.setSelectedNavItem(mActionBar, 1);
             }
         }
 );
@@ -1545,8 +1510,6 @@ _L7:
             public void onClick(View view)
             {
                 switchToScreen(2);
-                if(SpeedView.mIsTablet && mActionBar != null)
-                    mTabletHelper.setSelectedNavItem(mActionBar, 2);
             }
         }
 );
@@ -1569,8 +1532,6 @@ _L7:
             public void onClick(View view)
             {
                 switchToScreen(3);
-                if(SpeedView.mIsTablet && mActionBar != null)
-                    mTabletHelper.setSelectedNavItem(mActionBar, 3);
             }
         }
 );
@@ -2263,7 +2224,7 @@ _L1:
         }
     }
 
-    public void onCreateContextMenu(ContextMenu contextmenu, View view, android.view.ContextMenu.ContextMenuInfo contextmenuinfo)
+	public void onCreateContextMenu(ContextMenu contextmenu, View view, android.view.ContextMenu.ContextMenuInfo contextmenuinfo)
     {
         super.onCreateContextMenu(contextmenu, view, contextmenuinfo);
         contextmenu.setHeaderTitle(2131099778);
@@ -2281,7 +2242,7 @@ _L3:
 _L4:
     }
 
-    protected Dialog onCreateDialog(int i)
+	protected Dialog onCreateDialog(int i)
     {
         i;
         JVM INSTR tableswitch 0 2: default 28
@@ -2315,7 +2276,7 @@ _L2:
             final SpeedView this$0;
             private final Dialog val$dialog;
 
-            
+
             {
                 this$0 = SpeedView.this;
                 dialog = dialog1;
@@ -2339,7 +2300,7 @@ _L2:
             private final LinearLayout val$helpButtonsLayout;
             private final ScrollView val$helpView;
 
-            
+
             {
                 this$0 = SpeedView.this;
                 helpView = scrollview;
@@ -2366,7 +2327,7 @@ _L2:
             private final LinearLayout val$helpButtonsLayout;
             private final ScrollView val$helpView;
 
-            
+
             {
                 this$0 = SpeedView.this;
                 faqView = scrollview;
@@ -2397,7 +2358,7 @@ _L3:
             final SpeedView this$0;
             private final Dialog val$dialog;
 
-            
+
             {
                 this$0 = SpeedView.this;
                 dialog = dialog1;
@@ -2452,20 +2413,12 @@ _L4:
 _L5:
     }
 
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(2131230720, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(2131230720, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        if(mAnalyticsTracker != null)
-            mAnalyticsTracker.stopSession();
-    }
-
-    public boolean onKeyDown(int i, KeyEvent keyevent)
+	public boolean onKeyDown(int i, KeyEvent keyevent)
     {
         boolean flag = true;
         if(i != 4) goto _L2; else goto _L1
@@ -2515,7 +2468,7 @@ _L2:
 _L5:
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuitem)
+	public boolean onOptionsItemSelected(MenuItem menuitem)
     {
         menuitem.getItemId();
         JVM INSTR tableswitch 2131296664 2131296693: default 140
@@ -2807,53 +2760,52 @@ _L27:
 _L32:
     }
 
-    public void onOptionsMenuClosed(Menu menu)
-    {
-        super.onOptionsMenuClosed(menu);
-    }
+	public void onOptionsMenuClosed(Menu menu) {
+		super.onOptionsMenuClosed(menu);
+	}
 
-    protected void onPause()
-    {
-        super.onPause();
-        mLocationManager.removeUpdates(mLocationListener);
-        mLocationManager.removeGpsStatusListener(mGPSListener);
-        mSensorManager.unregisterListener(mOrientationListener);
-        saveUserPreferences();
-        if(mTrackLoggingChecked)
-            saveCurrentTrack();
-        if((mRunInBGChecked && !mExitButtonPressed && !mShareButtonPressed && !mSettingsButtonPressed && !mFeaturedButtonPressed || mMinimizeButtonPressed) && mIsGPSEnabled && mIsRecording)
-        {
-            Intent intent = new Intent(this, com/codesector/speedview/pro/BackgroundService);
-            intent.putExtra("distance", mStoredDistance);
-            intent.putExtra("max_speed", mStoredMaxSpeed);
-            intent.putExtra("moving_time", mStoredMovingTime + mSessionMovingTime);
-            intent.putExtra("total_time", mStoredTotalTime + mSessionTotalTime);
-            intent.putExtra("display_units", mDisplayUnits);
-            intent.putExtra("warning_checked", mWarningChecked);
-            intent.putExtra("speed_warning", mSpeedWarning);
-            intent.putExtra("sould_alert_toggled", mSoundAlertToggled);
-            if(mWarningChecked && mSoundAlertToggled && mWarningSound != null)
-            {
-                String s;
-                if(mAlertSoundUri == null)
-                    s = "";
-                else
-                    s = mAlertSoundUri.toString();
-                intent.putExtra("alert_sound_uri", s);
-            }
-            intent.putExtra("vibration_checked", mVibrationChecked);
-            intent.putExtra("track_logging_checked", mTrackLoggingChecked);
-            intent.putExtra("min_time_between_pts", mMinTimeBetweenPts);
-            intent.putExtra("min_dist_between_pts", mMinDistBetweenPts);
-            intent.putExtra("narrowing_checked", mNarrowingChecked);
-            intent.putExtra("minimum_accuracy", mMinimumAccuracy);
-            startService(intent);
-        }
-        mSessionMovingTime = 0L;
-        mSessionTotalTime = 0L;
-    }
+	protected void onPause() {
+		super.onPause();
+		mLocationManager.removeUpdates(mLocationListener);
+		mLocationManager.removeGpsStatusListener(mGPSListener);
+		mSensorManager.unregisterListener(mOrientationListener);
+		saveUserPreferences();
+		if (mTrackLoggingChecked)
+			saveCurrentTrack();
+		if ((mRunInBGChecked && !mExitButtonPressed && !mShareButtonPressed
+				&& !mSettingsButtonPressed && !mFeaturedButtonPressed || mMinimizeButtonPressed)
+				&& mIsGPSEnabled && mIsRecording) {
+			Intent intent = new Intent(this, BackgroundService.class);
+			intent.putExtra("distance", mStoredDistance);
+			intent.putExtra("max_speed", mStoredMaxSpeed);
+			intent.putExtra("moving_time", mStoredMovingTime
+					+ mSessionMovingTime);
+			intent.putExtra("total_time", mStoredTotalTime + mSessionTotalTime);
+			intent.putExtra("display_units", mDisplayUnits);
+			intent.putExtra("warning_checked", mWarningChecked);
+			intent.putExtra("speed_warning", mSpeedWarning);
+			intent.putExtra("sould_alert_toggled", mSoundAlertToggled);
+			if (mWarningChecked && mSoundAlertToggled && mWarningSound != null) {
+				String s;
+				if (mAlertSoundUri == null)
+					s = "";
+				else
+					s = mAlertSoundUri.toString();
+				intent.putExtra("alert_sound_uri", s);
+			}
+			intent.putExtra("vibration_checked", mVibrationChecked);
+			intent.putExtra("track_logging_checked", mTrackLoggingChecked);
+			intent.putExtra("min_time_between_pts", mMinTimeBetweenPts);
+			intent.putExtra("min_dist_between_pts", mMinDistBetweenPts);
+			intent.putExtra("narrowing_checked", mNarrowingChecked);
+			intent.putExtra("minimum_accuracy", mMinimumAccuracy);
+			startService(intent);
+		}
+		mSessionMovingTime = 0L;
+		mSessionTotalTime = 0L;
+	}
 
-    public boolean onPrepareOptionsMenu(Menu menu)
+	public boolean onPrepareOptionsMenu(Menu menu)
     {
         boolean flag = false;
         if(mFrom0To60Screen.getVisibility() != 0 && mFrom0To100Screen.getVisibility() != 0 && mQuarterMileScreen.getVisibility() != 0 && mSwitchboard.getVisibility() != 0) goto _L2; else goto _L1
@@ -3027,7 +2979,7 @@ _L19:
           goto _L14
     }
 
-    protected void onResume()
+	protected void onResume()
     {
         Iterator iterator;
         Iterator iterator1;
@@ -3430,7 +3382,7 @@ _L19:
           goto _L16
     }
 
-    public void refreshMainScreen()
+	public void refreshMainScreen()
     {
         if((!mDsblRotationChecked || mStoredOrientation != 1 && mStoredOrientation != 3) && (mDsblRotationChecked || getResources().getConfiguration().orientation != 2)) goto _L2; else goto _L1
 _L1:
@@ -3458,718 +3410,410 @@ _L5:
 _L6:
     }
 
-    public void selectTab(int i)
-    {
-        if(mTabletHelper.getNavItemCount(mActionBar) == 4)
-            i++;
-        i;
-        JVM INSTR tableswitch 0 4: default 52
-    //                   0 53
-    //                   1 61
-    //                   2 69
-    //                   3 77
-    //                   4 85;
-           goto _L1 _L2 _L3 _L4 _L5 _L6
-_L1:
-        return;
-_L2:
-        switchToScreen(0);
-        continue; /* Loop/switch isn't completed */
-_L3:
-        switchToScreen(1);
-        continue; /* Loop/switch isn't completed */
-_L4:
-        switchToScreen(2);
-        continue; /* Loop/switch isn't completed */
-_L5:
-        switchToScreen(3);
-        continue; /* Loop/switch isn't completed */
-_L6:
-        mDisplayUnits;
-        JVM INSTR tableswitch 0 2: default 116
-    //                   0 128
-    //                   1 173
-    //                   2 218;
-           goto _L7 _L8 _L9 _L10
-_L10:
-        break MISSING_BLOCK_LABEL_218;
-_L7:
-        break; /* Loop/switch isn't completed */
-_L8:
-        break; /* Loop/switch isn't completed */
-_L12:
-        switchToScreen(4);
-        displayStoredData();
-        if(true) goto _L1; else goto _L11
-_L11:
-        mFrom0To100Row.setVisibility(8);
-        mFrom0To60Row.setVisibility(0);
-        mFrom0To100Button.setVisibility(8);
-        mFrom0To60Button.setVisibility(0);
-        mAccelerationLayout.setVisibility(0);
-          goto _L12
-_L9:
-        mFrom0To60Row.setVisibility(8);
-        mFrom0To100Row.setVisibility(0);
-        mFrom0To60Button.setVisibility(8);
-        mFrom0To100Button.setVisibility(0);
-        mAccelerationLayout.setVisibility(0);
-          goto _L12
-        mAccelerationLayout.setVisibility(8);
-          goto _L12
-    }
-
-    private static final int ABOUT_DIALOG_ID = 1;
-    static final int ACCURACY = 3;
-    static final float ACCURACY_VALUES[];
-    private static final int ADMOB_INTERVAL = 30;
-    static final int ADVANCED = 4;
-    static final int AVERAGE_SPEED = 1;
-    private static final int CHANGELOG_DIALOG_ID = 2;
-    static final int COMPASS = 2;
-    private static final String COMPASS_DIRECTIONS[];
-    static final int DEF_MIN_ACCURACY = 4;
-    static final int ELEVATION = 2;
-    private static final int EXPORT_FAILURE = 2;
-    private static final int EXPORT_SUCCESS = 1;
-    static final int FREEWAY = 2;
-    private static final int HELP_DIALOG_ID = 0;
-    static final int HIGHWAY = 1;
-    static final int HUD_VIEW = 3;
-    static final int KNOTS = 2;
-    static final int KPH = 1;
-    static final int LANDSCAPE = 1;
-    static final int LITE = 1;
-    static final int MAIN = 1;
-    static final int MIN_DISTANCE_VALUES[];
-    static final int MIN_TIME_VALUES[];
-    static final int MPH = 0;
-    private static final int NO_DATA_TO_EXPORT = 0;
-    static final int PORTRAIT = 0;
-    static final String PREFS_NAME = "PrefsFile";
-    static final int PRO = 0;
-    static final boolean PRO_VERSION = true;
-    static final int REVERSE_LANDSCAPE = 3;
-    static final int REVERSE_PORTRAIT = 2;
-    static final int STARTUP = 0;
-    static final int TIME_OF_DAY = 4;
-    static final int TRIP_TIME;
-    static final String UNITS_ARRAY[];
-    static final int URBAN_AREA;
-    static final String VERSIONS[];
-    static final boolean VODAFONE_SHOP;
-    static boolean mAdvancedHudChecked;
-    static boolean mAdvancedZoomChecked;
-    static boolean mBackgroundChecked;
-    static int mCurrentVersion;
-    static boolean mCustomColorsChecked;
-    static boolean mDigitAddlDataToggled;
-    static int mDigitDataSelected;
-    static boolean mDigitSpeedoChecked;
-    static int mDisplayUnits;
-    static boolean mDsblRotationChecked;
-    static boolean mFullScreenChecked;
-    private static String mGPXFileLocation;
-    private static boolean mHasGPSFix;
-    private static boolean mHasNetworkAccess;
-    static boolean mIsGPSEnabled;
-    static boolean mIsRecording;
-    private static boolean mIsScreenSupported;
-    static boolean mIsTablet;
-    static boolean mMaverickInst;
-    static String mMaverickVersion;
-    static boolean mMaxSpeedoChecked;
-    static int mMaxSpeedoLimit;
-    private static boolean mOpenSpotInst;
-    static int mPrimaryTextColor;
-    private static int mScreenLayoutSize;
-    static float mScreenRatio;
-    static int mSecondaryTextColor;
-    static int mSelectedDashboard;
-    static int mSpeedBarColor;
-    static int mStoredOrientation;
-    static boolean mStreetAddrChecked;
-    static boolean mUseHudChecked;
-    static int mVersionCode;
-    static String mVersionName;
-    static boolean mWarningChecked;
-    private boolean m100KphReached;
-    private boolean m60MphReached;
-    private TextView mAccelerationInfo;
-    private LinearLayout mAccelerationLayout;
-    private LinearLayout mAccelerationLayoutT;
-    private Location mAcclStartLocation;
-    private RelativeLayout mAccuracyNotification;
-    private ActionBar mActionBar;
-    private AdView mAdViewMain;
-    private AdView mAdViewStartup;
-    private Address mAddress;
-    final Runnable mAddressFound = new Runnable() {
-
-        public void run()
-        {
-            if(mAddress != null)
-            {
-                String s = mAddress.getAddressLine(0);
-                String s1 = mAddress.getAddressLine(1);
-                String s2 = mAddress.getAddressLine(2);
-                SpeedView speedview = SpeedView.this;
-                String s3;
-                TextView textview;
-                if(s != null)
-                    s3 = s;
-                else
-                    s3 = "";
-                speedview.mAddressString = s3;
-                if(s1 != null)
-                {
-                    SpeedView speedview1 = SpeedView.this;
-                    speedview1.mAddressString = (new StringBuilder(String.valueOf(speedview1.mAddressString))).append(", ").append(s1).toString();
-                    if(s2 != null)
-                    {
-                        s1 = (new StringBuilder(String.valueOf(s1))).append(", ").append(s2).toString();
-                        SpeedView speedview2 = SpeedView.this;
-                        speedview2.mAddressString = (new StringBuilder(String.valueOf(speedview2.mAddressString))).append(", ").append(s2).toString();
-                    }
-                } else
-                {
-                    s1 = "";
-                }
-                textview = mAddressLine0;
-                if(s == null)
-                    s = "";
-                textview.setText(s);
-                mAddressLine1.setText(s1);
-            }
-        }
-    }
-;
-    private TextView mAddressLine0;
-    private TextView mAddressLine1;
-    private String mAddressString;
-    private RelativeLayout mAddressView;
-    private LinearLayout mAdvancedScreen;
-    private Uri mAlertSoundUri;
-    private GoogleAnalyticsTracker mAnalyticsTracker;
-    private ServiceConnection mBackgroundConn;
-    private TextView mCompassElevation;
-    private CompassMode mCompassMode;
-    private TextView mCompassOdometer;
-    private RelativeLayout mCompassScreen;
-    private TextView mCompassSource;
-    private TextView mCompassSpeed;
-    private TextView mCompassTime;
-    private CompassView mCompassView;
-    private Button mConfirm0To100Button;
-    private Button mConfirm0To60Button;
-    private Button mConfirmQtrButton;
-    private DecimalFormat mCoordFormat;
-    private int mCurrentSpeedLimit;
-    private SimpleDateFormat mDateFormat;
-    private Button mDiscard0To100Button;
-    private Button mDiscard0To60Button;
-    private Button mDiscardQtrButton;
-    private boolean mExitButtonPressed;
-    private Button mExportGPXButton;
-    private boolean mFeaturedButtonPressed;
-    private long mFirstFixTime;
-    private ImageView mFreewayLimitDec;
-    private ImageView mFreewayLimitInc;
-    private TextView mFreewayLimitNumbers;
-    private ImageView mFreewayLimitSign;
-    private RelativeLayout mFreewayLimitToggle;
-    private int mFreewaySpeedLimit;
-    private Button mFrom0To100Button;
-    private TextView mFrom0To100Info;
-    private TextView mFrom0To100Meters;
-    private TextView mFrom0To100Result;
-    private TextView mFrom0To100ResultT;
-    private TableRow mFrom0To100Row;
-    private TableRow mFrom0To100RowT;
-    private LinearLayout mFrom0To100Screen;
-    private TextView mFrom0To100Speed;
-    private String mFrom0To100String;
-    private TextView mFrom0To100Time;
-    private Button mFrom0To60Button;
-    private TextView mFrom0To60Feet;
-    private TextView mFrom0To60Info;
-    private TextView mFrom0To60Result;
-    private TextView mFrom0To60ResultT;
-    private TableRow mFrom0To60Row;
-    private TableRow mFrom0To60RowT;
-    private LinearLayout mFrom0To60Screen;
-    private TextView mFrom0To60Speed;
-    private String mFrom0To60String;
-    private TextView mFrom0To60Time;
-    final Runnable mGPSIsDisabled = new Runnable() {
-
-        public void run()
-        {
-            mAddressLine0.setText(2131099734);
-            mAddressLine1.setText(2131099736);
-        }
-    }
-;
-    private MyGPSListener mGPSListener;
-    private TextView mGPXExportStatus;
-    private Geocoder mGeocoder;
-    private Button mGoogleMapsButton;
-    private Button mGoogleMapsButtonT;
-    private GraphView mGraphView;
-    final Handler mHandler = new Handler();
-    private TextView mHeading;
-    private ImageView mHighwayLimitDec;
-    private ImageView mHighwayLimitInc;
-    private TextView mHighwayLimitNumbers;
-    private ImageView mHighwayLimitSign;
-    private RelativeLayout mHighwayLimitToggle;
-    private int mHighwaySpeedLimit;
-    private HudMode mHudMode;
-    private RelativeLayout mHudScreen;
-    private Location mLastAddress;
-    private Location mLastLocation;
-    private long mLastLocationTime;
-    private Location mLastTrackLocation;
-    private LocationListener mLocationListener;
-    private LocationManager mLocationManager;
-    private FilenameFilter mLogExtensionFilter;
-    private String mLogFilesList[];
-    private ImageView mLogo;
-    private ImageView mLookoutBanner;
-    private TextView mLowAccuracy;
-    private LinearLayout mMainScreen;
-    private Button mMaverickButton;
-    private Button mMaverickButtonT;
-    private ImageView mMaxField;
-    private TextView mMaxSpeed;
-    private int mMinDistBetweenPts;
-    private int mMinTimeBetweenPts;
-    private boolean mMinimizeButtonPressed;
-    private int mMinimumAccuracy;
-    private boolean mNarrowingChecked;
-    final Runnable mNetworkFailure = new Runnable() {
-
-        public void run()
-        {
-            mAddressLine0.setText(2131099732);
-            mAddressLine1.setText(2131099733);
-        }
-    }
-;
-    private boolean mNotifiedAboutGPS;
-    private boolean mNotifiedAboutNetwork;
-    private boolean mNotifiedAboutScreen;
-    private TextView mNumOfSatellites;
-    private TextView mNumberOfSats;
-    private TextView mOdometer;
-    private ImageView mOdometerField;
-    private Button mOpenSpotButton;
-    private Button mOpenSpotButtonT;
-    private SensorEventListener mOrientationListener;
-    private ProgressDialog mProgressDialog;
-    private boolean mQtrMileReached;
-    private String mQtrMileString;
-    private Button mQuarterMileButton;
-    private TextView mQuarterMileDist;
-    private TextView mQuarterMileInfo;
-    private TextView mQuarterMileResult;
-    private TextView mQuarterMileResultT;
-    private LinearLayout mQuarterMileScreen;
-    private TextView mQuarterMileSpeed;
-    private TextView mQuarterMileTime;
-    private TextView mQuarterMileUnits;
-    private LinearLayout mQuickLaunchLayout;
-    private LinearLayout mQuickLaunchLayoutT;
-    private Button mRecordingButton;
-    private TextView mRecordingStatus;
-    private boolean mRunInBGChecked;
-    private SatelliteView mSatelliteView;
-    private Button mSendGPXButton;
-    private boolean mSendTrackInit;
-    private SensorManager mSensorManager;
-    private long mSessionMovingTime;
-    private long mSessionStartTime;
-    private long mSessionTotalTime;
-    private boolean mSettingsButtonPressed;
-    private boolean mShareButtonPressed;
-    private ImageView mSignalStrength;
-    private boolean mSoundAlertToggled;
-    private TextView mSpeedMovingAvg;
-    private TextView mSpeedMovingAvgT;
-    private TextView mSpeedOverallAvg;
-    private TextView mSpeedOverallAvgT;
-    private RelativeLayout mSpeedView;
-    private int mSpeedWarning;
-    private SpeedometerView mSpeedometerView;
-    private RelativeLayout mStartupScreen;
-    private long mStateChangedTime;
-    private TextView mStatusMessage;
-    private String mStored0To100Time;
-    private String mStored0To60Time;
-    private float mStoredDistance;
-    private float mStoredMaxSpeed;
-    private long mStoredMovingTime;
-    private String mStoredQtrMileTime;
-    private long mStoredTotalTime;
-    private RelativeLayout mSwitchboard;
-    private TabletHelper mTabletHelper;
-    private String mTemp0To100Time;
-    private String mTemp0To60Time;
-    private String mTempQtrMileTime;
-    private SimpleDateFormat mTimeFormat;
-    private TextView mTipMessage;
-    private LinearLayout mTipsLayout;
-    private ImageView mTownLimitDec;
-    private ImageView mTownLimitInc;
-    private TextView mTownLimitNumbers;
-    private ImageView mTownLimitSign;
-    private RelativeLayout mTownLimitToggle;
-    private int mTownSpeedLimit;
-    private StringBuilder mTrackBuffer;
-    private File mTrackLogFile;
-    private boolean mTrackLoggingChecked;
-    private TextView mTripDistance;
-    private TextView mTripTimeMoving;
-    private TextView mTripTimeMovingT;
-    private TextView mTripTimeStopped;
-    private TextView mTripTimeStoppedT;
-    private TextView mTripTimeTotal;
-    private TextView mTripTimeTotalT;
-    final Runnable mUnableToGetAddress = new Runnable() {
-
-        public void run()
-        {
-            mAddressLine0.setText(2131099730);
-            mAddressLine1.setText(2131099731);
-        }
-    }
-;
-    private ServiceConnection mUpdateWidgetConn;
-    private ImageView mUpgradeBanner;
-    private boolean mVehicleIsMoving;
-    private boolean mVibrationChecked;
-    private Vibrator mVibrator;
-    private ViewStub mViewStub;
-    private Ringtone mWarningSound;
-    final Handler progressHandler = new Handler() {
-
-        public void handleMessage(Message message)
-        {
-            mProgressDialog.dismiss();
-            message.what;
-            JVM INSTR tableswitch 0 2: default 40
-        //                       0 41
-        //                       1 82
-        //                       2 259;
-               goto _L1 _L2 _L3 _L4
-_L1:
-            return;
-_L2:
-            (new android.app.AlertDialog.Builder(SpeedView.this)).setTitle(2131099776).setMessage(2131099777).setNeutralButton(2131099939, new android.content.DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialoginterface, int i)
-                {
-                }
-            }
-).show();
-            continue; /* Loop/switch isn't completed */
-_L3:
-            if(mSendTrackInit)
-            {
-                String s = message.getData().getString("file_path");
-                Intent intent = new Intent("android.intent.action.SEND");
-                intent.setType("application/gpx");
-                intent.putExtra("android.intent.extra.SUBJECT", getString(2131099780));
-                intent.putExtra("android.intent.extra.TEXT", getString(2131099781));
-                intent.putExtra("android.intent.extra.STREAM", Uri.parse((new StringBuilder("file://")).append(s).toString()));
-                startActivity(Intent.createChooser(intent, getString(2131099773)));
-            } else
-            {
-                mGPXExportStatus.setText((new StringBuilder(String.valueOf(getString(2131099771)))).append(SpeedView.mGPXFileLocation).append(getString(2131099772)).toString());
-            }
-            continue; /* Loop/switch isn't completed */
-_L4:
-            (new android.app.AlertDialog.Builder(SpeedView.this)).setTitle(2131099726).setMessage(2131099727).setNeutralButton(2131099939, new android.content.DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialoginterface, int i)
-                {
-                }
-            }
-).show();
-            if(true) goto _L1; else goto _L5
-_L5:
-        }
-    }
-;
-
-    static 
-    {
-        String as[] = new String[2];
-        as[0] = "Pro";
-        as[1] = "Lite";
-        VERSIONS = as;
-        String as1[] = new String[3];
-        as1[0] = "mph";
-        as1[1] = "km/h";
-        as1[2] = "knots";
-        UNITS_ARRAY = as1;
-        float af[] = new float[9];
-        af[0] = 10F;
-        af[1] = 20F;
-        af[2] = 50F;
-        af[3] = 100F;
-        af[4] = 200F;
-        af[5] = 500F;
-        af[6] = 1000F;
-        af[7] = 2000F;
-        af[8] = 5000F;
-        ACCURACY_VALUES = af;
-        int ai[] = new int[14];
-        ai[0] = 1;
-        ai[1] = 2;
-        ai[2] = 3;
-        ai[3] = 4;
-        ai[4] = 5;
-        ai[5] = 10;
-        ai[6] = 20;
-        ai[7] = 30;
-        ai[8] = 60;
-        ai[9] = 120;
-        ai[10] = 300;
-        ai[11] = 600;
-        ai[12] = 900;
-        ai[13] = 1800;
-        MIN_TIME_VALUES = ai;
-        int ai1[] = new int[7];
-        ai1[0] = 1;
-        ai1[1] = 2;
-        ai1[2] = 3;
-        ai1[3] = 4;
-        ai1[4] = 5;
-        ai1[5] = 10;
-        ai1[6] = 100;
-        MIN_DISTANCE_VALUES = ai1;
-        String as2[] = new String[9];
-        as2[0] = "N";
-        as2[1] = "NE";
-        as2[2] = "E";
-        as2[3] = "SE";
-        as2[4] = "S";
-        as2[5] = "SW";
-        as2[6] = "W";
-        as2[7] = "NW";
-        as2[8] = "N";
-        COMPASS_DIRECTIONS = as2;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private static final int ABOUT_DIALOG_ID = 1;
+	static final int ACCURACY = 3;
+	static final float ACCURACY_VALUES[] = { 10F, 20F, 50F, 100F, 200F, 500F,
+			1000F, 2000F, 5000F
+
+	};
+	private static final int ADMOB_INTERVAL = 30;
+	static final int ADVANCED = 4;
+	static final int AVERAGE_SPEED = 1;
+	private static final int CHANGELOG_DIALOG_ID = 2;
+	static final int COMPASS = 2;
+	private static final String COMPASS_DIRECTIONS[] = { "N", "NE", "E", "SE",
+			"S", "SW", "W", "NW", "N" };
+	static final int DEF_MIN_ACCURACY = 4;
+	static final int ELEVATION = 2;
+	private static final int EXPORT_FAILURE = 2;
+	private static final int EXPORT_SUCCESS = 1;
+	static final int FREEWAY = 2;
+	private static final int HELP_DIALOG_ID = 0;
+	static final int HIGHWAY = 1;
+	static final int HUD_VIEW = 3;
+	static final int KNOTS = 2;
+	static final int KPH = 1;
+	static final int LANDSCAPE = 1;
+	static final int LITE = 1;
+	static final int MAIN = 1;
+	static final int MIN_DISTANCE_VALUES[] = { 1, 2, 3, 4, 5, 10, 100 };
+	static final int MIN_TIME_VALUES[] = { 1, 2, 3, 4, 5, 10, 20, 30, 60, 120,
+			300, 600, 900, 1800 };
+	static final int MPH = 0;
+	private static final int NO_DATA_TO_EXPORT = 0;
+	static final int PORTRAIT = 0;
+	static final String PREFS_NAME = "PrefsFile";
+	static final int PRO = 0;
+	static final boolean PRO_VERSION = true;
+	static final int REVERSE_LANDSCAPE = 3;
+	static final int REVERSE_PORTRAIT = 2;
+	static final int STARTUP = 0;
+	static final int TIME_OF_DAY = 4;
+	static final int TRIP_TIME = 0;
+	static final String UNITS_ARRAY[] = { "mph", "km/h", "knots" };
+	static final int URBAN_AREA = 0;
+	static final String VERSIONS[] = { "Pro", "Lite" };
+	static final boolean VODAFONE_SHOP = false;
+	static boolean mAdvancedHudChecked;
+	static boolean mAdvancedZoomChecked;
+	static boolean mBackgroundChecked;
+	static int mCurrentVersion;
+	static boolean mCustomColorsChecked;
+	static boolean mDigitAddlDataToggled;
+	static int mDigitDataSelected;
+	static boolean mDigitSpeedoChecked;
+	static int mDisplayUnits;
+	static boolean mDsblRotationChecked;
+	static boolean mFullScreenChecked;
+	private static String mGPXFileLocation;
+	private static boolean mHasGPSFix;
+	private static boolean mHasNetworkAccess;
+	static boolean mIsGPSEnabled;
+	static boolean mIsRecording;
+	private static boolean mIsScreenSupported;
+	static boolean mMaverickInst;
+	static String mMaverickVersion;
+	static boolean mMaxSpeedoChecked;
+	static int mMaxSpeedoLimit;
+	private static boolean mOpenSpotInst;
+	static int mPrimaryTextColor;
+	private static int mScreenLayoutSize;
+	static float mScreenRatio;
+	static int mSecondaryTextColor;
+	static int mSelectedDashboard;
+	static int mSpeedBarColor;
+	static int mStoredOrientation;
+	static boolean mStreetAddrChecked;
+	static boolean mUseHudChecked;
+	static int mVersionCode;
+	static String mVersionName;
+	static boolean mWarningChecked;
+	private boolean m100KphReached;
+	private boolean m60MphReached;
+	private TextView mAccelerationInfo;
+	private LinearLayout mAccelerationLayout;
+	private LinearLayout mAccelerationLayoutT;
+	private Location mAcclStartLocation;
+	private RelativeLayout mAccuracyNotification;
+	private ActionBar mActionBar;
+	private Address mAddress;
+	final Runnable mAddressFound = new Runnable() {
+
+		public void run() {
+			if (mAddress != null) {
+				String s = mAddress.getAddressLine(0);
+				String s1 = mAddress.getAddressLine(1);
+				String s2 = mAddress.getAddressLine(2);
+				SpeedView speedview = SpeedView.this;
+				String s3;
+				TextView textview;
+				if (s != null)
+					s3 = s;
+				else
+					s3 = "";
+				speedview.mAddressString = s3;
+				if (s1 != null) {
+					SpeedView speedview1 = SpeedView.this;
+					speedview1.mAddressString = (new StringBuilder(
+							String.valueOf(speedview1.mAddressString)))
+							.append(", ").append(s1).toString();
+					if (s2 != null) {
+						s1 = (new StringBuilder(String.valueOf(s1)))
+								.append(", ").append(s2).toString();
+						SpeedView speedview2 = SpeedView.this;
+						speedview2.mAddressString = (new StringBuilder(
+								String.valueOf(speedview2.mAddressString)))
+								.append(", ").append(s2).toString();
+					}
+				} else {
+					s1 = "";
+				}
+				textview = mAddressLine0;
+				if (s == null)
+					s = "";
+				textview.setText(s);
+				mAddressLine1.setText(s1);
+			}
+		}
+	};
+	private TextView mAddressLine0;
+	private TextView mAddressLine1;
+	private String mAddressString;
+	private RelativeLayout mAddressView;
+	private LinearLayout mAdvancedScreen;
+	private Uri mAlertSoundUri;
+	private ServiceConnection mBackgroundConn;
+	private TextView mCompassElevation;
+	private CompassMode mCompassMode;
+	private TextView mCompassOdometer;
+	private RelativeLayout mCompassScreen;
+	private TextView mCompassSource;
+	private TextView mCompassSpeed;
+	private TextView mCompassTime;
+	private CompassView mCompassView;
+	private Button mConfirm0To100Button;
+	private Button mConfirm0To60Button;
+	private Button mConfirmQtrButton;
+	private DecimalFormat mCoordFormat;
+	private int mCurrentSpeedLimit;
+	private SimpleDateFormat mDateFormat;
+	private Button mDiscard0To100Button;
+	private Button mDiscard0To60Button;
+	private Button mDiscardQtrButton;
+	private boolean mExitButtonPressed;
+	private Button mExportGPXButton;
+	private boolean mFeaturedButtonPressed;
+	private long mFirstFixTime;
+	private ImageView mFreewayLimitDec;
+	private ImageView mFreewayLimitInc;
+	private TextView mFreewayLimitNumbers;
+	private ImageView mFreewayLimitSign;
+	private RelativeLayout mFreewayLimitToggle;
+	private int mFreewaySpeedLimit;
+	private Button mFrom0To100Button;
+	private TextView mFrom0To100Info;
+	private TextView mFrom0To100Meters;
+	private TextView mFrom0To100Result;
+	private TextView mFrom0To100ResultT;
+	private TableRow mFrom0To100Row;
+	private TableRow mFrom0To100RowT;
+	private LinearLayout mFrom0To100Screen;
+	private TextView mFrom0To100Speed;
+	private String mFrom0To100String;
+	private TextView mFrom0To100Time;
+	private Button mFrom0To60Button;
+	private TextView mFrom0To60Feet;
+	private TextView mFrom0To60Info;
+	private TextView mFrom0To60Result;
+	private TextView mFrom0To60ResultT;
+	private TableRow mFrom0To60Row;
+	private TableRow mFrom0To60RowT;
+	private LinearLayout mFrom0To60Screen;
+	private TextView mFrom0To60Speed;
+	private String mFrom0To60String;
+	private TextView mFrom0To60Time;
+	final Runnable mGPSIsDisabled = new Runnable() {
+
+		public void run() {
+			mAddressLine0.setText(2131099734);
+			mAddressLine1.setText(2131099736);
+		}
+	};
+	private MyGPSListener mGPSListener;
+	private TextView mGPXExportStatus;
+	private Geocoder mGeocoder;
+	private Button mGoogleMapsButton;
+	private Button mGoogleMapsButtonT;
+	private GraphView mGraphView;
+	final Handler mHandler = new Handler();
+	private TextView mHeading;
+	private ImageView mHighwayLimitDec;
+	private ImageView mHighwayLimitInc;
+	private TextView mHighwayLimitNumbers;
+	private ImageView mHighwayLimitSign;
+	private RelativeLayout mHighwayLimitToggle;
+	private int mHighwaySpeedLimit;
+	private HudMode mHudMode;
+	private RelativeLayout mHudScreen;
+	private Location mLastAddress;
+	private Location mLastLocation;
+	private long mLastLocationTime;
+	private Location mLastTrackLocation;
+	private LocationListener mLocationListener;
+	private LocationManager mLocationManager;
+	private FilenameFilter mLogExtensionFilter;
+	private String mLogFilesList[];
+	private ImageView mLogo;
+	private ImageView mLookoutBanner;
+	private TextView mLowAccuracy;
+	private LinearLayout mMainScreen;
+	private Button mMaverickButton;
+	private Button mMaverickButtonT;
+	private ImageView mMaxField;
+	private TextView mMaxSpeed;
+	private int mMinDistBetweenPts;
+	private int mMinTimeBetweenPts;
+	private boolean mMinimizeButtonPressed;
+	private int mMinimumAccuracy;
+	private boolean mNarrowingChecked;
+	final Runnable mNetworkFailure = new Runnable() {
+
+		public void run() {
+			mAddressLine0.setText(2131099732);
+			mAddressLine1.setText(2131099733);
+		}
+	};
+	private boolean mNotifiedAboutGPS;
+	private boolean mNotifiedAboutNetwork;
+	private boolean mNotifiedAboutScreen;
+	private TextView mNumOfSatellites;
+	private TextView mNumberOfSats;
+	private TextView mOdometer;
+	private ImageView mOdometerField;
+	private Button mOpenSpotButton;
+	private Button mOpenSpotButtonT;
+	private SensorEventListener mOrientationListener;
+	private ProgressDialog mProgressDialog;
+	private boolean mQtrMileReached;
+	private String mQtrMileString;
+	private Button mQuarterMileButton;
+	private TextView mQuarterMileDist;
+	private TextView mQuarterMileInfo;
+	private TextView mQuarterMileResult;
+	private TextView mQuarterMileResultT;
+	private LinearLayout mQuarterMileScreen;
+	private TextView mQuarterMileSpeed;
+	private TextView mQuarterMileTime;
+	private TextView mQuarterMileUnits;
+	private LinearLayout mQuickLaunchLayout;
+	private LinearLayout mQuickLaunchLayoutT;
+	private Button mRecordingButton;
+	private TextView mRecordingStatus;
+	private boolean mRunInBGChecked;
+	private SatelliteView mSatelliteView;
+	private Button mSendGPXButton;
+	private boolean mSendTrackInit;
+	private SensorManager mSensorManager;
+	private long mSessionMovingTime;
+	private long mSessionStartTime;
+	private long mSessionTotalTime;
+	private boolean mSettingsButtonPressed;
+	private boolean mShareButtonPressed;
+	private ImageView mSignalStrength;
+	private boolean mSoundAlertToggled;
+	private TextView mSpeedMovingAvg;
+	private TextView mSpeedMovingAvgT;
+	private TextView mSpeedOverallAvg;
+	private TextView mSpeedOverallAvgT;
+	private RelativeLayout mSpeedView;
+	private int mSpeedWarning;
+	private SpeedometerView mSpeedometerView;
+	private RelativeLayout mStartupScreen;
+	private long mStateChangedTime;
+	private TextView mStatusMessage;
+	private String mStored0To100Time;
+	private String mStored0To60Time;
+	private float mStoredDistance;
+	private float mStoredMaxSpeed;
+	private long mStoredMovingTime;
+	private String mStoredQtrMileTime;
+	private long mStoredTotalTime;
+	private RelativeLayout mSwitchboard;
+	private String mTemp0To100Time;
+	private String mTemp0To60Time;
+	private String mTempQtrMileTime;
+	private SimpleDateFormat mTimeFormat;
+	private TextView mTipMessage;
+	private LinearLayout mTipsLayout;
+	private ImageView mTownLimitDec;
+	private ImageView mTownLimitInc;
+	private TextView mTownLimitNumbers;
+	private ImageView mTownLimitSign;
+	private RelativeLayout mTownLimitToggle;
+	private int mTownSpeedLimit;
+	private StringBuilder mTrackBuffer;
+	private File mTrackLogFile;
+	private boolean mTrackLoggingChecked;
+	private TextView mTripDistance;
+	private TextView mTripTimeMoving;
+	private TextView mTripTimeMovingT;
+	private TextView mTripTimeStopped;
+	private TextView mTripTimeStoppedT;
+	private TextView mTripTimeTotal;
+	private TextView mTripTimeTotalT;
+	final Runnable mUnableToGetAddress = new Runnable() {
+
+		public void run() {
+			mAddressLine0.setText(2131099730);
+			mAddressLine1.setText(2131099731);
+		}
+	};
+	private ImageView mUpgradeBanner;
+	private boolean mVehicleIsMoving;
+	private boolean mVibrationChecked;
+	private Vibrator mVibrator;
+	private ViewStub mViewStub;
+	private Ringtone mWarningSound;
+	final Handler progressHandler = new Handler() {
+
+		public void handleMessage(Message message) {
+			mProgressDialog.dismiss();
+			switch (message.what) {
+			case 0:
+				(new android.app.AlertDialog.Builder(SpeedView.this))
+						.setTitle(2131099776)
+						.setMessage(2131099777)
+						.setNeutralButton(
+								2131099939,
+								new android.content.DialogInterface.OnClickListener() {
+
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+									}
+								}).show();
+				break;
+			case 1:
+				if (mSendTrackInit) {
+					String s = message.getData().getString("file_path");
+					Intent intent = new Intent("android.intent.action.SEND");
+					intent.setType("application/gpx");
+					intent.putExtra("android.intent.extra.SUBJECT",
+							getString(2131099780));
+					intent.putExtra("android.intent.extra.TEXT",
+							getString(2131099781));
+					intent.putExtra("android.intent.extra.STREAM", Uri
+							.parse((new StringBuilder("file://")).append(s)
+									.toString()));
+					startActivity(Intent.createChooser(intent,
+							getString(2131099773)));
+				} else {
+					mGPXExportStatus.setText((new StringBuilder(String
+							.valueOf(getString(2131099771))))
+							.append(SpeedView.mGPXFileLocation)
+							.append(getString(2131099772)).toString());
+				}
+				break;
+			case 2:
+				(new android.app.AlertDialog.Builder(SpeedView.this))
+						.setTitle(2131099726)
+						.setMessage(2131099727)
+						.setNeutralButton(
+								2131099939,
+								new android.content.DialogInterface.OnClickListener() {
+
+									public void onClick(
+											DialogInterface dialoginterface,
+											int i) {
+									}
+								}).show();
+				break;
+			}
+			return;
+		}
+	};
 
 }
 
-
 /*
-	DECOMPILATION REPORT
-
-	Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar
-	Total time: 557 ms
-	Jad reported messages/errors:
-Couldn't fully decompile method onGpsStatusChanged
-Couldn't fully decompile method onLocationChanged
-Couldn't fully decompile method onSensorChanged
-Couldn't fully decompile method distanceToString
-Couldn't fully decompile method getDisplaySpeed
-Couldn't resolve all exception handlers in method refreshAdView
-Couldn't fully decompile method saveCurrentTrack
-Couldn't resolve all exception handlers in method saveCurrentTrack
-Couldn't fully decompile method switchToScreen
-Couldn't fully decompile method onClick
-Couldn't fully decompile method onClick
-Couldn't resolve all exception handlers in method onClick
-Couldn't fully decompile method onClick
-Couldn't resolve all exception handlers in method onClick
-Couldn't fully decompile method onCreateContextMenu
-Couldn't fully decompile method onCreateDialog
-Couldn't fully decompile method onKeyDown
-Couldn't fully decompile method onOptionsItemSelected
-Couldn't fully decompile method onPrepareOptionsMenu
-Couldn't fully decompile method onResume
-Couldn't fully decompile method refreshMainScreen
-Couldn't fully decompile method selectTab
-Couldn't fully decompile method handleMessage
-	Exit status: 0
-	Caught exceptions:
-*/
+ * DECOMPILATION REPORT
+ *
+ * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS娴嬮�.jar Total time: 557
+ * ms Jad reported messages/errors: Couldn't fully decompile method
+ * onGpsStatusChanged Couldn't fully decompile method onLocationChanged Couldn't
+ * fully decompile method onSensorChanged Couldn't fully decompile method
+ * distanceToString Couldn't fully decompile method getDisplaySpeed Couldn't
+ * resolve all exception handlers in method refreshAdView Couldn't fully
+ * decompile method saveCurrentTrack Couldn't resolve all exception handlers in
+ * method saveCurrentTrack Couldn't fully decompile method switchToScreen
+ * Couldn't fully decompile method onClick Couldn't fully decompile method
+ * onClick Couldn't resolve all exception handlers in method onClick Couldn't
+ * fully decompile method onClick Couldn't resolve all exception handlers in
+ * method onClick Couldn't fully decompile method onCreateContextMenu Couldn't
+ * fully decompile method onCreateDialog Couldn't fully decompile method
+ * onKeyDown Couldn't fully decompile method onOptionsItemSelected Couldn't
+ * fully decompile method onPrepareOptionsMenu Couldn't fully decompile method
+ * onResume Couldn't fully decompile method refreshMainScreen Couldn't fully
+ * decompile method selectTab Couldn't fully decompile method handleMessage Exit
+ * status: 0 Caught exceptions:
+ */

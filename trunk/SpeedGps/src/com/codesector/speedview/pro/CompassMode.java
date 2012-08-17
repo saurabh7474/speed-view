@@ -102,21 +102,16 @@ class CompassMode extends View {
         double mMetricScaleChoices[];
         float mMetricDisplayUnitsPerKm[];
         String as[];
-        int i;
-        int j;
+        int i = mMetricScaleChoices.length;
+        int j = 0;
         if(mUseMetric)
         {
-            mMetricScaleChoices = mMetricScaleChoices;
-            mMetricDisplayUnitsPerKm = mMetricDisplayUnitsPerKm;
             as = mMetricScaleFormats;
         } else
         {
-            mMetricScaleChoices = mEnglishScaleChoices;
-            mMetricDisplayUnitsPerKm = mEnglishDisplayUnitsPerKm;
             as = mEnglishScaleFormats;
         }
-        i = mMetricScaleChoices.length;
-        j = 0;
+
 _L5:
         if(j < i) goto _L2; else goto _L1
 _L1:
@@ -462,8 +457,8 @@ _L12:
 
 /*
  * DECOMPILATION REPORT
- * 
- * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar Total time: 52 ms
+ *
+ * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS娴嬮�.jar Total time: 52 ms
  * Jad reported messages/errors: Couldn't fully decompile method updateDistance
  * Couldn't fully decompile method onDraw Exit status: 0 Caught exceptions:
  */

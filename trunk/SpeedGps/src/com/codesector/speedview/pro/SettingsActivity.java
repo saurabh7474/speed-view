@@ -2,7 +2,9 @@
 
 package com.codesector.speedview.pro;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.*;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -26,25 +28,17 @@ public class SettingsActivity extends Activity implements
 		mAlertSoundUri = null;
 	}
 
-	private int getArrayIndex(String as[], String s)
-    {
-        int i;
-        int j;
-        i = Array.getLength(as);
-        j = 0;
-_L6:
-        if(j < i) goto _L2; else goto _L1
-_L1:
-        j = -1;
-_L4:
-        return j;
-_L2:
-        if(as[j].equals(s)) goto _L4; else goto _L3
-_L3:
-        j++;
-        if(true) goto _L6; else goto _L5
-_L5:
-    }
+	private int getArrayIndex(String as[], String s) {
+		int i = Array.getLength(as);
+		for (int j = 0;; j++) {
+			if (j >= i)
+				j = -1;
+			do
+				return j;
+			while (as[j].equals(s));
+		}
+
+	}
 
 	private boolean isNetworkAvailable() {
 		boolean flag;
@@ -1010,150 +1004,166 @@ _L9:
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	public boolean onKeyDown(int i, KeyEvent keyevent)
-    {
-        i;
-        JVM INSTR tableswitch 4 4: default 20
-    //                   4 31;
-           goto _L1 _L2
-_L1:
-        boolean flag = super.onKeyDown(i, keyevent);
-_L4:
-        return flag;
-_L2:
-        android.content.SharedPreferences.Editor editor = getSharedPreferences("PrefsFile", 0).edit();
-        editor.putInt("displayUnits", mDisplayUnits);
-        editor.putBoolean("warningChecked", mWarningChecked);
-        editor.putInt("townSpeedLimit", mTownSpeedLimit);
-        editor.putInt("highwaySpeedLimit", mHighwaySpeedLimit);
-        editor.putInt("freewaySpeedLimit", mFreewaySpeedLimit);
-        editor.putBoolean("soundAlertToggled", mSoundAlertToggled);
-        String s;
-        if(mAlertSoundUri == null)
-            s = "";
-        else
-            s = mAlertSoundUri.toString();
-        editor.putString("alertSoundUri", s);
-        editor.putBoolean("vibrationChecked", mVibrationChecked);
-        editor.putBoolean("digitSpeedoChecked", mDigitSpeedoChecked);
-        editor.putBoolean("digitAddlDataToggled", mDigitAddlDataToggled);
-        editor.putInt("digitDataSelected", mDigitDataSelected);
-        editor.putBoolean("maxSpeedoChecked", mMaxSpeedoChecked);
-        editor.putInt("maxSpeedoLimit", mMaxSpeedoLimit);
-        editor.putBoolean("useHudChecked", mUseHudChecked);
-        editor.putBoolean("advancedHudChecked", mAdvancedHudChecked);
-        editor.putBoolean("advancedZoomChecked", mAdvancedZoomChecked);
-        editor.putBoolean("customColorsChecked", mCustomColorsChecked);
-        editor.putInt("speedBarColor", mSpeedBarColor);
-        editor.putInt("primaryTextColor", mPrimaryTextColor);
-        editor.putInt("secondaryTextColor", mSecondaryTextColor);
-        editor.putBoolean("runInBGChecked", mRunInBGChecked);
-        editor.putBoolean("trackLoggingChecked", mTrackLoggingChecked);
-        editor.putInt("minTimeBetweenPts", mMinTimeBetweenPts);
-        editor.putInt("minDistBetweenPts", mMinDistBetweenPts);
-        editor.putBoolean("narrowingChecked", mNarrowingChecked);
-        editor.putInt("minimumAccuracy", mMinimumAccuracy);
-        editor.putBoolean("streetAddrChecked", mStreetAddrChecked);
-        editor.putBoolean("dsblRotationChecked", mDsblRotationChecked);
-        editor.putBoolean("fullScreenChecked", mFullScreenChecked);
-        editor.putBoolean("backgroundChecked", mBackgroundChecked);
-        editor.commit();
-        finish();
-        flag = true;
-        if(true) goto _L4; else goto _L3
-_L3:
-    }
+	public boolean onKeyDown(int i, KeyEvent keyevent) {
+		boolean flag;
+		if (i == 4) {
+			android.content.SharedPreferences.Editor editor = getSharedPreferences(
+					"PrefsFile", 0).edit();
+			editor.putInt("displayUnits", mDisplayUnits);
+			editor.putBoolean("warningChecked", mWarningChecked);
+			editor.putInt("townSpeedLimit", mTownSpeedLimit);
+			editor.putInt("highwaySpeedLimit", mHighwaySpeedLimit);
+			editor.putInt("freewaySpeedLimit", mFreewaySpeedLimit);
+			editor.putBoolean("soundAlertToggled", mSoundAlertToggled);
+			String s;
+			if (mAlertSoundUri == null)
+				s = "";
+			else
+				s = mAlertSoundUri.toString();
+			editor.putString("alertSoundUri", s);
+			editor.putBoolean("vibrationChecked", mVibrationChecked);
+			editor.putBoolean("digitSpeedoChecked", mDigitSpeedoChecked);
+			editor.putBoolean("digitAddlDataToggled", mDigitAddlDataToggled);
+			editor.putInt("digitDataSelected", mDigitDataSelected);
+			editor.putBoolean("maxSpeedoChecked", mMaxSpeedoChecked);
+			editor.putInt("maxSpeedoLimit", mMaxSpeedoLimit);
+			editor.putBoolean("useHudChecked", mUseHudChecked);
+			editor.putBoolean("advancedHudChecked", mAdvancedHudChecked);
+			editor.putBoolean("advancedZoomChecked", mAdvancedZoomChecked);
+			editor.putBoolean("customColorsChecked", mCustomColorsChecked);
+			editor.putInt("speedBarColor", mSpeedBarColor);
+			editor.putInt("primaryTextColor", mPrimaryTextColor);
+			editor.putInt("secondaryTextColor", mSecondaryTextColor);
+			editor.putBoolean("runInBGChecked", mRunInBGChecked);
+			editor.putBoolean("trackLoggingChecked", mTrackLoggingChecked);
+			editor.putInt("minTimeBetweenPts", mMinTimeBetweenPts);
+			editor.putInt("minDistBetweenPts", mMinDistBetweenPts);
+			editor.putBoolean("narrowingChecked", mNarrowingChecked);
+			editor.putInt("minimumAccuracy", mMinimumAccuracy);
+			editor.putBoolean("streetAddrChecked", mStreetAddrChecked);
+			editor.putBoolean("dsblRotationChecked", mDsblRotationChecked);
+			editor.putBoolean("fullScreenChecked", mFullScreenChecked);
+			editor.putBoolean("backgroundChecked", mBackgroundChecked);
+			editor.commit();
+			finish();
+			flag = true;
+		} else {
+			flag = super.onKeyDown(i, keyevent);
+		}
+		return flag;
+	}
 
-	public boolean onOptionsItemSelected(MenuItem menuitem)
-    {
-        menuitem.getItemId();
-        JVM INSTR tableswitch 2131296694 2131296695: default 28
-    //                   2131296694 34
-    //                   2131296695 89;
-           goto _L1 _L2 _L3
-_L1:
-        return super.onOptionsItemSelected(menuitem);
-_L2:
-        (new android.app.AlertDialog.Builder(this)).setTitle(2131099897).setMessage(2131099899).setPositiveButton(2131099724, new android.content.DialogInterface.OnClickListener() {
+	public boolean onOptionsItemSelected(MenuItem menuitem) {
+		switch (menuitem.getItemId()) {
+		case 2131296694:
+			(new AlertDialog.Builder(this))
+					.setTitle(2131099897)
+					.setMessage(2131099899)
+					.setPositiveButton(
+							2131099724,
+							new android.content.DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialoginterface, int i)
-            {
-                mSpeedBarColorButton.setText(2131099868);
-                mSpeedBarColorButton.setTextColor(-16777216);
-                mSpeedBarColor = -16776961;
-                mPrimaryColorButton.setText(2131099868);
-                mPrimaryColorButton.setTextColor(-16777216);
-                mPrimaryTextColor = -1;
-                mSecondaryColorButton.setText(2131099868);
-                mSecondaryColorButton.setTextColor(-16777216);
-                mSecondaryTextColor = -3355444;
-                Toast.makeText(getBaseContext(), 2131099901, 1).show();
-            }
-        }
-).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+									mSpeedBarColorButton.setText(2131099868);
+									mSpeedBarColorButton
+											.setTextColor(-16777216);
+									mSpeedBarColor = -16776961;
+									mPrimaryColorButton.setText(2131099868);
+									mPrimaryColorButton.setTextColor(-16777216);
+									mPrimaryTextColor = -1;
+									mSecondaryColorButton.setText(2131099868);
+									mSecondaryColorButton
+											.setTextColor(-16777216);
+									mSecondaryTextColor = -3355444;
+									Toast.makeText(getBaseContext(),
+											2131099901, 1).show();
+								}
+							})
+					.setNegativeButton(
+							2131099725,
+							new android.content.DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialoginterface, int i)
-            {
-            }
-        }
-).show();
-        continue; /* Loop/switch isn't completed */
-_L3:
-        (new android.app.AlertDialog.Builder(this)).setTitle(2131099898).setMessage(2131099900).setPositiveButton(2131099724, new android.content.DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+			break;
+		case 2131296695:
+			(new android.app.AlertDialog.Builder(this))
+					.setTitle(2131099898)
+					.setMessage(2131099900)
+					.setPositiveButton(
+							2131099724,
+							new android.content.DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialoginterface, int i)
-            {
-                boolean flag = false;
-                Intent intent = getIntent();
-                intent.putExtra("display_units", 0);
-                intent.putExtra("warning_checked", false);
-                intent.putExtra("current_speed_limit", 0);
-                intent.putExtra("town_speed_limit", 30);
-                intent.putExtra("highway_speed_limit", 55);
-                intent.putExtra("freeway_speed_limit", 65);
-                intent.putExtra("sound_alert_toggled", false);
-                mAlertSoundUri = null;
-                intent.putExtra("alert_sound_uri", mAlertSoundUri);
-                intent.putExtra("vibration_checked", false);
-                intent.putExtra("digit_speedo_checked", false);
-                intent.putExtra("digit_addl_data_toggled", false);
-                intent.putExtra("digit_data_selected", -1);
-                intent.putExtra("max_speedo_checked", false);
-                intent.putExtra("max_speedo_limit", 160);
-                intent.putExtra("use_hud_checked", false);
-                intent.putExtra("advanced_hud_checked", false);
-                intent.putExtra("advanced_zoom_checked", false);
-                intent.putExtra("custom_colors_checked", false);
-                intent.putExtra("speed_bar_color", -16776961);
-                intent.putExtra("primary_text_color", -1);
-                intent.putExtra("secondary_text_color", -3355444);
-                intent.putExtra("run_in_bg_checked", false);
-                intent.putExtra("track_logging_checked", false);
-                intent.putExtra("min_time_between_pts", 0);
-                intent.putExtra("min_dist_between_pts", 4);
-                intent.putExtra("narrowing_checked", true);
-                intent.putExtra("minimum_accuracy", 4);
-                intent.putExtra("street_addr_checked", true);
-                if(!SpeedView.mIsTablet)
-                    flag = true;
-                intent.putExtra("dsbl_rotation_checked", flag);
-                intent.putExtra("full_screen_checked", true);
-                intent.putExtra("background_checked", true);
-                finish();
-                startActivity(intent);
-                Toast.makeText(getBaseContext(), 2131099902, 1).show();
-            }
-        }
-).setNegativeButton(2131099725, new android.content.DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+									boolean flag = false;
+									Intent intent = getIntent();
+									intent.putExtra("display_units", 0);
+									intent.putExtra("warning_checked", false);
+									intent.putExtra("current_speed_limit", 0);
+									intent.putExtra("town_speed_limit", 30);
+									intent.putExtra("highway_speed_limit", 55);
+									intent.putExtra("freeway_speed_limit", 65);
+									intent.putExtra("sound_alert_toggled",
+											false);
+									mAlertSoundUri = null;
+									intent.putExtra("alert_sound_uri",
+											mAlertSoundUri);
+									intent.putExtra("vibration_checked", false);
+									intent.putExtra("digit_speedo_checked",
+											false);
+									intent.putExtra("digit_addl_data_toggled",
+											false);
+									intent.putExtra("digit_data_selected", -1);
+									intent.putExtra("max_speedo_checked", false);
+									intent.putExtra("max_speedo_limit", 160);
+									intent.putExtra("use_hud_checked", false);
+									intent.putExtra("advanced_hud_checked",
+											false);
+									intent.putExtra("advanced_zoom_checked",
+											false);
+									intent.putExtra("custom_colors_checked",
+											false);
+									intent.putExtra("speed_bar_color",
+											-16776961);
+									intent.putExtra("primary_text_color", -1);
+									intent.putExtra("secondary_text_color",
+											-3355444);
+									intent.putExtra("run_in_bg_checked", false);
+									intent.putExtra("track_logging_checked",
+											false);
+									intent.putExtra("min_time_between_pts", 0);
+									intent.putExtra("min_dist_between_pts", 4);
+									intent.putExtra("narrowing_checked", true);
+									intent.putExtra("minimum_accuracy", 4);
+									intent.putExtra("street_addr_checked", true);
+									if (!SpeedView.mIsTablet)
+										flag = true;
+									intent.putExtra("dsbl_rotation_checked",
+											flag);
+									intent.putExtra("full_screen_checked", true);
+									intent.putExtra("background_checked", true);
+									finish();
+									startActivity(intent);
+									Toast.makeText(getBaseContext(),
+											2131099902, 1).show();
+								}
+							})
+					.setNegativeButton(
+							2131099725,
+							new android.content.DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialoginterface, int i)
-            {
-            }
-        }
-).show();
-        if(true) goto _L1; else goto _L4
-_L4:
-    }
+								public void onClick(
+										DialogInterface dialoginterface, int i) {
+								}
+							}).show();
+			break;
+		}
+		return super.onOptionsItemSelected(menuitem);
+	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (mSpeedBarColor != -16776961 || mPrimaryTextColor != -1
@@ -1164,7 +1174,7 @@ _L4:
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	public void reload() {
+	@SuppressLint("NewApi") public void reload() {
 		Intent intent = getIntent();
 		overridePendingTransition(0, 0);
 		intent.addFlags(65536);
@@ -1278,12 +1288,12 @@ _L4:
 
 /*
  * DECOMPILATION REPORT
- * 
- * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar Total time: 124 ms
- * Jad reported messages/errors: Couldn't fully decompile method getArrayIndex
- * Couldn't fully decompile method onActivityResult Couldn't fully decompile
- * method onCreate Couldn't fully decompile method onItemSelected Couldn't fully
- * decompile method onCheckedChanged Couldn't fully decompile method onKeyDown
- * Couldn't fully decompile method onOptionsItemSelected Exit status: 0 Caught
- * exceptions:
+ *
+ * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS娴嬮�.jar Total time: 124
+ * ms Jad reported messages/errors: Couldn't fully decompile method
+ * getArrayIndex Couldn't fully decompile method onActivityResult Couldn't fully
+ * decompile method onCreate Couldn't fully decompile method onItemSelected
+ * Couldn't fully decompile method onCheckedChanged Couldn't fully decompile
+ * method onKeyDown Couldn't fully decompile method onOptionsItemSelected Exit
+ * status: 0 Caught exceptions:
  */
