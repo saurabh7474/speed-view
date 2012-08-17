@@ -4,7 +4,6 @@ package com.codesector.speedview.pro;
 
 import android.annotation.SuppressLint;
 import android.app.*;
-import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.location.*;
@@ -91,7 +90,7 @@ public class BackgroundService extends Service {
 			case 3: // '\003'
 			case 4: // '\004'
 			}
-			
+
 		}
 
 		private GpsStatus gpsStatus;
@@ -155,14 +154,6 @@ public class BackgroundService extends Service {
 				mNarrowingChecked = bundle.getBoolean("narrowing_checked");
 				mMinimumAccuracy = bundle.getInt("minimum_accuracy");
 				showNotification(getString(2131099651), getString(2131099652));
-				if (mAllWidgetIds.length > 0) {
-					mRemoteViews.setTextViewText(2131296657,
-							getString(2131099923));
-					mRemoteViews.setViewVisibility(2131296658, 8);
-					mRemoteViews.setViewVisibility(2131296656, 0);
-					mAppWidgetManager.updateAppWidget(mAllWidgetIds[0],
-							mRemoteViews);
-				}
 				mIsRunning = true;
 				break;
 			case 2:
@@ -449,9 +440,6 @@ public class BackgroundService extends Service {
 		} catch (NoClassDefFoundError noclassdeffounderror) {
 			noclassdeffounderror.printStackTrace();
 		}
-		mAppWidgetManager = AppWidgetManager.getInstance(this);
-		componentname = new ComponentName(this, WidgetProvider.class);
-		mAllWidgetIds = mAppWidgetManager.getAppWidgetIds(componentname);
 		mRemoteViews = new RemoteViews(getPackageName(), 2130903051);
 		mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
 				SpeedView.class), 0);
@@ -467,18 +455,6 @@ public class BackgroundService extends Service {
 			mLocationManager.removeGpsStatusListener(mGPSListener);
 			mLooper.quit();
 			mNotificationManager.cancel(2131099648);
-			mAllWidgetIds = mAppWidgetManager
-					.getAppWidgetIds(new ComponentName(this,
-							WidgetProvider.class));
-			if (mAllWidgetIds.length > 0) {
-				mRemoteViews.setTextViewText(2131296657, getString(2131099911));
-				mRemoteViews.setTextViewText(2131296658, getString(2131099912)
-						.toUpperCase());
-				mRemoteViews.setViewVisibility(2131296658, 0);
-				mRemoteViews.setViewVisibility(2131296656, 0);
-				mAppWidgetManager.updateAppWidget(mAllWidgetIds[0],
-						mRemoteViews);
-			}
 		}
 		mIsRunning = false;
 	}
@@ -493,8 +469,6 @@ public class BackgroundService extends Service {
 	}
 
 	private Uri mAlertSoundUri;
-	private int mAllWidgetIds[];
-	private AppWidgetManager mAppWidgetManager;
 	private final IBinder mBinder = new LocalBinder();
 	private android.app.Notification.Builder mBuilder;
 	private DecimalFormat mCoordFormat;
@@ -540,8 +514,8 @@ public class BackgroundService extends Service {
 
 /*
  * DECOMPILATION REPORT
- * 
- * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS测速.jar Total time: 71 ms
+ *
+ * Decompiled from: H:\AndroidProject\SpeedGps\libs\GPS娴嬮�.jar Total time: 71 ms
  * Jad reported messages/errors: Couldn't fully decompile method
  * onGpsStatusChanged Couldn't fully decompile method handleMessage Couldn't
  * fully decompile method distanceToString Couldn't fully decompile method
