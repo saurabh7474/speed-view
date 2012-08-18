@@ -99,11 +99,10 @@ class CompassMode extends View {
 
 	private void updateDistance(double d)
     {
-        double mMetricScaleChoices[];
-        float mMetricDisplayUnitsPerKm[];
+		//TODO
+        double mMetricScaleChoices[] = null;
+        float mMetricDisplayUnitsPerKm[] = null;
         String as[];
-        int i = mMetricScaleChoices.length;
-        int j = 0;
         if(mUseMetric)
         {
             as = mMetricScaleFormats;
@@ -112,41 +111,18 @@ class CompassMode extends View {
             as = mEnglishScaleFormats;
         }
 
-_L5:
-        if(j < i) goto _L2; else goto _L1
-_L1:
-        return;
-_L2:
-        if(d >= mMetricScaleChoices[j] && j != i - 1)
-            break; /* Loop/switch isn't completed */
-        if(mLastScale != j)
-        {
-            mLastScale = j;
-            String s = as[j];
-            float f = (float)(mMetricScaleChoices[j] * (double)mMetricDisplayUnitsPerKm[j]);
-            String as1[] = mDistanceScale;
-            Object aobj[] = new Object[1];
-            aobj[0] = Float.valueOf(f / 4F);
-            as1[0] = String.format(s, aobj);
-            String as2[] = mDistanceScale;
-            Object aobj1[] = new Object[1];
-            aobj1[0] = Float.valueOf(f / 2.0F);
-            as2[1] = String.format(s, aobj1);
-            String as3[] = mDistanceScale;
-            Object aobj2[] = new Object[1];
-            aobj2[0] = Float.valueOf((3F * f) / 4F);
-            as3[2] = String.format(s, aobj2);
-            String as4[] = mDistanceScale;
-            Object aobj3[] = new Object[1];
-            aobj3[0] = Float.valueOf(f);
-            as4[3] = String.format(s, aobj3);
+		for (int j = 0; j < mMetricScaleChoices.length; j++){
+            if(mLastScale != j)
+            {
+                String s = as[mLastScale];
+                float f = (float)(mMetricScaleChoices[j] * (double)mMetricDisplayUnitsPerKm[j]);
+                mDistanceScale[0] = String.format(s, Float.valueOf(f / 4F));
+                mDistanceScale[1] = String.format(s, Float.valueOf(f / 2.0F));
+                mDistanceScale[2] = String.format(s, Float.valueOf((3F * f) / 4F));
+                mDistanceScale[3] = String.format(s, Float.valueOf(f));
+            }
+            mDistanceRatio = (float)(mDistance / mMetricScaleChoices[mLastScale]);
         }
-        mDistanceRatio = (float)(mDistance / mMetricScaleChoices[mLastScale]);
-        if(true) goto _L1; else goto _L3
-_L3:
-        j++;
-        if(true) goto _L5; else goto _L4
-_L4:
     }
 
 	public void onAccuracyChanged(int i, int j) {
@@ -154,199 +130,7 @@ _L4:
 
 	protected void onDraw(Canvas canvas)
     {
-        int i;
-        int j;
-        Paint paint;
-        Paint paint2;
-        int k;
-        super.onDraw(canvas);
-        i = getHeight() / 2;
-        j = (int)((float)i - 30F * mScreenRatio);
-        paint = mGridPaint;
-        canvas.drawCircle(i, i, -2 + (j * 2) / 3, paint);
-        canvas.drawCircle(i, i, -1 + (j * 1) / 3, paint);
-        canvas.drawLine(i, i - j, i, i + j, paint);
-        canvas.drawLine(i - j, i, i + j, i, paint);
-        canvas.drawCircle(i, i, 2.0F, paint);
-        Paint paint1 = mBlackPaint;
-        canvas.drawCircle(i, i, j, paint1);
-        paint2 = mWhitePaint;
-        k = 0;
-_L4:
-        int l;
-        int i1;
-        double d4;
-        float f12;
-        float f13;
-        long l2;
-        int j1;
-        double d5;
-        float f14;
-        float f15;
-        double d6;
-        float f16;
-        float f17;
-        double d7;
-        float f18;
-        float f19;
-        if(k >= 360)
-        {
-            l = 0;
-            break MISSING_BLOCK_LABEL_154;
-        }
-        double d = Math.toRadians(-mOrientation + (float)k) - 1.5707963267948966D;
-        f = (float)Math.cos(d);
-        f1 = (float)Math.sin(d);
-        f2 = (float)i + f * (float)j;
-        f3 = (float)i + f1 * (float)j;
-        k;
-        JVM INSTR lookupswitch 4: default 776
-    //                   0: 800
-    //                   90: 977
-    //                   180: 977
-    //                   270: 977;
-           goto _L1 _L2 _L3 _L3 _L3
-_L3:
-        break MISSING_BLOCK_LABEL_977;
-_L1:
-        canvas.drawCircle(f2, f3, 3F * mScreenRatio, paint2);
-_L5:
-        k += 30;
-          goto _L4
-_L2:
-        mRadarPath.reset();
-        mRadarPath.moveTo((float)i + f * (float)(j + 7), (float)i + f1 * (float)(j + 7));
-        double d1 = Math.toRadians(-mOrientation - 5F) - 1.5707963267948966D;
-        float f4 = (float)Math.cos(d1);
-        float f5 = (float)Math.sin(d1);
-        mRadarPath.lineTo((float)i + f4 * (float)(j - 6), (float)i + f5 * (float)(j - 6));
-        double d2 = Math.toRadians(5F + -mOrientation) - 1.5707963267948966D;
-        float f6 = (float)Math.cos(d2);
-        float f7 = (float)Math.sin(d2);
-        mRadarPath.lineTo((float)i + f6 * (float)(j - 6), (float)i + f7 * (float)(j - 6));
-        canvas.drawPath(mRadarPath, paint2);
-          goto _L5
-        canvas.drawCircle(f2, f3, 5F * mScreenRatio, paint2);
-          goto _L5
-_L15:
-        if(l >= 360)
-        {
-            if(mHasBearing)
-            {
-                d5 = Math.toRadians(-mOrientation + mLocationBearing) - 1.5707963267948966D;
-                f14 = (float)Math.cos(d5);
-                f15 = (float)Math.sin(d5);
-                mRadarPath.reset();
-                mRadarPath.moveTo((float)i + f14 * (float)(j / 3), (float)i + f15 * (float)(j / 3));
-                d6 = Math.toRadians((-mOrientation + mLocationBearing) - 150F) - 1.5707963267948966D;
-                f16 = (float)Math.cos(d6);
-                f17 = (float)Math.sin(d6);
-                mRadarPath.lineTo((float)i + f16 * (float)(j / 3), (float)i + f17 * (float)(j / 3));
-                d7 = Math.toRadians(150F + (-mOrientation + mLocationBearing)) - 1.5707963267948966D;
-                f18 = (float)Math.cos(d7);
-                f19 = (float)Math.sin(d7);
-                mRadarPath.lineTo((float)i + f18 * (float)(j / 3), (float)i + f19 * (float)(j / 3));
-                canvas.drawPath(mRadarPath, mTextPaint);
-            }
-            i1 = (int)(mDistanceRatio * (float)(j - 14));
-            long l1 = SystemClock.uptimeMillis();
-            if(mSweepTime > 0L && mHaveLocation)
-            {
-                l2 = l1 - mSweepTime;
-                if(l2 < 512L)
-                {
-                    j1 = (int)(l2 * (long)(j + 6) >> 9);
-                    canvas.drawCircle(i, i, j1, mSweepPaint0);
-                    canvas.drawCircle(i, i, j1 - 2, mSweepPaint1);
-                    canvas.drawCircle(i, i, j1 - 4, mSweepPaint2);
-                    float f;
-                    float f1;
-                    float f2;
-                    float f3;
-                    double d3;
-                    float f8;
-                    float f9;
-                    float f10;
-                    float f11;
-                    boolean flag;
-                    if(j1 < i1)
-                        flag = true;
-                    else
-                        flag = false;
-                    if(!flag && mSweepBefore)
-                    {
-                        mSweepBefore = false;
-                        mBlipTime = l1;
-                    }
-                } else
-                {
-                    mSweepTime = 1000L + l1;
-                    mSweepBefore = true;
-                }
-                postInvalidate();
-            }
-            if(mHaveLocation && mTargetLocation != null)
-            {
-                d4 = Math.toRadians(mBearing - (double)mOrientation) - 1.5707963267948966D;
-                f12 = (float)Math.cos(d4);
-                f13 = (float)Math.sin(d4);
-                addText(canvas, mDistanceScale[3], -18 + (i + j), i);
-                if(mTargetLocation != null)
-                {
-                    paint.setAlpha(255 - (int)(128L * (l1 - mBlipTime) >> 10));
-                    canvas.drawBitmap(mBlip, ((float)i + f12 * (float)i1) - 8F, ((float)i + f13 * (float)i1) - 8F, paint);
-                    paint.setAlpha(255);
-                }
-            }
-            return;
-        }
-        d3 = Math.toRadians(-mOrientation + (float)l) - 1.5707963267948966D;
-        f8 = (float)Math.cos(d3);
-        f9 = (float)Math.sin(d3);
-        f10 = (float)i + f8 * (float)((j * 2) / 3);
-        f11 = (float)i + f9 * (float)((j * 2) / 3);
-        canvas.save();
-        canvas.rotate(-mOrientation + (float)l, f10, f11);
-        l;
-        JVM INSTR lookupswitch 8: default 1160
-    //                   0: 1170
-    //                   45: 1262
-    //                   90: 1193
-    //                   135: 1282
-    //                   180: 1216
-    //                   225: 1302
-    //                   270: 1239
-    //                   315: 1322;
-           goto _L6 _L7 _L8 _L9 _L10 _L11 _L12 _L13 _L14
-_L14:
-        break MISSING_BLOCK_LABEL_1322;
-_L16:
-        canvas.restore();
-        l += 45;
-          goto _L15
-_L7:
-        canvas.drawText(mSides[0], f10, 14F + f11, mBigPaint);
-          break;
-          _L9:
-        canvas.drawText(mSides[1], f10, 14F + f11, mBigPaint);
-          break;
-_L11:
-        canvas.drawText(mSides[2], f10, 14F + f11, mBigPaint);
-         break;
-_L13:
-        canvas.drawText(mSides[3], f10, 14F + f11, mBigPaint);
-         break;
-_L8:
-        canvas.drawText(mSides2[0], f10, f11, mBigPaint2);
-         break;
-_L10:
-        canvas.drawText(mSides2[1], f10, f11, mBigPaint2);
-         break;
-_L12:
-        canvas.drawText(mSides2[2], f10, f11, mBigPaint2);
-         break;
-        canvas.drawText(mSides2[3], f10, f11, mBigPaint2);
-         break;
+        //TODO
     }
 
 	public void onLocationChanged(Location location, int i, int j) {
