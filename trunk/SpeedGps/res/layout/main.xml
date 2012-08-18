@@ -88,18 +88,6 @@
             android:src="@drawable/upgrade_banner"
             android:visibility="gone" />
 
-        <com.google.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-            android:id="@id/adViewStartup"
-            android:layout_width="320.0dip"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="a14ca0e8b30bfea"
-            ads:keywords="android,car,gps,speedometer,speed,compass,hud,acceleration,track,location"
-            ads:loadAdOnCreate="false"
-            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout
@@ -245,7 +233,7 @@
         android:layout_height="fill_parent"
         android:visibility="invisible" >
 
-        <com.my.compass.CompassMode
+        <com.codesector.speedview.pro.CompassMode
             android:id="@id/CompassMode"
             android:layout_width="320.0dip"
             android:layout_height="320.0dip"
