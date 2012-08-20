@@ -11,11 +11,6 @@ import android.view.WindowManager;
 
 public class DisplayHelper extends Activity
 {
-
-    public DisplayHelper()
-    {
-    }
-
     public static int getRotation(SpeedView speedview)
     {
         return ((WindowManager)speedview.getSystemService("window")).getDefaultDisplay().getRotation();
