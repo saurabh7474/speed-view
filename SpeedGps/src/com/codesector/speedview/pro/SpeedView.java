@@ -32,21 +32,16 @@ import java.util.*;
 public class SpeedView extends Activity {
 	private class MyGPSListener implements android.location.GpsStatus.Listener {
 
-		public void onGpsStatusChanged(int i)
-        {
-          //TODO
-        }
-
-		private GpsStatus gpsStatus;
-		private int mSecondsElapsed;
+		public void onGpsStatusChanged(int i) {
+			// TODO
+		}
 	}
 
 	private class MyLocationListener implements LocationListener {
 
-		public void onLocationChanged(Location location)
-        {
-			//TODO
-        }
+		public void onLocationChanged(Location location) {
+			// TODO
+		}
 
 		public void onProviderDisabled(String s) {
 		}
@@ -57,15 +52,8 @@ public class SpeedView extends Activity {
 		public void onStatusChanged(String s, int i, Bundle bundle) {
 		}
 
-		private int mAccuracy;
-		private String mAltitudeString;
-		private String mHeadingString;
-		private boolean mLimitFlag;
-		private int mSpeed;
-
 		private MyLocationListener() {
 			super();
-			mLimitFlag = false;
 		}
 
 	}
@@ -336,7 +324,6 @@ public class SpeedView extends Activity {
 					bufferedwriter.write("<trk>\n");
 					bufferedwriter.write(" <name>SpeedView</name>\n");
 					bufferedwriter.write(" <trkseg>\n");
-					String[] _tmp = (String[]) null;
 					do {
 						String s = bufferedreader.readLine();
 						if (s == null) {
@@ -498,7 +485,6 @@ public class SpeedView extends Activity {
 		mStoredDistance = 0.0F;
 		mStoredMovingTime = 0L;
 		mStoredTotalTime = 0L;
-		mFirstFixTime = 0L;
 		mSessionMovingTime = 0L;
 		mSessionTotalTime = 0L;
 	}
@@ -647,13 +633,10 @@ public class SpeedView extends Activity {
 		i = getResources().getConfiguration().screenLayout;
 		if ((i & 15) == 4) {
 			mScreenLayoutSize = 4;
-			mIsScreenSupported = true;
 		} else if ((i & 15) == 3) {
 			mScreenLayoutSize = 3;
-			mIsScreenSupported = false;
 		} else if ((i & 15) == 2) {
 			mScreenLayoutSize = 2;
-			mIsScreenSupported = true;
 		}
 		displaymetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -1075,7 +1058,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						mAcclStartLocation = null;
 						mFrom0To60Time.setText(2131099787);
 						mFrom0To60Feet.setText(2131099788);
 						mFrom0To60Speed.setText("0");
@@ -1091,7 +1073,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						mAcclStartLocation = null;
 						mFrom0To100Time.setText(2131099787);
 						mFrom0To100Meters.setText(2131099795);
 						mFrom0To100Speed.setText("0");
@@ -1107,7 +1088,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						mAcclStartLocation = null;
 						mQuarterMileTime.setText(2131099787);
 						mQuarterMileSpeed
 								.setText((new StringBuilder("0 "))
@@ -1133,7 +1113,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						m60MphReached = false;
 						mFrom0To60Screen.setVisibility(4);
 					}
 				});
@@ -1150,7 +1129,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						m60MphReached = false;
 						mFrom0To60Screen.setVisibility(4);
 					}
 				});
@@ -1158,7 +1136,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						m100KphReached = false;
 						mFrom0To100Screen.setVisibility(4);
 					}
 				});
@@ -1175,7 +1152,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						m100KphReached = false;
 						mFrom0To100Screen.setVisibility(4);
 					}
 				});
@@ -1183,7 +1159,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						mQtrMileReached = false;
 						mQuarterMileScreen.setVisibility(4);
 					}
 				});
@@ -1200,7 +1175,6 @@ public class SpeedView extends Activity {
 				.setOnClickListener(new android.view.View.OnClickListener() {
 
 					public void onClick(View view) {
-						mQtrMileReached = false;
 						mQuarterMileScreen.setVisibility(4);
 					}
 				});
@@ -1234,7 +1208,6 @@ public class SpeedView extends Activity {
 									+ mSessionTotalTime;
 							mSessionMovingTime = 0L;
 							mSessionTotalTime = 0L;
-							mFirstFixTime = 0L;
 							SpeedView.mHasGPSFix = false;
 							SpeedView.mIsRecording = false;
 						} else {
@@ -1655,15 +1628,12 @@ public class SpeedView extends Activity {
 		} else {
 			if (mSwitchboard.getVisibility() != 0) {
 				if (mFrom0To60Screen.getVisibility() == 0) {
-					m60MphReached = false;
 					mFrom0To60Screen.setVisibility(4);
 				}
 				if (mFrom0To100Screen.getVisibility() == 0) {
-					m100KphReached = false;
 					mFrom0To100Screen.setVisibility(4);
 				}
 				if (mQuarterMileScreen.getVisibility() == 0) {
-					mQtrMileReached = false;
 					mQuarterMileScreen.setVisibility(4);
 				}
 				if (mSelectedDashboard == 0 && !mHasGPSFix) {
@@ -1987,7 +1957,6 @@ public class SpeedView extends Activity {
 					Uri.parse("market://details?id=com.codesector.speedview.pro")));
 			break;
 		case 2131296692:
-
 			break;
 
 		}
@@ -2040,8 +2009,178 @@ public class SpeedView extends Activity {
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// TODO
-		return false;
+		if (mFrom0To60Screen.getVisibility() != 0
+				&& mFrom0To100Screen.getVisibility() != 0
+				&& mQuarterMileScreen.getVisibility() != 0
+				&& mSwitchboard.getVisibility() != 0) {
+			if (!mDsblRotationChecked) {
+				menu.findItem(2131296663).setVisible(false);
+				menu.findItem(2131296667).setVisible(mWarningChecked);
+				if (!mWarningChecked) {
+					switch (mSelectedDashboard) {
+					case 0:
+						menu.findItem(2131296673).setChecked(true);
+						break;
+					case 1:
+						menu.findItem(2131296674).setChecked(true);
+						break;
+					case 2:
+						menu.findItem(2131296675).setChecked(true);
+						break;
+					case 3:
+						menu.findItem(2131296676).setChecked(true);
+						break;
+					case 4:
+						menu.findItem(2131296678).setChecked(true);
+						break;
+					}
+
+					// _L14:
+					boolean flag2;
+					int k1;
+					int i2 = 0;
+					int j2 = 0;
+					boolean flag3 = false;
+					int k2 = 0;
+					if (mHasGPSFix)
+						flag2 = false;
+					else
+						flag2 = true;
+					menu.findItem(2131296673).setVisible(flag2);
+					if (mUseHudChecked)
+						k1 = 2131099681;
+					else
+						k1 = 2131099682;
+					menu.findItem(2131296676).setTitle(k1);
+					int l1 = 0;
+					if (mStoredDistance != 0F || mStoredMovingTime != 0L
+							|| mStoredTotalTime != 0L) {
+						menu.findItem(2131296680).setVisible(true);
+						i2 = l1 + 1;
+					} else {
+						menu.findItem(2131296680).setVisible(false);
+					}
+					if (mStoredMaxSpeed != 0F) {
+						menu.findItem(2131296681).setVisible(true);
+						j2 = i2 + 1;
+					} else {
+						menu.findItem(2131296681).setVisible(false);
+					}
+					if (!mStored0To60Time.equals(getString(2131099663))) {
+					} else {
+						if (!mStored0To100Time.equals(getString(2131099663))) {
+						} else {
+							if (mStoredQtrMileTime
+									.equals(getString(2131099663))) {
+								menu.findItem(2131296682).setVisible(false);
+								boolean flag4;
+								boolean flag5;
+								boolean flag7;
+								boolean flag8;
+								if (!mGraphView.isHexArrayEmpty()) {
+									menu.findItem(2131296683).setVisible(true);
+									flag3 = true;
+									k2++;
+								} else {
+									menu.findItem(2131296683).setVisible(false);
+								}
+								menu.findItem(2131296679).setEnabled(flag3);
+								if (k2 > 1)
+									flag4 = true;
+								else
+									flag4 = false;
+								menu.findItem(2131296684).setVisible(flag4);
+								if (mIsGPSEnabled && !mRunInBGChecked)
+									flag5 = true;
+								else
+									flag5 = false;
+								menu.findItem(2131296685).setVisible(flag5);
+								menu.findItem(2131296685).setEnabled(
+										mIsRecording);
+								if (mIsGPSEnabled && mRunInBGChecked)
+									flag7 = true;
+								else
+									flag7 = false;
+								menu.findItem(2131296686).setVisible(flag7);
+								if (mHasNetworkAccess && mHasGPSFix)
+									flag8 = true;
+								else
+									flag8 = false;
+								menu.findItem(2131296687).setEnabled(flag8);
+								menu.findItem(2131296692).setVisible(true);
+								menu.findItem(2131296692).setEnabled(
+										mHasNetworkAccess);
+								menu.findItem(2131296693).setVisible(false);
+								menu.findItem(2131296693).setEnabled(
+										mHasNetworkAccess);
+							} else {
+								menu.findItem(2131296682).setVisible(true);
+								flag3 = true;
+								k2 = j2 + 1;
+							}
+						}
+					}
+				} else {
+					String s = String.valueOf(getString(2131099673));
+					StringBuilder stringbuilder = (new StringBuilder(s))
+							.append(" (");
+					StringBuilder stringbuilder1 = stringbuilder.append(
+							mTownSpeedLimit).append(" ");
+					String s1 = UNITS_ARRAY[mDisplayUnits];
+					String s2 = stringbuilder1.append(s1).append(")")
+							.toString();
+					menu.findItem(2131296668).setTitle(s2);
+					String s3 = String.valueOf(getString(2131099674));
+					StringBuilder stringbuilder2 = (new StringBuilder(s3))
+							.append(" (");
+					StringBuilder stringbuilder3 = stringbuilder2.append(
+							mHighwaySpeedLimit).append(" ");
+					String s4 = UNITS_ARRAY[mDisplayUnits];
+					String s5 = stringbuilder3.append(s4).append(")")
+							.toString();
+					menu.findItem(2131296669).setTitle(s5);
+					String s6 = String.valueOf(getString(2131099675));
+					StringBuilder stringbuilder4 = (new StringBuilder(s6))
+							.append(" (");
+					StringBuilder stringbuilder5 = stringbuilder4.append(
+							mFreewaySpeedLimit).append(" ");
+					String s8 = stringbuilder5
+							.append(UNITS_ARRAY[mDisplayUnits]).append(")")
+							.toString();
+					menu.findItem(2131296670).setTitle(s8);
+					switch (mCurrentSpeedLimit) {
+					case 0:
+						menu.findItem(2131296668).setChecked(true);
+						break;
+					case 1:
+						menu.findItem(2131296669).setChecked(true);
+						break;
+					case 2:
+						menu.findItem(2131296670).setChecked(true);
+						break;
+					}
+				}
+			} else {
+				menu.findItem(2131296663).setVisible(true);
+				if (Integer.parseInt(android.os.Build.VERSION.SDK) < 9)
+					menu.findItem(2131296666).setVisible(false);
+				switch (mStoredOrientation) {
+				case 0:
+					menu.findItem(2131296664).setChecked(true);
+					break;
+				case 1:
+					menu.findItem(2131296665).setChecked(true);
+					break;
+				case 2:
+					break;
+				case 3:
+					menu.findItem(2131296666).setChecked(true);
+					break;
+				}
+			}
+		}
+
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	protected void onResume() {
@@ -2074,25 +2213,17 @@ public class SpeedView extends Activity {
 		return;
 	}
 
-	private static final int ABOUT_DIALOG_ID = 1;
 	static final int ACCURACY = 3;
 	static final float ACCURACY_VALUES[] = { 10F, 20F, 50F, 100F, 200F, 500F,
 			1000F, 2000F, 5000F
 
 	};
-	private static final int ADMOB_INTERVAL = 30;
 	static final int ADVANCED = 4;
 	static final int AVERAGE_SPEED = 1;
-	private static final int CHANGELOG_DIALOG_ID = 2;
 	static final int COMPASS = 2;
-	private static final String COMPASS_DIRECTIONS[] = { "N", "NE", "E", "SE",
-			"S", "SW", "W", "NW", "N" };
 	static final int DEF_MIN_ACCURACY = 4;
 	static final int ELEVATION = 2;
-	private static final int EXPORT_FAILURE = 2;
-	private static final int EXPORT_SUCCESS = 1;
 	static final int FREEWAY = 2;
-	private static final int HELP_DIALOG_ID = 0;
 	static final int HIGHWAY = 1;
 	static final int HUD_VIEW = 3;
 	static final int KNOTS = 2;
@@ -2104,7 +2235,6 @@ public class SpeedView extends Activity {
 	static final int MIN_TIME_VALUES[] = { 1, 2, 3, 4, 5, 10, 20, 30, 60, 120,
 			300, 600, 900, 1800 };
 	static final int MPH = 0;
-	private static final int NO_DATA_TO_EXPORT = 0;
 	static final int PORTRAIT = 0;
 	static final String PREFS_NAME = "PrefsFile";
 	static final int PRO = 0;
@@ -2134,7 +2264,6 @@ public class SpeedView extends Activity {
 	private static boolean mHasNetworkAccess;
 	static boolean mIsGPSEnabled;
 	static boolean mIsRecording;
-	private static boolean mIsScreenSupported;
 	static boolean mMaverickInst;
 	static String mMaverickVersion;
 	static boolean mMaxSpeedoChecked;
@@ -2152,14 +2281,10 @@ public class SpeedView extends Activity {
 	static int mVersionCode;
 	static String mVersionName;
 	static boolean mWarningChecked;
-	private boolean m100KphReached;
-	private boolean m60MphReached;
 	private TextView mAccelerationInfo;
 	private LinearLayout mAccelerationLayout;
 	private LinearLayout mAccelerationLayoutT;
-	private Location mAcclStartLocation;
 	private RelativeLayout mAccuracyNotification;
-	private ActionBar mActionBar;
 	private Address mAddress;
 	final Runnable mAddressFound = new Runnable() {
 
@@ -2227,7 +2352,6 @@ public class SpeedView extends Activity {
 	private boolean mExitButtonPressed;
 	private Button mExportGPXButton;
 	private boolean mFeaturedButtonPressed;
-	private long mFirstFixTime;
 	private ImageView mFreewayLimitDec;
 	private ImageView mFreewayLimitInc;
 	private TextView mFreewayLimitNumbers;
@@ -2238,23 +2362,19 @@ public class SpeedView extends Activity {
 	private TextView mFrom0To100Info;
 	private TextView mFrom0To100Meters;
 	private TextView mFrom0To100Result;
-	private TextView mFrom0To100ResultT;
 	private TableRow mFrom0To100Row;
 	private TableRow mFrom0To100RowT;
 	private LinearLayout mFrom0To100Screen;
 	private TextView mFrom0To100Speed;
-	private String mFrom0To100String;
 	private TextView mFrom0To100Time;
 	private Button mFrom0To60Button;
 	private TextView mFrom0To60Feet;
 	private TextView mFrom0To60Info;
 	private TextView mFrom0To60Result;
-	private TextView mFrom0To60ResultT;
 	private TableRow mFrom0To60Row;
 	private TableRow mFrom0To60RowT;
 	private LinearLayout mFrom0To60Screen;
 	private TextView mFrom0To60Speed;
-	private String mFrom0To60String;
 	private TextView mFrom0To60Time;
 	final Runnable mGPSIsDisabled = new Runnable() {
 
@@ -2267,7 +2387,6 @@ public class SpeedView extends Activity {
 	private TextView mGPXExportStatus;
 	private Geocoder mGeocoder;
 	private Button mGoogleMapsButton;
-	private Button mGoogleMapsButtonT;
 	private GraphView mGraphView;
 	final Handler mHandler = new Handler();
 	private TextView mHeading;
@@ -2279,20 +2398,14 @@ public class SpeedView extends Activity {
 	private int mHighwaySpeedLimit;
 	private HudMode mHudMode;
 	private RelativeLayout mHudScreen;
-	private Location mLastAddress;
 	private Location mLastLocation;
-	private long mLastLocationTime;
-	private Location mLastTrackLocation;
 	private LocationListener mLocationListener;
 	private LocationManager mLocationManager;
 	private FilenameFilter mLogExtensionFilter;
 	private String mLogFilesList[];
-	private ImageView mLogo;
-	private ImageView mLookoutBanner;
 	private TextView mLowAccuracy;
 	private LinearLayout mMainScreen;
 	private Button mMaverickButton;
-	private Button mMaverickButtonT;
 	private ImageView mMaxField;
 	private TextView mMaxSpeed;
 	private int mMinDistBetweenPts;
@@ -2315,22 +2428,17 @@ public class SpeedView extends Activity {
 	private TextView mOdometer;
 	private ImageView mOdometerField;
 	private Button mOpenSpotButton;
-	private Button mOpenSpotButtonT;
 	private SensorEventListener mOrientationListener;
 	private ProgressDialog mProgressDialog;
-	private boolean mQtrMileReached;
-	private String mQtrMileString;
 	private Button mQuarterMileButton;
 	private TextView mQuarterMileDist;
 	private TextView mQuarterMileInfo;
 	private TextView mQuarterMileResult;
-	private TextView mQuarterMileResultT;
 	private LinearLayout mQuarterMileScreen;
 	private TextView mQuarterMileSpeed;
 	private TextView mQuarterMileTime;
 	private TextView mQuarterMileUnits;
 	private LinearLayout mQuickLaunchLayout;
-	private LinearLayout mQuickLaunchLayoutT;
 	private Button mRecordingButton;
 	private TextView mRecordingStatus;
 	private boolean mRunInBGChecked;
@@ -2339,21 +2447,17 @@ public class SpeedView extends Activity {
 	private boolean mSendTrackInit;
 	private SensorManager mSensorManager;
 	private long mSessionMovingTime;
-	private long mSessionStartTime;
 	private long mSessionTotalTime;
 	private boolean mSettingsButtonPressed;
 	private boolean mShareButtonPressed;
 	private ImageView mSignalStrength;
 	private boolean mSoundAlertToggled;
 	private TextView mSpeedMovingAvg;
-	private TextView mSpeedMovingAvgT;
 	private TextView mSpeedOverallAvg;
-	private TextView mSpeedOverallAvgT;
 	private RelativeLayout mSpeedView;
 	private int mSpeedWarning;
 	private SpeedometerView mSpeedometerView;
 	private RelativeLayout mStartupScreen;
-	private long mStateChangedTime;
 	private TextView mStatusMessage;
 	private String mStored0To100Time;
 	private String mStored0To60Time;
@@ -2368,7 +2472,6 @@ public class SpeedView extends Activity {
 	private String mTempQtrMileTime;
 	private SimpleDateFormat mTimeFormat;
 	private TextView mTipMessage;
-	private LinearLayout mTipsLayout;
 	private ImageView mTownLimitDec;
 	private ImageView mTownLimitInc;
 	private TextView mTownLimitNumbers;
@@ -2380,11 +2483,8 @@ public class SpeedView extends Activity {
 	private boolean mTrackLoggingChecked;
 	private TextView mTripDistance;
 	private TextView mTripTimeMoving;
-	private TextView mTripTimeMovingT;
 	private TextView mTripTimeStopped;
-	private TextView mTripTimeStoppedT;
 	private TextView mTripTimeTotal;
-	private TextView mTripTimeTotalT;
 	final Runnable mUnableToGetAddress = new Runnable() {
 
 		public void run() {
@@ -2392,8 +2492,6 @@ public class SpeedView extends Activity {
 			mAddressLine1.setText(2131099731);
 		}
 	};
-	private ImageView mUpgradeBanner;
-	private boolean mVehicleIsMoving;
 	private boolean mVibrationChecked;
 	private Vibrator mVibrator;
 	private ViewStub mViewStub;
