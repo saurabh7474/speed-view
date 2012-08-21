@@ -19,91 +19,614 @@ import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
+
 import java.io.*;
 import java.text.*;
 import java.util.*;
 
-// Referenced classes of package com.codesector.speedview.pro:
-//            GraphView, SatelliteView, CompassView, SpeedometerView,
-//            CompassMode, HudMode, TabletHelper, ShareActivity,
-//            SettingsActivity, FeaturedActivity, BackgroundService, UpdateWidgetService,
-//            DisplayHelper
-
 public class SpeedView extends Activity {
+
 	private class MyGPSListener implements android.location.GpsStatus.Listener {
+		private GpsStatus gpsStatus;
+		private int mSecondsElapsed;
+		private int k = 0;
+		private Iterator iterator;
+		private GpsSatellite gpssatellite;
+		private int i1 = 0;
 
 		public void onGpsStatusChanged(int i) {
-			// TODO
+			mSecondsElapsed = (int) ((System.nanoTime() - mSessionStartTime) / 1000000000L);
+			switch (i) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				SpeedView.mHasGPSFix = true;
+				break;
+			case 4:
+				GpsStatus gpsstatus;
+				if (gpsStatus != null)
+					gpsstatus = gpsStatus;
+				else
+					gpsstatus = null;
+				gpsStatus = mLocationManager.getGpsStatus(gpsstatus);
+				mSatelliteView.setSatellites(gpsStatus);
+				iterator = gpsStatus.getSatellites().iterator();
+				int i1 = 0;
+
+				if (SpeedView.mSelectedDashboard != 0) {
+					switch (SpeedView.mSelectedDashboard) {
+					case 1:
+						if (SpeedView.mStoredOrientation != 0
+								&& mHeading != null)
+							mHeading.setText(2131099663);
+						mSpeedometerView.onSpeedChanged(-1, mSpeedWarning,
+								mStoredMaxSpeed);
+						if (SpeedView.mDigitSpeedoChecked
+								&& SpeedView.mDigitAddlDataToggled)
+							mSpeedometerView.refreshView();
+						if (SpeedView.mCustomColorsChecked) {
+							mMaxSpeed
+									.setTextColor(SpeedView.mSecondaryTextColor);
+						} else {
+							mMaxSpeed.setTextColor(-3355444);
+						}
+						break;
+					case 2:
+						mCompassSpeed.setText(getBaseContext().getResources()
+								.getString(2131099743));
+						mCompassOdometer.setText(getBaseContext()
+								.getResources().getString(2131099744));
+						mCompassElevation.setText(getBaseContext()
+								.getResources().getString(2131099745));
+						mCompassTime.setText(getBaseContext().getResources()
+								.getString(2131099746));
+						if (SpeedView.mCustomColorsChecked) {
+							mCompassSpeed
+									.setTextColor(SpeedView.mSecondaryTextColor);
+						} else {
+							mCompassSpeed.setTextColor(-3355444);
+						}
+						// goto _L6
+						break;
+					case 3:
+						mHudMode.onSpeedChanged(-1, mSpeedWarning);
+						break;
+					}
+					if (k < 4)
+						mAddressLine0.setText(2131099651);
+					else
+						mAddressLine0.setText(2131099653);
+					StringBuilder stringbuilder4 = (new StringBuilder(
+							String.valueOf(k))).append(" ");
+					String s13;
+					if (k != 1)
+						s13 = getString(2131099654);
+					else
+						s13 = getString(2131099655);
+					stringbuilder4.append(s13).toString();
+					mAddressLine1.setText(stringbuilder4.toString());
+					mSignalStrength.setImageResource(2130837517);
+					StringBuilder stringbuilder5 = (new StringBuilder(
+							String.valueOf(i1))).append(" ");
+					stringbuilder5.append(getString(2131099741)).toString();
+					mNumberOfSats.setText(stringbuilder5.toString());
+					if (mAccuracyNotification.getVisibility() == 0) {
+						mGraphView.setVisibility(0);
+						mAccuracyNotification.setVisibility(8);
+					}
+					mLastAddress = null;
+					return;
+
+				} else {
+					if (k < 4)
+						mStatusMessage.setText(2131099651);
+					else
+						mStatusMessage.setText(2131099653);
+					StringBuilder stringbuilder3 = (new StringBuilder(
+							String.valueOf(k))).append(" ");
+					String s10;
+					if (k != 1)
+						s10 = getString(2131099654);
+					else
+						s10 = getString(2131099655);
+					stringbuilder3.append(s10).toString();
+					mNumOfSatellites.setText(stringbuilder3.toString());
+					if (k < 4) {
+						if (mSecondsElapsed < 60) {
+							mTipMessage.setText(2131099656);
+						} else {
+							String s18;
+							if (k != 0)
+								s18 = getString(2131099658);
+							else
+								s18 = getString(2131099659);
+							StringBuilder stringbuilder6 = new StringBuilder(
+									String.valueOf(s18));
+							stringbuilder6.append(" ");
+							stringbuilder6.append(getString(2131099660))
+									.toString();
+							mTipMessage.setText(stringbuilder6.toString());
+						}
+					} else {
+						mTipMessage.setText(2131099657);
+					}
+				}
+				break;
+			}
+
+			if (!iterator.hasNext()) {
+				if (mLastLocation != null) {
+					if (SystemClock.elapsedRealtime() - mLastLocationTime < 10000L)
+						SpeedView.mHasGPSFix = true;
+					else
+						SpeedView.mHasGPSFix = false;
+				}
+				if (SpeedView.mHasGPSFix) {
+					if (SpeedView.mSelectedDashboard == 1)
+						if (SpeedView.mStreetAddrChecked
+								&& SpeedView.mHasNetworkAccess) {
+							StringBuilder stringbuilder = (new StringBuilder(
+									String.valueOf(i1))).append(" ");
+							int j1;
+							if (k != 1)
+								j1 = 2131099739;
+							else
+								j1 = 2131099740;
+							stringbuilder.append(getString(j1)).toString();
+							mNumberOfSats.setText(stringbuilder.toString());
+						} else {
+							StringBuilder stringbuilder1 = (new StringBuilder(
+									String.valueOf(k))).append(" ");
+							String s4;
+							StringBuilder stringbuilder2;
+							if (k != 1)
+								s4 = getString(2131099654);
+							else
+								s4 = getString(2131099655);
+							stringbuilder1.append(s4).toString();
+							mAddressLine1.setText(stringbuilder1.toString());
+							stringbuilder2 = (new StringBuilder(
+									String.valueOf(i1))).append(" ");
+							stringbuilder2.append(getString(2131099741))
+									.toString();
+							mNumberOfSats.setText(stringbuilder2.toString());
+						}
+				}
+			} else {
+				gpssatellite = (GpsSatellite) iterator.next();
+				k++;
+				if (gpssatellite.usedInFix())
+					i1++;
+			}
 		}
+
 	}
 
 	private class MyLocationListener implements LocationListener {
+		private int mAccuracy;
+		private String mAltitudeString;
+		private String mHeadingString;
+		private boolean mLimitFlag;
+		private int mSpeed;
+		private float f;
 
 		public void onLocationChanged(Location location) {
-			// TODO
-		}
+			if (location == null)
+				return;
+			if (SpeedView.mSelectedDashboard == 0) {
+				switchToScreen(1);
+			}
+			SystemClock.elapsedRealtime();
+			if ((!mNarrowingChecked || location.getSpeed() >= 66.7F)
+					&& mNarrowingChecked)
+				return;
+			float f1 = location.getSpeed();
+			mSpeed = getDisplaySpeed(f1);
+			double d = location.getLatitude();
+			double d1 = location.getLongitude();
+			double f2 = (int) location.getAccuracy();
+			double d2 = location.getAltitude();
+			double f3 = location.getBearing();
+			double l1 = location.getTime();
+			if (SpeedView.mSelectedDashboard == 4 && f == 0F) {
+				mFrom0To60Button.setEnabled(true);
+				mFrom0To100Button.setEnabled(true);
+				mQuarterMileButton.setEnabled(true);
+			} else {
+				mFrom0To60Button.setEnabled(false);
+				mFrom0To100Button.setEnabled(false);
+				mQuarterMileButton.setEnabled(false);
+			}
+			if (mFrom0To60Screen.getVisibility() != 0
+					&& mFrom0To100Screen.getVisibility() != 0
+					&& mQuarterMileScreen.getVisibility() != 0) {
+				if (f2 >= SpeedView.ACCURACY_VALUES[mMinimumAccuracy])
+					return;
+				mGraphView.setVisibility(0);
+				mAccuracyNotification.setVisibility(8);
+				StringBuilder stringbuilder21 = (new StringBuilder(
+						String.valueOf((int) f3))).append("\260 ");
+				int k8 = (int) (((double) f3 + 22.5D) / 45D);
+				mHeadingString = stringbuilder21.append(
+						SpeedView.COMPASS_DIRECTIONS[k8]).toString();
+			} else {
+				if (mFrom0To60Screen.getVisibility() == 0) {
+					int k = (int) ((double) f * 2.2400000000000002D);
+					if (mLastLocation.getSpeed() == 0F && f > 0F
+							&& !m60MphReached) {
+						mAcclStartLocation = mLastLocation;
+						mFrom0To60Speed.setText(k + "");
+						mFrom0To60Info.setText(2131099791);
+						mFrom0To60Info.setTextColor(-65536);
+						m60MphReached = false;
+					} else if (f != 0F && f <= 26.8224F && !m60MphReached) {
+						long l3 = (long) (l1 - mAcclStartLocation.getTime());
+						int j2 = (int) (l3 % 1000L);
+						int k2 = (int) (l3 / 1000L);
+						StringBuilder stringbuilder3 = (new StringBuilder(
+								String.valueOf(k2))).append(".").append(j2)
+								.append(" ");
+						mFrom0To60String = stringbuilder3.append(
+								getString(2131099789)).toString();
+						mFrom0To60Time.setText(mFrom0To60String);
+						StringBuilder stringbuilder4 = new StringBuilder();
+						int i3 = (int) (location.distanceTo(mAcclStartLocation) * 3.2808F);
+						String s7 = stringbuilder4.append(i3).append(" ft")
+								.toString();
+						mFrom0To60Feet.setText(s7);
+						StringBuilder stringbuilder5 = new StringBuilder();
+						stringbuilder5.append(k).toString();
+						mFrom0To60Speed.setText(stringbuilder5.toString());
+						mConfirm0To60Button.setEnabled(false);
+						mDiscard0To60Button.setEnabled(false);
+					} else if (f > 26.8224F && !m60MphReached) {
+						mFrom0To60Speed.setTextColor(-16776961);
+						StringBuilder stringbuilder6 = new StringBuilder();
+						stringbuilder6.append(k).toString();
+						mFrom0To60Speed.setText(stringbuilder6.toString());
+						mFrom0To60Info.setTextColor(-3355444);
+						StringBuilder stringbuilder7 = (new StringBuilder(
+								String.valueOf(getString(2131099792))))
+								.append(" ");
+						stringbuilder7.append(mFrom0To60String).toString();
+						mFrom0To60Info.setText(stringbuilder7.toString());
+						m60MphReached = true;
+						mTemp0To60Time = mFrom0To60String;
+						mConfirm0To60Button.setEnabled(true);
+						mDiscard0To60Button.setEnabled(true);
+					}
+				}
 
-		public void onProviderDisabled(String s) {
-		}
+				if (mFrom0To100Screen.getVisibility() == 0) {
+					int j1 = (int) ((double) f * 3.6000000000000001D);
+					if (mLastLocation.getSpeed() == 0F && f > 0F
+							&& !m100KphReached) {
+						mAcclStartLocation = mLastLocation;
+						StringBuilder stringbuilder1 = new StringBuilder();
+						stringbuilder1.append(j1).toString();
+						mFrom0To100Speed.setText(stringbuilder1.toString());
+						mFrom0To100Info.setText(2131099791);
+						mFrom0To100Info.setTextColor(-65536);
+						m100KphReached = false;
+					} else if (f != 0F && f <= 27.78F && !m100KphReached) {
+						long l4 = mAcclStartLocation.getTime();
+						long l5 = (long) (l1 - l4);
+						int i4 = (int) (l5 % 1000L);
+						int j4 = (int) (l5 / 1000L);
+						StringBuilder stringbuilder8 = (new StringBuilder(
+								String.valueOf(j4))).append(".").append(i4)
+								.append(" ");
+						mFrom0To100String = stringbuilder8.append(
+								getString(2131099789)).toString();
+						mFrom0To100Time.setText(mFrom0To100String);
+						StringBuilder stringbuilder9 = new StringBuilder();
+						int k4 = (int) location.distanceTo(mAcclStartLocation);
+						stringbuilder9.append(k4).append(" m").toString();
+						mFrom0To100Meters.setText(stringbuilder9.toString());
+						StringBuilder stringbuilder10 = new StringBuilder();
+						stringbuilder10.append(j1).toString();
+						mFrom0To100Speed.setText(stringbuilder10.toString());
+						mConfirm0To100Button.setEnabled(false);
+						mDiscard0To100Button.setEnabled(false);
+					} else if (f > 27.78F && !m100KphReached) {
+						mFrom0To100Speed.setTextColor(-16776961);
+						StringBuilder stringbuilder11 = new StringBuilder();
+						stringbuilder11.append(j1).toString();
+						mFrom0To100Speed.setText(stringbuilder11.toString());
+						mFrom0To100Info.setTextColor(-3355444);
+						StringBuilder stringbuilder12 = (new StringBuilder(
+								String.valueOf(getString(2131099797))))
+								.append(" ");
+						String s23 = stringbuilder12.append(mFrom0To100String)
+								.toString();
+						mFrom0To100Info.setText(s23);
+						m100KphReached = true;
+						mTemp0To100Time = mFrom0To100String;
+						mConfirm0To100Button.setEnabled(true);
+						mDiscard0To100Button.setEnabled(true);
+					}
+				}
 
-		public void onProviderEnabled(String s) {
-		}
+				if (mQuarterMileScreen.getVisibility() == 0) {
+					if (mLastLocation.getSpeed() == 0F && f > 0F
+							&& !mQtrMileReached) {
+						mAcclStartLocation = mLastLocation;
+						if (SpeedView.mDisplayUnits == 1) {
+							StringBuilder stringbuilder2 = new StringBuilder();
+							stringbuilder2.append(
+									(int) location
+											.distanceTo(mAcclStartLocation))
+									.toString();
+							mQuarterMileDist.setText(stringbuilder2.toString());
+						} else {
+							StringBuilder stringbuilder13 = new StringBuilder();
+							stringbuilder13
+									.append((int) (location
+											.distanceTo(mAcclStartLocation) * 3.2808F))
+									.toString();
+							mQuarterMileDist
+									.setText(stringbuilder13.toString());
+						}
+						mQuarterMileInfo.setText(2131099791);
+						mQuarterMileInfo.setTextColor(-65536);
+						mQtrMileReached = false;
+					} else {
+						if (location.distanceTo(mAcclStartLocation) > 402.336F
+								|| mQtrMileReached)
+							return;
+						long l7 = (long) (l1 - mAcclStartLocation.getTime());
+						int i6 = (int) (l7 % 1000L);
+						int j6 = (int) (l7 / 1000L);
+						StringBuilder stringbuilder14 = (new StringBuilder(
+								String.valueOf(j6))).append(".").append(i6)
+								.append(" ");
+						mQtrMileString = stringbuilder14.append(
+								getString(2131099789)).toString();
+						mQuarterMileTime.setText(mQtrMileString);
+						StringBuilder stringbuilder15 = (new StringBuilder(
+								String.valueOf(mSpeed))).append(" ");
+						String s31 = SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits];
+						String s32 = stringbuilder15.append(s31).toString();
+						mQuarterMileSpeed.setText(s32);
+						if (SpeedView.mDisplayUnits == 1) {
+							StringBuilder stringbuilder16 = new StringBuilder();
+							int i7 = (int) location
+									.distanceTo(mAcclStartLocation);
+							stringbuilder16.append(i7).toString();
+							mQuarterMileDist
+									.setText(stringbuilder16.toString());
+						} else {
+							StringBuilder stringbuilder17 = new StringBuilder();
+							int j7 = (int) (location
+									.distanceTo(mAcclStartLocation) * 3.2808F);
+							stringbuilder17.append(j7).toString();
+							mQuarterMileDist
+									.setText(stringbuilder17.toString());
+						}
+						mConfirmQtrButton.setEnabled(false);
+						mDiscardQtrButton.setEnabled(false);
+					}
 
-		public void onStatusChanged(String s, int i, Bundle bundle) {
+				}
+
+				switch (SpeedView.mDisplayUnits) {
+				case 0:
+					mAltitudeString = (new StringBuilder(
+							String.valueOf((int) (d2 / 0.30480000000000002D))))
+							.append(" ft \u2191").toString();
+					break;
+				case 1:
+					mAltitudeString = (new StringBuilder(
+							String.valueOf((int) d2))).append(" m \u2191")
+							.toString();
+					break;
+				case 2:
+					mAltitudeString = (new StringBuilder(
+							String.valueOf((int) (d2 / 0.30480000000000002D))))
+							.append(" ft \u2191").toString();
+					break;
+				}
+				if (SpeedView.mSelectedDashboard == 2) {
+					if (f > 1.4F) {
+						mCompassMode.onLocationChanged(location, mSpeed,
+								mSpeedWarning);
+						mCompassSource.setText(2131099748);
+					}
+					StringBuilder stringbuilder22 = (new StringBuilder(
+							String.valueOf(mSpeed))).append(" ");
+					stringbuilder22.append(
+							SpeedView.UNITS_ARRAY[SpeedView.mDisplayUnits])
+							.toString();
+					mCompassSpeed.setText(stringbuilder22.toString());
+					mCompassOdometer.setText(distanceToString());
+					mCompassElevation.setText(mAltitudeString);
+					SimpleDateFormat simpledateformat;
+					if (!DateFormat.is24HourFormat(getApplicationContext())) {
+						simpledateformat = new SimpleDateFormat("h:mm a");
+					} else {
+						simpledateformat = new SimpleDateFormat("HH:mm");
+					}
+					mCompassTime.setText(simpledateformat.format(l1 + ""));
+				} else if (SpeedView.mStoredOrientation == 0) {
+					if (f > 1.4F) {
+						mCompassView.onSpeedChanged((float) f3);
+					}
+				} else if (mHeading != null) {
+					mHeading.setText(mHeadingString);
+				}
+				if (f > mStoredMaxSpeed) {
+					mStoredMaxSpeed = f;
+				}
+				if (!SpeedView.mDigitSpeedoChecked
+						|| !SpeedView.mDigitAddlDataToggled) {
+					mSpeedometerView.onSpeedChanged(mSpeed, mSpeedWarning,
+							mStoredMaxSpeed);
+				} else {
+
+				}
+
+				if (!SpeedView.mWarningChecked) {
+					if (SpeedView.mStreetAddrChecked
+							&& SpeedView.mHasNetworkAccess) {
+						if (mLastAddress != null) {
+							float f11;
+							if (f > 15.6F)
+								f11 = 1000;
+							else
+								f11 = 100;
+							if (location.distanceTo(mLastAddress) > f11) {
+								displayAddress(location);
+								mLastAddress = location;
+							} else {
+								displayAddress(location);
+								mLastAddress = location;
+							}
+						} else {
+							mAddressLine0.setText(2131099737);
+						}
+						if (mAccuracy < 500) {
+							if (mAccuracy > 50 && mAccuracy < 500)
+								mSignalStrength.setImageResource(2130837516);
+							else
+								mSignalStrength.setImageResource(2130837515);
+						} else {
+							mSignalStrength.setImageResource(2130837518);
+						}
+					}
+				}
+
+				if (mTrackLoggingChecked) {
+					if (mLastTrackLocation != null) {
+						if ((l1 - mLastTrackLocation.getTime()) > SpeedView.MIN_TIME_VALUES[mMinTimeBetweenPts] * 1000) {
+							if (location.distanceTo(mLastTrackLocation) > SpeedView.MIN_DISTANCE_VALUES[mMinDistBetweenPts]) {
+								StringBuilder stringbuilder24 = mTrackBuffer
+										.append(mCoordFormat.format(d)).append(
+												"|");
+								stringbuilder24.append(mCoordFormat.format(d1))
+										.append("|");
+								stringbuilder24
+										.append(l1 / 1000L - 1280000000L)
+										.append("|");
+								stringbuilder24.append(f).append("|");
+								stringbuilder24.append((int) d2).append("\n");
+								if (mTrackBuffer.length() > 2000)
+									saveCurrentTrack();
+								mLastTrackLocation = location;
+							}
+						}
+					} else {
+						mLastTrackLocation = location;
+					}
+				} else {
+					if (mSpeed <= mSpeedWarning || !mSoundAlertToggled) {
+						if (mWarningSound != null && mWarningSound.isPlaying())
+							mWarningSound.stop();
+					} else {
+						if (mWarningSound == null) {
+							Toast.makeText(getBaseContext(), 2131099705,
+									Toast.LENGTH_LONG).show();
+						} else {
+							if (mWarningSound.getTitle(getBaseContext())
+									.equals("Unknown ringtone")) {
+								Toast.makeText(getBaseContext(), 2131099705,
+										Toast.LENGTH_LONG).show();
+							} else {
+								if (!mWarningSound.isPlaying())
+									mWarningSound.play();
+							}
+						}
+
+						if (mSpeed > mSpeedWarning && mVibrationChecked)
+							mVibrator.vibrate(300L);
+						if (mSpeed > mSpeedWarning && !mLimitFlag) {
+							if (SpeedView.mSelectedDashboard != 3)
+								Toast.makeText(getBaseContext(), 2131099706, 1)
+										.show();
+							mCompassSpeed.setTextColor(-65536);
+							mMaxSpeed.setTextColor(-65536);
+							mLimitFlag = true;
+						} else {
+							if (mSpeedWarning <= mSpeed && mLimitFlag) {
+								if (SpeedView.mCustomColorsChecked) {
+									mCompassSpeed
+											.setTextColor(SpeedView.mSecondaryTextColor);
+									mMaxSpeed
+											.setTextColor(SpeedView.mSecondaryTextColor);
+								} else {
+									mCompassSpeed.setTextColor(-3355444);
+									mMaxSpeed.setTextColor(-3355444);
+								}
+								mLimitFlag = false;
+							}
+						}
+
+					}
+				}
+				mAccuracyNotification.setVisibility(0);
+				mGraphView.setVisibility(8);
+				StringBuilder stringbuilder31 = (new StringBuilder(
+						String.valueOf(getString(2131099661)))).append(" (");
+				stringbuilder31.append(mAccuracy).append(" m)").toString();
+				mLowAccuracy.setText(stringbuilder31.toString());
+				if (mFirstFixTime == 0L) {
+					mFirstFixTime = (long) l1;
+					if (f > 0F) {
+					} else {
+					}
+				}
+				mLastLocation = location;
+				if (mAcclStartLocation != null) {
+					if (location.distanceTo(mAcclStartLocation) > 402.336F
+							&& !mQtrMileReached) {
+						mQuarterMileDist.setTextColor(-16776961);
+						if (SpeedView.mDisplayUnits == 1) {
+							StringBuilder stringbuilder18 = new StringBuilder();
+							stringbuilder18.append(
+									(int) location
+											.distanceTo(mAcclStartLocation))
+									.toString();
+							mQuarterMileDist
+									.setText(stringbuilder18.toString());
+						} else {
+							StringBuilder stringbuilder20 = new StringBuilder();
+							int i8 = (int) (location
+									.distanceTo(mAcclStartLocation) * 3.2808F);
+							String s40 = stringbuilder20.append(i8).toString();
+							mQuarterMileDist.setText(s40);
+						}
+						mQuarterMileInfo.setTextColor(-3355444);
+						StringBuilder stringbuilder19 = (new StringBuilder(
+								String.valueOf(getString(2131099802))))
+								.append(" ");
+						mQuarterMileInfo.setText(stringbuilder19.append(
+								mQtrMileString).toString());
+						mQtrMileReached = true;
+						mTempQtrMileTime = mQtrMileString;
+						mConfirmQtrButton.setEnabled(true);
+						mDiscardQtrButton.setEnabled(true);
+					}
+				}
+			}
 		}
 
 		private MyLocationListener() {
 			super();
+			mLimitFlag = false;
 		}
 
-	}
+		public void onStatusChanged(String s, int i, android.os.Bundle bundle) {
 
-	public SpeedView() {
-		mTrackBuffer = new StringBuilder();
-		mBackgroundConn = new ServiceConnection() {
+		}
 
-			public void onServiceConnected(ComponentName componentname,
-					IBinder ibinder) {
-				mStoredDistance = ((BackgroundService.LocalBinder) ibinder)
-						.getStoredDistance();
-				mStoredMaxSpeed = ((BackgroundService.LocalBinder) ibinder)
-						.getStoredMaxSpeed();
-				mStoredMovingTime = ((BackgroundService.LocalBinder) ibinder)
-						.getStoredMovingTime();
-				mStoredTotalTime = ((BackgroundService.LocalBinder) ibinder)
-						.getStoredTotalTime();
-				displayStoredData();
-				((BackgroundService.LocalBinder) ibinder).dumpCurrentTrack();
-				try {
-					unbindService(mBackgroundConn);
-				} catch (IllegalArgumentException illegalargumentexception) {
-					illegalargumentexception.printStackTrace();
-				}
-				stopService(new Intent(SpeedView.this, BackgroundService.class));
-			}
+		public void onProviderEnabled(String s) {
 
-			public void onServiceDisconnected(ComponentName componentname) {
-			}
-		};
-		mOrientationListener = new SensorEventListener() {
+		}
 
-			public void onAccuracyChanged(Sensor sensor, int i) {
-			}
+		public void onProviderDisabled(String s) {
 
-			public void onSensorChanged(SensorEvent sensorevent) {
-				float f = sensorevent.values[0];
-				if (mLastLocation != null && mLastLocation.getSpeed() >= 1.4F) {
-					if (SpeedView.mSelectedDashboard != 2) {
-						if (SpeedView.mSelectedDashboard == 1)
-							mCompassView.onSpeedChanged(f);
-					} else {
-						mCompassMode.onSensorChanged(f);
-						mCompassSource.setText(2131099747);
-					}
-				}
-				return;
-			}
-		};
+		}
 	}
 
 	private void checkGPSEnabled() {
@@ -2184,8 +2707,392 @@ public class SpeedView extends Activity {
 	}
 
 	protected void onResume() {
-		// TODO
 		super.onResume();
+		SharedPreferences sharedpreferences = getSharedPreferences("PrefsFile",
+				0);
+		mNotifiedAboutScreen = sharedpreferences.getBoolean(
+				"notifiedAboutScreen", false);
+		if (!mIsScreenSupported && !mNotifiedAboutScreen) {
+			AlertDialog.Builder builder = (new AlertDialog.Builder(this))
+					.setTitle(2131099707).setMessage(2131099708);
+			builder.setPositiveButton(2131099711, null);
+			builder.setNegativeButton(2131099691,
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+						}
+					}).show();
+			mNotifiedAboutScreen = true;
+		}
+		mNotifiedAboutGPS = sharedpreferences.getBoolean("notifiedAboutGPS",
+				false);
+		checkGPSEnabled();
+		mNotifiedAboutNetwork = sharedpreferences.getBoolean(
+				"notifiedAboutNetwork", false);
+		mHasNetworkAccess = isNetworkAvailable();
+		mCurrentVersion = sharedpreferences.getInt("currentVersion", 0);
+		if (mCurrentVersion < mVersionCode) {
+			AlertDialog.Builder builder2 = (new AlertDialog.Builder(this))
+					.setTitle(2131099946).setMessage(2131099947);
+			builder2.setNeutralButton(2131099857, null).show();
+		}
+		if (mCurrentVersion == 0) {
+			final Dialog dialog = new Dialog(this, 16973834);
+			dialog.setContentView(2130903049);
+			TextView textview = (TextView) dialog.findViewById(2131296647);
+			TextView textview1 = (TextView) dialog.findViewById(2131296649);
+			StringBuilder stringbuilder = (new StringBuilder(
+					getString(2131099929))).append(" ");
+			stringbuilder.append(mVersionName).append(" ");
+			stringbuilder.append(getString(2131099930));
+			textview.setText(stringbuilder.toString());
+			Button button = (Button) dialog.findViewById(2131296650);
+			Button button1 = (Button) dialog.findViewById(2131296651);
+			if (!mHasNetworkAccess)
+				button1.setEnabled(false);
+			button.setOnClickListener(new View.OnClickListener() {
+
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+			button1.setOnClickListener(new View.OnClickListener() {
+
+				public void onClick(View v) {
+					Uri uri = Uri.parse("http://www.codesector.com/speedview");
+					Intent intent = new Intent("android.intent.action.VIEW",
+							uri);
+					startActivity(intent);
+				}
+			});
+			dialog.show();
+		}
+		if (Integer.parseInt(android.os.Build.VERSION.SDK) < 5) {
+			if (hasMatchingActivity("com.codesector.maverick.full",
+					"com.codesector.maverick.full.Main")) {
+				mMaverickInst = true;
+				mMaverickVersion = VERSIONS[0];
+				mMaverickButton.setEnabled(true);
+			} else if (hasMatchingActivity("com.codesector.maverick.lite",
+					"com.codesector.maverick.lite.Main")) {
+				mMaverickInst = true;
+				mMaverickVersion = VERSIONS[1];
+				mMaverickButton.setEnabled(true);
+			} else {
+				mMaverickInst = false;
+				if (mHasNetworkAccess) {
+					mMaverickButton.setEnabled(true);
+					mMaverickButton.setTextColor(-7829368);
+				}
+			}
+		}
+			if (mMaverickInst)
+				mGPXFileLocation = "/maverick/tracks";
+			else
+				mGPXFileLocation = "/speedview/tracks";
+			mIsRecording = sharedpreferences.getBoolean("isRecording", true);
+			if (mIsGPSEnabled && !mIsRecording) {
+				mSatelliteView.clearSatellites();
+				mStatusMessage.setText(2131099664);
+				mNumOfSatellites.setText(2131099665);
+				mTipMessage.setText(2131099666);
+				mAddressLine0.setText(2131099664);
+				mAddressLine1.setText(2131099665);
+			}
+			mStoredDistance = sharedpreferences.getFloat("storedDistance", 0F);
+			mStoredMaxSpeed = sharedpreferences.getFloat("storedMaxSpeed", 0F);
+			mStoredMovingTime = sharedpreferences.getLong("storedMovingTime",
+					0L);
+			mStoredTotalTime = sharedpreferences.getLong("storedTotalTime", 0L);
+			mStored0To60Time = sharedpreferences.getString("stored0To60Time",
+					getString(2131099663));
+			mStored0To100Time = sharedpreferences.getString("stored0To100Time",
+					getString(2131099663));
+			mStoredQtrMileTime = sharedpreferences.getString(
+					"storedQtrMileTime", getString(2131099663));
+			mDisplayUnits = sharedpreferences.getInt("displayUnits", 0);
+			mWarningChecked = sharedpreferences.getBoolean("warningChecked",
+					false);
+			mCurrentSpeedLimit = sharedpreferences.getInt("currentSpeedLimit",
+					0);
+			mTownSpeedLimit = sharedpreferences.getInt("townSpeedLimit", 30);
+			mHighwaySpeedLimit = sharedpreferences.getInt("highwaySpeedLimit",
+					55);
+			mFreewaySpeedLimit = sharedpreferences.getInt("freewaySpeedLimit",
+					65);
+			mSoundAlertToggled = sharedpreferences.getBoolean(
+					"soundAlertToggled", false);
+			if (sharedpreferences.getString("alertSoundUri", "").equals(""))
+				mAlertSoundUri = null;
+			else
+				mAlertSoundUri = Uri.parse(sharedpreferences.getString(
+						"alertSoundUri", ""));
+			if (mAlertSoundUri != null) {
+				mWarningSound = RingtoneManager.getRingtone(getBaseContext(),
+						mAlertSoundUri);
+			}
+			mVibrationChecked = sharedpreferences.getBoolean(
+					"vibrationChecked", false);
+			mDigitSpeedoChecked = sharedpreferences.getBoolean(
+					"digitSpeedoChecked", false);
+			mDigitAddlDataToggled = sharedpreferences.getBoolean(
+					"digitAddlDataToggled", false);
+			mDigitDataSelected = sharedpreferences.getInt("digitDataSelected",
+					-1);
+			mMaxSpeedoChecked = sharedpreferences.getBoolean(
+					"maxSpeedoChecked", false);
+			mMaxSpeedoLimit = sharedpreferences.getInt("maxSpeedoLimit", 160);
+			mUseHudChecked = sharedpreferences.getBoolean("useHudChecked",
+					false);
+			mAdvancedHudChecked = sharedpreferences.getBoolean(
+					"advancedHudChecked", false);
+			mAdvancedZoomChecked = sharedpreferences.getBoolean(
+					"advancedZoomChecked", false);
+			mCustomColorsChecked = sharedpreferences.getBoolean(
+					"customColorsChecked", false);
+			mSpeedBarColor = sharedpreferences.getInt("speedBarColor",
+					-16776961);
+			mPrimaryTextColor = sharedpreferences
+					.getInt("primaryTextColor", -1);
+			mSecondaryTextColor = sharedpreferences.getInt(
+					"secondaryTextColor", -3355444);
+			mRunInBGChecked = sharedpreferences.getBoolean("runInBGChecked",
+					false);
+			mTrackLoggingChecked = sharedpreferences.getBoolean(
+					"trackLoggingChecked", false);
+			mMinTimeBetweenPts = sharedpreferences.getInt("minTimeBetweenPts",
+					0);
+			mMinDistBetweenPts = sharedpreferences.getInt("minDistBetweenPts",
+					4);
+			mNarrowingChecked = sharedpreferences.getBoolean(
+					"narrowingChecked", true);
+			mMinimumAccuracy = sharedpreferences.getInt("minimumAccuracy", 4);
+			mStreetAddrChecked = sharedpreferences.getBoolean(
+					"streetAddrChecked", true);
+			mDsblRotationChecked = sharedpreferences.getBoolean(
+					"dsblRotationChecked", true);
+			mFullScreenChecked = sharedpreferences.getBoolean(
+					"fullScreenChecked", true);
+			mBackgroundChecked = sharedpreferences.getBoolean(
+					"backgroundChecked", true);
+			if (!mFullScreenChecked) {
+				if (mDsblRotationChecked
+						&& (mStoredOrientation == 1 || mStoredOrientation == 3)
+						|| !mDsblRotationChecked
+						&& getResources().getConfiguration().orientation == 2)
+					setFullScreenMode(true);
+				else
+					setFullScreenMode(false);
+			} else {
+				setFullScreenMode(true);
+			}
+			if (mBackgroundChecked) {
+				mSpeedView.setBackgroundResource(2130837508);
+				mStartupScreen.setBackgroundResource(2130837508);
+			} else {
+				mSpeedView.setBackgroundColor(-16777216);
+				mStartupScreen.setBackgroundColor(-16777216);
+			}
+			if (!hasMatchingActivity("com.googlelabs.openspot",
+					"com.google.android.apps.openspot.activities.MainActivity")) {
+
+				mOpenSpotInst = false;
+				if (mHasNetworkAccess) {
+					mOpenSpotButton.setEnabled(true);
+					mOpenSpotButton.setTextColor(-7829368);
+				}
+
+			} else {
+				mOpenSpotInst = true;
+				mOpenSpotButton.setEnabled(true);
+			}
+
+		if (!mWarningChecked) {
+			mSpeedometerView.setDisplayUnits(mDisplayUnits);
+			if (mCustomColorsChecked) {
+				mOdometer.setTextColor(mSecondaryTextColor);
+				mMaxSpeed.setTextColor(mSecondaryTextColor);
+				if (mStoredOrientation != 0 && mHeading != null) {
+					mHeading.setTextColor(mSecondaryTextColor);
+				}
+				mCompassSpeed.setTextColor(mSecondaryTextColor);
+				mCompassOdometer.setTextColor(mSecondaryTextColor);
+				mCompassElevation.setTextColor(mSecondaryTextColor);
+				mCompassTime.setTextColor(mSecondaryTextColor);
+			} else {
+				mOdometer.setTextColor(-3355444);
+				mMaxSpeed.setTextColor(-3355444);
+				if (mStoredOrientation != 0 && mHeading != null)
+					mHeading.setTextColor(-3355444);
+				mCompassSpeed.setTextColor(-3355444);
+				mCompassOdometer.setTextColor(-3355444);
+				mCompassElevation.setTextColor(-3355444);
+				mCompassTime.setTextColor(-3355444);
+			}
+			if (mDigitSpeedoChecked && mDigitAddlDataToggled)
+				mSpeedometerView.refreshView();
+			mGraphView.mArrayPointer = sharedpreferences.getInt(
+					"graphArrayPointer", 0);
+			mGraphView.setHexArray(sharedpreferences.getString(
+					"graphHexString", ""));
+		} else {
+			switch (mCurrentSpeedLimit) {
+			case 0:
+				mSpeedWarning = mTownSpeedLimit;
+				mTownLimitSign.setAlpha(250);
+				mHighwayLimitSign.setAlpha(100);
+				mFreewayLimitSign.setAlpha(100);
+				mTownLimitDec.setAlpha(250);
+				mTownLimitInc.setAlpha(250);
+				mHighwayLimitDec.setAlpha(100);
+				mHighwayLimitInc.setAlpha(100);
+				mFreewayLimitDec.setAlpha(100);
+				mFreewayLimitInc.setAlpha(100);
+				break;
+			case 1:
+				mSpeedWarning = mHighwaySpeedLimit;
+				mHighwayLimitSign.setAlpha(250);
+				mTownLimitSign.setAlpha(100);
+				mFreewayLimitSign.setAlpha(100);
+				mHighwayLimitDec.setAlpha(250);
+				mHighwayLimitInc.setAlpha(250);
+				mTownLimitDec.setAlpha(100);
+				mTownLimitInc.setAlpha(100);
+				mFreewayLimitDec.setAlpha(100);
+				mFreewayLimitInc.setAlpha(100);
+				break;
+			case 2:
+				mSpeedWarning = mFreewaySpeedLimit;
+				mFreewayLimitSign.setAlpha(250);
+				mTownLimitSign.setAlpha(100);
+				mHighwayLimitSign.setAlpha(100);
+				mFreewayLimitDec.setAlpha(250);
+				mFreewayLimitInc.setAlpha(250);
+				mTownLimitDec.setAlpha(100);
+				mTownLimitInc.setAlpha(100);
+				mHighwayLimitDec.setAlpha(100);
+				mHighwayLimitInc.setAlpha(100);
+				break;
+			}
+			if (mTownSpeedLimit >= 100)
+				mTownLimitNumbers.setTextSize(48F);
+			else
+				mTownLimitNumbers.setTextSize(60F);
+			StringBuilder stringbuilder2 = new StringBuilder();
+			stringbuilder2.append(mTownSpeedLimit).toString();
+			mTownLimitNumbers.setText(stringbuilder2.toString());
+			if (mHighwaySpeedLimit >= 100)
+				mHighwayLimitNumbers.setTextSize(48F);
+			else
+				mHighwayLimitNumbers.setTextSize(60F);
+			StringBuilder stringbuilder3 = new StringBuilder();
+			stringbuilder3.append(mHighwaySpeedLimit).toString();
+			mHighwayLimitNumbers.setText(stringbuilder3.toString());
+			if (mFreewaySpeedLimit >= 100)
+				mFreewayLimitNumbers.setTextSize(48F);
+			else
+				mFreewayLimitNumbers.setTextSize(60F);
+			StringBuilder stringbuilder4 = new StringBuilder();
+			stringbuilder4.append(mFreewaySpeedLimit).toString();
+			mFreewayLimitNumbers.setText(stringbuilder4.toString());
+		}
+
+		if (mSelectedDashboard == 4) {
+			switch (mDisplayUnits) {
+			case 0:
+				mFrom0To100Row.setVisibility(8);
+				mFrom0To60Row.setVisibility(0);
+				mFrom0To100Button.setVisibility(8);
+				mFrom0To60Button.setVisibility(0);
+				mAccelerationLayout.setVisibility(0);
+				break;
+			case 1:
+				mFrom0To60Row.setVisibility(8);
+				mFrom0To100Row.setVisibility(0);
+				mFrom0To60Button.setVisibility(8);
+				mFrom0To100Button.setVisibility(0);
+				mAccelerationLayout.setVisibility(0);
+				break;
+			case 2:
+				mAccelerationLayout.setVisibility(8);
+				break;
+			}
+		}
+		if (mIsRecording) {
+			mLocationManager.requestLocationUpdates("gps", 0L, 0F,
+					mLocationListener);
+			mLocationManager.addGpsStatusListener(mGPSListener);
+		} else {
+			mRecordingStatus.setText(2131099767);
+			mRecordingButton.setText(2131099766);
+		}
+
+		mAccelerationInfo.setText(2131099759);
+		if (mTrackLoggingChecked) {
+			mGPXExportStatus.setText(2131099770);
+			mExportGPXButton.setEnabled(true);
+			if (mHasNetworkAccess)
+				mSendGPXButton.setEnabled(true);
+		} else {
+			mGPXExportStatus.setText(2131099769);
+			mExportGPXButton.setEnabled(false);
+			mSendGPXButton.setEnabled(false);
+		}
+		mSensorManager.registerListener(mOrientationListener,
+				mSensorManager.getDefaultSensor(3), 2);
+		mSessionStartTime = System.nanoTime();
+		mFirstFixTime = 0L;
+		mShareButtonPressed = false;
+		mSettingsButtonPressed = false;
+		mFeaturedButtonPressed = false;
+		ActivityManager activitymanager = (ActivityManager) getSystemService("activity");
+		Iterator iterator = activitymanager.getRunningServices(2147483647)
+				.iterator();
+
+		while (iterator.hasNext()) {
+			String s21 = ((android.app.ActivityManager.RunningServiceInfo) iterator
+					.next()).service.getClassName();
+			if ("com.codesector.speedview.pro.BackgroundService".equals(s21)) {
+				Intent intent = new Intent(this, BackgroundService.class);
+				bindService(intent, mBackgroundConn, 0);
+			}
+		}
+
+		displayStoredData();
+		if (mDsblRotationChecked) {
+			mStoredOrientation = sharedpreferences.getInt("storedOrientation",
+					0);
+			switch (mStoredOrientation) {
+			case 2: // '\002'
+			default:
+				return;
+
+			case 0: // '\0'
+				setRequestedOrientation(1);
+				return;
+
+			case 1: // '\001'
+				setRequestedOrientation(0);
+				return;
+
+			case 3: // '\003'
+				setRequestedOrientation(8);
+				break;
+			}
+			return;
+		}
+		setRequestedOrientation(4);
+		if (Integer.parseInt(android.os.Build.VERSION.SDK) >= 9) {
+			mStoredOrientation = DisplayHelper.getRotation(this);
+			return;
+		}
+		if (getResources().getConfiguration().orientation == 1) {
+			mStoredOrientation = 0;
+			return;
+		}
+		mStoredOrientation = 1;
+
 	}
 
 	public void refreshMainScreen() {
@@ -2221,6 +3128,8 @@ public class SpeedView extends Activity {
 	static final int ADVANCED = 4;
 	static final int AVERAGE_SPEED = 1;
 	static final int COMPASS = 2;
+	private static final String COMPASS_DIRECTIONS[] = { "N", "NE", "E", "SE",
+			"S", "SW", "W", "NW", "N" };
 	static final int DEF_MIN_ACCURACY = 4;
 	static final int ELEVATION = 2;
 	static final int FREEWAY = 2;
@@ -2281,9 +3190,12 @@ public class SpeedView extends Activity {
 	static int mVersionCode;
 	static String mVersionName;
 	static boolean mWarningChecked;
+	private boolean m100KphReached;
+	private boolean m60MphReached;
 	private TextView mAccelerationInfo;
 	private LinearLayout mAccelerationLayout;
 	private LinearLayout mAccelerationLayoutT;
+	private Location mAcclStartLocation;
 	private RelativeLayout mAccuracyNotification;
 	private Address mAddress;
 	final Runnable mAddressFound = new Runnable() {
@@ -2331,7 +3243,31 @@ public class SpeedView extends Activity {
 	private RelativeLayout mAddressView;
 	private LinearLayout mAdvancedScreen;
 	private Uri mAlertSoundUri;
-	private ServiceConnection mBackgroundConn;
+	private ServiceConnection mBackgroundConn = new ServiceConnection() {
+
+		public void onServiceConnected(ComponentName componentname,
+				IBinder ibinder) {
+			mStoredDistance = ((BackgroundService.LocalBinder) ibinder)
+					.getStoredDistance();
+			mStoredMaxSpeed = ((BackgroundService.LocalBinder) ibinder)
+					.getStoredMaxSpeed();
+			mStoredMovingTime = ((BackgroundService.LocalBinder) ibinder)
+					.getStoredMovingTime();
+			mStoredTotalTime = ((BackgroundService.LocalBinder) ibinder)
+					.getStoredTotalTime();
+			displayStoredData();
+			((BackgroundService.LocalBinder) ibinder).dumpCurrentTrack();
+			try {
+				unbindService(mBackgroundConn);
+			} catch (IllegalArgumentException illegalargumentexception) {
+				illegalargumentexception.printStackTrace();
+			}
+			stopService(new Intent(SpeedView.this, BackgroundService.class));
+		}
+
+		public void onServiceDisconnected(ComponentName componentname) {
+		}
+	};
 	private TextView mCompassElevation;
 	private CompassMode mCompassMode;
 	private TextView mCompassOdometer;
@@ -2352,6 +3288,7 @@ public class SpeedView extends Activity {
 	private boolean mExitButtonPressed;
 	private Button mExportGPXButton;
 	private boolean mFeaturedButtonPressed;
+	private long mFirstFixTime;
 	private ImageView mFreewayLimitDec;
 	private ImageView mFreewayLimitInc;
 	private TextView mFreewayLimitNumbers;
@@ -2366,6 +3303,7 @@ public class SpeedView extends Activity {
 	private TableRow mFrom0To100RowT;
 	private LinearLayout mFrom0To100Screen;
 	private TextView mFrom0To100Speed;
+	private String mFrom0To100String;
 	private TextView mFrom0To100Time;
 	private Button mFrom0To60Button;
 	private TextView mFrom0To60Feet;
@@ -2375,7 +3313,11 @@ public class SpeedView extends Activity {
 	private TableRow mFrom0To60RowT;
 	private LinearLayout mFrom0To60Screen;
 	private TextView mFrom0To60Speed;
+	private String mFrom0To60String;
 	private TextView mFrom0To60Time;
+
+	private static boolean mIsScreenSupported;
+
 	final Runnable mGPSIsDisabled = new Runnable() {
 
 		public void run() {
@@ -2398,7 +3340,10 @@ public class SpeedView extends Activity {
 	private int mHighwaySpeedLimit;
 	private HudMode mHudMode;
 	private RelativeLayout mHudScreen;
+	private Location mLastAddress;
 	private Location mLastLocation;
+	private long mLastLocationTime;
+	private Location mLastTrackLocation;
 	private LocationListener mLocationListener;
 	private LocationManager mLocationManager;
 	private FilenameFilter mLogExtensionFilter;
@@ -2428,8 +3373,28 @@ public class SpeedView extends Activity {
 	private TextView mOdometer;
 	private ImageView mOdometerField;
 	private Button mOpenSpotButton;
-	private SensorEventListener mOrientationListener;
+	private SensorEventListener mOrientationListener = new SensorEventListener() {
+
+		public void onAccuracyChanged(Sensor sensor, int i) {
+		}
+
+		public void onSensorChanged(SensorEvent sensorevent) {
+			float f = sensorevent.values[0];
+			if (mLastLocation != null && mLastLocation.getSpeed() >= 1.4F) {
+				if (SpeedView.mSelectedDashboard != 2) {
+					if (SpeedView.mSelectedDashboard == 1)
+						mCompassView.onSpeedChanged(f);
+				} else {
+					mCompassMode.onSensorChanged(f);
+					mCompassSource.setText(2131099747);
+				}
+			}
+			return;
+		}
+	};
 	private ProgressDialog mProgressDialog;
+	private boolean mQtrMileReached;
+	private String mQtrMileString;
 	private Button mQuarterMileButton;
 	private TextView mQuarterMileDist;
 	private TextView mQuarterMileInfo;
@@ -2447,6 +3412,7 @@ public class SpeedView extends Activity {
 	private boolean mSendTrackInit;
 	private SensorManager mSensorManager;
 	private long mSessionMovingTime;
+	private long mSessionStartTime;
 	private long mSessionTotalTime;
 	private boolean mSettingsButtonPressed;
 	private boolean mShareButtonPressed;
@@ -2478,7 +3444,7 @@ public class SpeedView extends Activity {
 	private ImageView mTownLimitSign;
 	private RelativeLayout mTownLimitToggle;
 	private int mTownSpeedLimit;
-	private StringBuilder mTrackBuffer;
+	private StringBuilder mTrackBuffer = new StringBuilder();
 	private File mTrackLogFile;
 	private boolean mTrackLoggingChecked;
 	private TextView mTripDistance;
